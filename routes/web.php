@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('prestasis', 'PrestasiController');
+Route::resource('jurusans', 'JurusanController');
+Route::resource('gallerys', 'GalleryController');
