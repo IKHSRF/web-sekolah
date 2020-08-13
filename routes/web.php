@@ -19,3 +19,6 @@ Route::get('/', function () {
 Route::resource('prestasis', 'PrestasiController');
 Route::resource('jurusans', 'JurusanController');
 Route::resource('gallerys', 'GalleryController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
