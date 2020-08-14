@@ -14,7 +14,10 @@ class JurusanController extends Controller
      */
     public function index()
     {
-        //
+        $jurusans = Jurusan::latest()->paginate(5);
+
+        return view('jurusans.index', compact('jurusans'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        //
+        return view('jurusans.create');
     }
 
     /**
@@ -35,7 +38,17 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_jurusan' => 'required',
+            'tahun_berdiri' => 'required',
+            'detail_berdiri' => 'required',
+            'foto_berdiri' => 'required',
+        ]);
+
+        Jurusan::create($request->all());
+
+        return redirect()->route('jurusans.index')
+            ->with('success', 'Jurusan Berhasil Dibuat');
     }
 
     /**
@@ -46,7 +59,7 @@ class JurusanController extends Controller
      */
     public function show(Jurusan $jurusan)
     {
-        //
+        return view('jurusans.show', compact('jurusan'));
     }
 
     /**
@@ -57,7 +70,8 @@ class JurusanController extends Controller
      */
     public function edit(Jurusan $jurusan)
     {
-        //
+        return view('jurusans.edit', compact('jurusan'));
+
     }
 
     /**
@@ -69,7 +83,17 @@ class JurusanController extends Controller
      */
     public function update(Request $request, Jurusan $jurusan)
     {
-        //
+        $request->validate([
+            'nama_jurusan' => 'required',
+            'detail_jurusan' => 'required',
+            'tahun_berdiri' => 'required',
+            'foto_jurusan' => 'required',
+        ]);
+
+        $jurusan->update($request->all());
+
+        return redirect()->route('jurusans.index')
+            ->with('success', 'Jurusan Berhasil Diupdate');
     }
 
     /**
@@ -80,6 +104,9 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
-        //
+        $jurusan->delete();
+
+        return redirect()->route('jurusans.index')
+            ->with('success', 'Jurusan Berhasil Dihapus');
     }
 }

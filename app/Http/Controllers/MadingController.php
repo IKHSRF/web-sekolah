@@ -47,7 +47,7 @@ class MadingController extends Controller
         Mading::create($request->all());
 
         return redirect()->route('madings.index')
-            ->with('success', 'Mading Berhasil Dibuat');
+            ->with('success', 'Mading Berhasil Ditambahkan');
     }
 
     /**

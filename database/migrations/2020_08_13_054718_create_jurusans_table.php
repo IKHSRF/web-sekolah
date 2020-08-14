@@ -17,6 +17,7 @@ class CreateJurusansTable extends Migration
             $table->id();
             $table->string('nama_jurusan');
             $table->string('tahun_berdiri');
+            $table->string('detail_jurusan');
             $table->string('foto_jurusan');
             $table->timestamps();
         });

@@ -14,7 +14,10 @@ class KemitraanController extends Controller
      */
     public function index()
     {
-        //
+        $kemitraans = Kemitraan::latest()->paginate(5);
+
+        return view('kemitraans.index', compact('kemitraans'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class KemitraanController extends Controller
      */
     public function create()
     {
-        //
+        return view('kemitraans.create');
     }
 
     /**
@@ -35,7 +38,17 @@ class KemitraanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_mitra' => 'required',
+            'detail_mitra' => 'required',
+            'tahun_mitra' => 'required',
+            'foto_mitra' => 'required',
+        ]);
+
+        Kemitraan::create($request->all());
+
+        return redirect()->route('kemitraans.index')
+            ->with('success', 'Mitra Berhasil Ditambahkan');
     }
 
     /**
@@ -46,7 +59,7 @@ class KemitraanController extends Controller
      */
     public function show(Kemitraan $kemitraan)
     {
-        //
+        return view('kemitraans.show', compact('kemitraan'));
     }
 
     /**
@@ -57,7 +70,7 @@ class KemitraanController extends Controller
      */
     public function edit(Kemitraan $kemitraan)
     {
-        //
+        return view('kemitraans.edit', compact('kemitraan'));
     }
 
     /**
@@ -69,7 +82,17 @@ class KemitraanController extends Controller
      */
     public function update(Request $request, Kemitraan $kemitraan)
     {
-        //
+        $request->validate([
+            'nama_mitra' => 'required',
+            'detail_mitra' => 'required',
+            'tahun_mitra' => 'required',
+            'foto_mitra' => 'required',
+        ]);
+
+        $kemitraan->update($request->all());
+
+        return redirect()->route('kemitraans.index')
+            ->with('success', 'Mitra Berhasil Diubah');
     }
 
     /**
@@ -80,6 +103,9 @@ class KemitraanController extends Controller
      */
     public function destroy(Kemitraan $kemitraan)
     {
-        //
+        $kemitraan->delete();
+
+        return redirect()->route('kemitraans.index')
+            ->with('success', 'Mitra Berhasil Dihapus');
     }
 }
