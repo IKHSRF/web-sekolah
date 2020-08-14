@@ -14,7 +14,10 @@ class GuruController extends Controller
      */
     public function index()
     {
-        //
+        $gurus = Guru::latest()->paginate(5);
+
+        return view('gurus.index', compact('gurus'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+        return view('gurus.create');
     }
 
     /**
@@ -35,7 +38,16 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_guru' => 'required',
+            'jabatan' => 'required',
+            'foto_guru' => 'required',
+        ]);
+
+        Guru::create($request->all());
+
+        return redirect()->route('gurus.index')
+            ->with('success', 'Guru Berhasil Ditambahkan');
     }
 
     /**
@@ -46,7 +58,7 @@ class GuruController extends Controller
      */
     public function show(Guru $guru)
     {
-        //
+        return view('gurus.show', compact('guru'));
     }
 
     /**
@@ -57,7 +69,7 @@ class GuruController extends Controller
      */
     public function edit(Guru $guru)
     {
-        //
+        return view('gurus.edit', compact('guru'));
     }
 
     /**
@@ -69,7 +81,16 @@ class GuruController extends Controller
      */
     public function update(Request $request, Guru $guru)
     {
-        //
+        $request->validate([
+            'nama_guru' => 'required',
+            'jabatan' => 'required',
+            'foto_guru' => 'required',
+        ]);
+
+        $guru->update($request->all());
+
+        return redirect()->route('gurus.index')
+            ->with('success', 'Guru Berhasil Diubah');
     }
 
     /**
@@ -80,6 +101,9 @@ class GuruController extends Controller
      */
     public function destroy(Guru $guru)
     {
-        //
+        $guru->delete();
+
+        return redirect()->route('gurus.index')
+            ->with('success', 'Guru Berhasil Dihapus');
     }
 }

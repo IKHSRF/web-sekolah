@@ -14,7 +14,10 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
+        $gallerys = Gallery::latest()->paginate(5);
+
+        return view('gallerys.index', compact('gallerys'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        //
+        return view('gallerys.create');
     }
 
     /**
@@ -35,7 +38,16 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_galeri' => 'required',
+            'detail_galeri' => 'required',
+            'foto_galeri' => 'required',
+        ]);
+
+        Gallery::create($request->all());
+
+        return redirect()->route('gallerys.index')
+            ->with('success', 'Galeri Berhasil Ditambahakan');
     }
 
     /**
@@ -46,7 +58,7 @@ class GalleryController extends Controller
      */
     public function show(Gallery $gallery)
     {
-        //
+        return view('gallerys.show', compact('gallery'));
     }
 
     /**
@@ -57,7 +69,7 @@ class GalleryController extends Controller
      */
     public function edit(Gallery $gallery)
     {
-        //
+        return view('gallerys.edit', compact('gallery'));
     }
 
     /**
@@ -69,7 +81,16 @@ class GalleryController extends Controller
      */
     public function update(Request $request, Gallery $gallery)
     {
-        //
+        $request->validate([
+            'nama_galeri' => 'required',
+            'detail_galeri' => 'required',
+            'foto_galeri' => 'required',
+        ]);
+
+        $gallery->update($request->all());
+
+        return redirect()->route('gallerys.index')
+            ->with('success', 'Galeri Berhasil Diubah');
     }
 
     /**
@@ -80,6 +101,9 @@ class GalleryController extends Controller
      */
     public function destroy(Gallery $gallery)
     {
-        //
+        $gallery->delete();
+
+        return redirect()->route('gallerys.index')
+            ->with('success', 'Galeri Berhasil Dihapus');
     }
 }
