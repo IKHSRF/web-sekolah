@@ -1,13 +1,13 @@
-@extends('gallerys.layout')
+@extends('kemitraans.layout')
 
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Edit Galeri</h2>
+                <h2>Edit Kemitraan</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('gallerys.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('kemitraans.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -23,27 +23,33 @@
         </div>
     @endif
 
-    <form action="{{ route('gallerys.update',$gallery->id) }}" method="POST">
+    <form action="{{ route('kemitraans.update',$kemitraan->id) }}" method="POST">
         @csrf
         @method('PUT')
 
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Judul:</strong>
-                    <input type="text" name="nama_galeri" value="{{ $gallery->nama_galeri }}" class="form-control" placeholder="Judul">
+                    <strong>Nama Mitra:</strong>
+                    <input type="text" name="nama_mitra" value="{{ $kemitraan->nama_mitra }}" class="form-control" placeholder="Nama Mitra">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Detail:</strong>
-                    <textarea class="form-control" style="height:150px" name="detail_galeri" placeholder="Detail">{{ $gallery->detail_galeri }}</textarea>
+                    <strong>Tahun Bermitra:</strong>
+                    <textarea class="form-control" style="height:150px" name="tahun_mitra" placeholder="Tahun Bermitra">{{ $kemitraan->tahun_mitra }}</textarea>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Detail Mitra:</strong>
+                    <textarea class="form-control" style="height:150px" name="detail_mitra" placeholder="Detail Mitra">{{ $kemitraan->detail_mitra }}</textarea>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Upload Foto</strong>
-                <input type="file" name="foto_galeri">Upload</input>
+                <input type="file" name="foto_mitra">Upload</input>
             </div>
         </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

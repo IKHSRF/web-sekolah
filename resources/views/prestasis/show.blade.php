@@ -1,12 +1,12 @@
-@extends('gallerys.layout')
+@extends('prestasis.layout')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2> Show Galeri</h2>
+                <h2> Lihat Prestasi</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('gallerys.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('prestasis.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -15,19 +15,19 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Judul:</strong>
-                {{ $gallery->nama_galeri }}
+                {{ $prestasi->nama_prestasi }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Detail:</strong>
-                {{ $gallery->detail_galeri }}
+                {{ $prestasi->detail_prestasi }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Foto Galeri:</strong>
-                {{ $gallery->foto_galeri }}
+                <strong>Foto Mading:</strong>
+                {{ $prestasi->foto_prestasi }}
             </div>
         </div>
     </div>
