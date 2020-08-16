@@ -16,7 +16,7 @@ class JurusanController extends Controller
     {
         $jurusans = Jurusan::latest()->paginate(5);
 
-        return view('jurusans.index', compact('jurusans'))
+        return view('admin.jurusans.index', compact('jurusans'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -27,7 +27,7 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        return view('jurusans.create');
+        return view('admin.jurusans.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class JurusanController extends Controller
 
         Jurusan::create($request->all());
 
-        return redirect()->route('jurusans.index')
+        return redirect()->route('admin.jurusans.index')
             ->with('success', 'Jurusan Berhasil Dibuat');
     }
 
@@ -59,7 +59,7 @@ class JurusanController extends Controller
      */
     public function show(Jurusan $jurusan)
     {
-        return view('jurusans.show', compact('jurusan'));
+        return view('admin.jurusans.show', compact('jurusan'));
     }
 
     /**
@@ -70,7 +70,7 @@ class JurusanController extends Controller
      */
     public function edit(Jurusan $jurusan)
     {
-        return view('jurusans.edit', compact('jurusan'));
+        return view('admin.jurusans.edit', compact('jurusan'));
 
     }
 
@@ -92,7 +92,7 @@ class JurusanController extends Controller
 
         $jurusan->update($request->all());
 
-        return redirect()->route('jurusans.index')
+        return redirect()->route('admin.jurusans.index')
             ->with('success', 'Jurusan Berhasil Diupdate');
     }
 
@@ -106,7 +106,7 @@ class JurusanController extends Controller
     {
         $jurusan->delete();
 
-        return redirect()->route('jurusans.index')
+        return redirect()->route('admin.jurusans.index')
             ->with('success', 'Jurusan Berhasil Dihapus');
     }
 }

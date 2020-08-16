@@ -14,7 +14,10 @@ class SaranaController extends Controller
      */
     public function index()
     {
-        //
+        $saranas = Sarana::latest()->paginate(5);
+
+        return view('admin.saranas.index', compact('saranas'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class SaranaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.saranas.create');
     }
 
     /**
@@ -35,7 +38,16 @@ class SaranaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_sarana' => 'required',
+            'detail_sarana' => 'required',
+            'foto_sarana' => 'required',
+        ]);
+
+        Sarana::create($request->all());
+
+        return redirect()->route('admin.saranas.index')
+            ->with('success', 'Sarana Berhasil Ditambahkan');
     }
 
     /**
@@ -46,7 +58,7 @@ class SaranaController extends Controller
      */
     public function show(Sarana $sarana)
     {
-        //
+        return view('admin.saranas.show', compact('sarana'));
     }
 
     /**
@@ -57,7 +69,7 @@ class SaranaController extends Controller
      */
     public function edit(Sarana $sarana)
     {
-        //
+        return view('admin.saranas.edit', compact('sarana'));
     }
 
     /**
@@ -69,7 +81,16 @@ class SaranaController extends Controller
      */
     public function update(Request $request, Sarana $sarana)
     {
-        //
+        $request->validate([
+            'nama_sarana' => 'required',
+            'detail_sarana' => 'required',
+            'foto_sarana' => 'required',
+        ]);
+
+        $sarana->update($request->all());
+
+        return redirect()->route('admin.saranas.index')
+            ->with('success', 'Sarana Berhasil Diupdate');
     }
 
     /**
@@ -80,6 +101,9 @@ class SaranaController extends Controller
      */
     public function destroy(Sarana $sarana)
     {
-        //
+        $sarana->delete();
+
+        return redirect()->route('admin.saranas.index')
+            ->with('success', 'Sarana Berhasil Dihapus');
     }
 }

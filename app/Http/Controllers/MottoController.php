@@ -14,7 +14,10 @@ class MottoController extends Controller
      */
     public function index()
     {
-        //
+        $mottos = Motto::latest()->paginate(5);
+
+        return view('admin.mottos.index', compact('mottos'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class MottoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.mottos.create');
     }
 
     /**
@@ -35,7 +38,16 @@ class MottoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'visi' => 'required',
+            'misi' => 'required',
+            'motto' => 'required',
+        ]);
+
+        Motto::create($request->all());
+
+        return redirect()->route('admin.mottos.index')
+            ->with('success', 'Visi Misi Berhasil Dibuat');
     }
 
     /**
@@ -46,7 +58,7 @@ class MottoController extends Controller
      */
     public function show(Motto $motto)
     {
-        //
+        return view('admin.mottos.show', compact('motto'));
     }
 
     /**
@@ -57,7 +69,7 @@ class MottoController extends Controller
      */
     public function edit(Motto $motto)
     {
-        //
+        return view('admin.mottos.edit', compact('motto'));
     }
 
     /**
@@ -69,7 +81,16 @@ class MottoController extends Controller
      */
     public function update(Request $request, Motto $motto)
     {
-        //
+        $request->validate([
+            'visi' => 'required',
+            'misi' => 'required',
+            'motto' => 'required',
+        ]);
+
+        $motto->update($request->all());
+
+        return redirect()->route('admin.mottos.index')
+            ->with('success', 'Visi Misi Berhasil Diupdate');
     }
 
     /**
@@ -80,6 +101,9 @@ class MottoController extends Controller
      */
     public function destroy(Motto $motto)
     {
-        //
+        $motto->delete();
+
+        return redirect()->route('admin.mottos.index')
+            ->with('success', 'Visi Misi Berhasil Dihapus');
     }
 }

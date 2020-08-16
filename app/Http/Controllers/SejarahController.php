@@ -14,7 +14,10 @@ class SejarahController extends Controller
      */
     public function index()
     {
-        //
+        $sejarahs = Sejarah::latest()->paginate(5);
+
+        return view('sejarahs.index', compact('sejarahs'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,8 @@ class SejarahController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.sejarahs.create');
+
     }
 
     /**
@@ -35,7 +39,15 @@ class SejarahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'judul_sejarah' => 'required',
+            'detail_sejarah' => 'required',
+        ]);
+
+        Sejarah::create($request->all());
+
+        return redirect()->route('admin.sejarahs.index')
+            ->with('success', 'Sejarah Berhasil Dibuat');
     }
 
     /**
@@ -46,7 +58,7 @@ class SejarahController extends Controller
      */
     public function show(Sejarah $sejarah)
     {
-        //
+        return view('admin.sejarahs.show', compact('sejarah'));
     }
 
     /**
@@ -57,7 +69,7 @@ class SejarahController extends Controller
      */
     public function edit(Sejarah $sejarah)
     {
-        //
+        return view('admin.sejarahs.edit', compact('sejarah'));
     }
 
     /**
@@ -69,7 +81,15 @@ class SejarahController extends Controller
      */
     public function update(Request $request, Sejarah $sejarah)
     {
-        //
+        $request->validate([
+            'judul_sejarah' => 'required',
+            'detail_sejarah' => 'required',
+        ]);
+
+        $sejarah->update($request->all());
+
+        return redirect()->route('admin.sejarahs.index')
+            ->with('success', 'Sejarah Berhasil Diupdate');
     }
 
     /**
@@ -80,6 +100,9 @@ class SejarahController extends Controller
      */
     public function destroy(Sejarah $sejarah)
     {
-        //
+        $sejarah->delete();
+
+        return redirect()->route('admin.sejarah.index')
+            ->with('success', 'Sejarah Berhasil Dihapus');
     }
 }

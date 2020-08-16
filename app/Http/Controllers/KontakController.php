@@ -14,7 +14,10 @@ class KontakController extends Controller
      */
     public function index()
     {
-        //
+        $kontaks = Kontak::latest()->paginate(5);
+
+        return view('admin.kontaks.index', compact('kontaks'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class KontakController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.kontaks.create');
     }
 
     /**
@@ -35,7 +38,17 @@ class KontakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'hotline' => 'required',
+            'email' => 'required',
+            'alamat' => 'required',
+            'sosial_media' => 'required',
+        ]);
+
+        Kontak::create($request->all());
+
+        return redirect()->route('admin.kontaks.index')
+            ->with('success', 'Kontak Berhasil Dibuat');
     }
 
     /**
@@ -46,7 +59,7 @@ class KontakController extends Controller
      */
     public function show(Kontak $kontak)
     {
-        //
+        return view('admin.kontaks.show', compact('kontak'));
     }
 
     /**
@@ -57,7 +70,7 @@ class KontakController extends Controller
      */
     public function edit(Kontak $kontak)
     {
-        //
+        return view('admin.kontaks.edit', compact('kontak'));
     }
 
     /**
@@ -69,7 +82,17 @@ class KontakController extends Controller
      */
     public function update(Request $request, Kontak $kontak)
     {
-        //
+        $request->validate([
+            'hotline' => 'required',
+            'email' => 'required',
+            'alamat' => 'required',
+            'sosial_media' => 'required',
+        ]);
+
+        $kontak->update($request->all());
+
+        return redirect()->route('admin.kontaks.index')
+            ->with('success', 'Kontak Berhasil Diupdate');
     }
 
     /**
@@ -80,6 +103,9 @@ class KontakController extends Controller
      */
     public function destroy(Kontak $kontak)
     {
-        //
+        $kontak->delete();
+
+        return redirect()->route('admin.kontaks.index')
+            ->with('success', 'Kontak Berhasil Dihapus');
     }
 }

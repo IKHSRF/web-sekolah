@@ -15,9 +15,8 @@ class CreateAkademiksTable extends Migration
     {
         Schema::create('akademiks', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_kalender');
-            $table->string('detail_kalender');
-            $table->string('foto_kalender');
+            $table->string('nama_akademik');
+            $table->string('tahun_akademik');
             $table->timestamps();
         });
     }

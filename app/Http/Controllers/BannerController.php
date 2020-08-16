@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Guru;
+use App\Banner;
 use Illuminate\Http\Request;
 
-class GuruController extends Controller
+class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class GuruController extends Controller
      */
     public function index()
     {
-        $gurus = Guru::latest()->paginate(5);
+        $banners = Banner::latest()->paginate(5);
 
-        return view('admin.gurus.index', compact('gurus'))
+        return view('admin.banners.index', compact('banners'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -27,7 +27,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        return view('admin.gurus.create');
+        return view('admin.banners.create');
     }
 
     /**
@@ -39,71 +39,69 @@ class GuruController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_guru' => 'required',
-            'jabatan' => 'required',
-            'foto_guru' => 'required',
+            'nama_banner' => 'required',
+            'foto_banner' => 'required',
         ]);
 
-        Guru::create($request->all());
+        Banner::create($request->all());
 
-        return redirect()->route('admin.gurus.index')
-            ->with('success', 'Guru Berhasil Ditambahkan');
+        return redirect()->route('admin.banners.index')
+            ->with('success', 'Banner Berhasil Dibuat');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Guru  $guru
+     * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function show(Guru $guru)
+    public function show(Banner $banner)
     {
-        return view('admin.gurus.show', compact('guru'));
+        return view('admin.banners.show', compact('banner'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Guru  $guru
+     * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function edit(Guru $guru)
+    public function edit(Banner $banner)
     {
-        return view('admin.gurus.edit', compact('guru'));
+        return view('admin.banners.edit', compact('banner'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Guru  $guru
+     * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Guru $guru)
+    public function update(Request $request, Banner $banner)
     {
         $request->validate([
-            'nama_guru' => 'required',
-            'jabatan' => 'required',
-            'foto_guru' => 'required',
+            'nama_banner' => 'required',
+            'foto_banner' => 'required',
         ]);
 
-        $guru->update($request->all());
+        $banner->update($request->all());
 
-        return redirect()->route('admin.gurus.index')
-            ->with('success', 'Guru Berhasil Diubah');
+        return redirect()->route('admin.banners.index')
+            ->with('success', 'Banner Berhasil Diupdate');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Guru  $guru
+     * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Guru $guru)
+    public function destroy(Banner $banner)
     {
-        $guru->delete();
+        $banner->delete();
 
-        return redirect()->route('admin.gurus.index')
-            ->with('success', 'Guru Berhasil Dihapus');
+        return redirect()->route('admin.banners.index')
+            ->with('success', 'Banner Berhasil Dihapus');
     }
 }

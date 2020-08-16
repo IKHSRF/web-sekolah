@@ -16,7 +16,7 @@ class KemitraanController extends Controller
     {
         $kemitraans = Kemitraan::latest()->paginate(5);
 
-        return view('kemitraans.index', compact('kemitraans'))
+        return view('admin.kemitraans.index', compact('kemitraans'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -27,7 +27,7 @@ class KemitraanController extends Controller
      */
     public function create()
     {
-        return view('kemitraans.create');
+        return view('admin.kemitraans.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class KemitraanController extends Controller
 
         Kemitraan::create($request->all());
 
-        return redirect()->route('kemitraans.index')
+        return redirect()->route('admin.kemitraans.index')
             ->with('success', 'Mitra Berhasil Ditambahkan');
     }
 
@@ -59,7 +59,7 @@ class KemitraanController extends Controller
      */
     public function show(Kemitraan $kemitraan)
     {
-        return view('kemitraans.show', compact('kemitraan'));
+        return view('admin.kemitraans.show', compact('kemitraan'));
     }
 
     /**
@@ -70,7 +70,7 @@ class KemitraanController extends Controller
      */
     public function edit(Kemitraan $kemitraan)
     {
-        return view('kemitraans.edit', compact('kemitraan'));
+        return view('admin.kemitraans.edit', compact('kemitraan'));
     }
 
     /**
@@ -91,7 +91,7 @@ class KemitraanController extends Controller
 
         $kemitraan->update($request->all());
 
-        return redirect()->route('kemitraans.index')
+        return redirect()->route('admin.kemitraans.index')
             ->with('success', 'Mitra Berhasil Diubah');
     }
 
@@ -105,7 +105,7 @@ class KemitraanController extends Controller
     {
         $kemitraan->delete();
 
-        return redirect()->route('kemitraans.index')
+        return redirect()->route('admin.kemitraans.index')
             ->with('success', 'Mitra Berhasil Dihapus');
     }
 }
