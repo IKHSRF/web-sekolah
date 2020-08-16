@@ -1,13 +1,13 @@
-@extends('akademiks.layout')
+@extends('banners.layout')
 
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Kalender Akademik</h2>
+                <h2>Banner</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('akademiks.create') }}">Buat Kalender Akademik Baru</a>
+                <a class="btn btn-success" href="{{ route('banners.create') }}">Buat Banner</a>
             </div>
         </div>
     </div>
@@ -21,21 +21,21 @@
     <table class="table table-bordered">
         <tr>
             <th>No</th>
-            <th>Nama Kegiatan</th>
-            <th>Tahun Ajaran</th>
+            <th>Nama Banner</th>
+            <th>Foto Banner</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($akademiks as $akademik)
+        @foreach ($banners as $banner)
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $akademik->nama_akademik }}</td>
-            <td>{{ $akademik->tahun_akademik }}</td>
+            <td>{{ $banner>nama_banner }}</td>
+            <td>{{ $banner->foto_banner }}</td>
             <td>
-                <form action="{{ route('akademiks.destroy',$akademik->id) }}" method="POST">
+                <form action="{{ route('banners.destroy',$banner->id) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('akademiks.show',$akademik->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('banners.show',$banner->id) }}">Show</a>
 
-                    <a class="btn btn-primary" href="{{ route('akademiks.edit',$akademik->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('banners.edit',$banner->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')
@@ -47,6 +47,6 @@
         @endforeach
     </table>
 
-    {!! $akademiks->links() !!}
+    {!! $banners->links() !!}
 
 @endsection

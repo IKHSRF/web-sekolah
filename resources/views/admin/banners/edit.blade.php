@@ -1,4 +1,4 @@
-@extends('akademiks.layout')
+@extends('banners.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Edit kalender Akademik</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('akademiks.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('banners.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -23,22 +23,22 @@
         </div>
     @endif
 
-    <form action="{{ route('akademiks.update',$akademik->id) }}" method="POST">
+    <form action="{{ route('banners.update',$banner->id) }}" method="POST">
         @csrf
         @method('PUT')
 
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Nama Kegiatan:</strong>
-                    <input type="text" name="nama_akademik" value="{{ $akademik->nama_akademik }}" class="form-control" placeholder="Nama Kegiatan">
+                    <strong>Nama Banner:</strong>
+                    <input type="text" name="nama_akademik" value="{{ $banner->nama_banner }}" class="form-control" placeholder="Nama Banner">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Tahun Ajaran:</strong>
-                    <textarea class="form-control" style="height:150px" name="tahun_akademik" placeholder="Tahun Ajaran">{{ $akademik->tahun_akademik }}</textarea>
-                </div>
+            <div class="form-group">
+                <strong>Upload Foto</strong>
+                <input type="file" name="foto_banner">Upload</input>
+            </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
