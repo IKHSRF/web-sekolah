@@ -16,7 +16,7 @@ class GalleryController extends Controller
     {
         $gallerys = Gallery::latest()->paginate(5);
 
-        return view('gallerys.index', compact('gallerys'))
+        return view('admin.gallerys.index', compact('gallerys'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -27,7 +27,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view('gallerys.create');
+        return view('admin.gallerys.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class GalleryController extends Controller
 
         Gallery::create($request->all());
 
-        return redirect()->route('gallerys.index')
+        return redirect()->route('admin.gallerys.index')
             ->with('success', 'Galeri Berhasil Ditambahakan');
     }
 
@@ -58,7 +58,7 @@ class GalleryController extends Controller
      */
     public function show(Gallery $gallery)
     {
-        return view('gallerys.show', compact('gallery'));
+        return view('admin.gallerys.show', compact('gallery'));
     }
 
     /**
@@ -69,7 +69,7 @@ class GalleryController extends Controller
      */
     public function edit(Gallery $gallery)
     {
-        return view('gallerys.edit', compact('gallery'));
+        return view('admin.gallerys.edit', compact('gallery'));
     }
 
     /**
@@ -89,7 +89,7 @@ class GalleryController extends Controller
 
         $gallery->update($request->all());
 
-        return redirect()->route('gallerys.index')
+        return redirect()->route('admin.gallerys.index')
             ->with('success', 'Galeri Berhasil Diubah');
     }
 
@@ -103,7 +103,7 @@ class GalleryController extends Controller
     {
         $gallery->delete();
 
-        return redirect()->route('gallerys.index')
+        return redirect()->route('admin.gallerys.index')
             ->with('success', 'Galeri Berhasil Dihapus');
     }
 }

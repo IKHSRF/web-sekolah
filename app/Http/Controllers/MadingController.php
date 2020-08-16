@@ -16,7 +16,7 @@ class MadingController extends Controller
     {
         $madings = Mading::latest()->paginate(5);
 
-        return view('madings.index', compact('madings'))
+        return view('admin.madings.index', compact('madings'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -27,7 +27,7 @@ class MadingController extends Controller
      */
     public function create()
     {
-        return view('madings.create');
+        return view('admin.madings.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class MadingController extends Controller
 
         Mading::create($request->all());
 
-        return redirect()->route('madings.index')
+        return redirect()->route('admin.madings.index')
             ->with('success', 'Mading Berhasil Ditambahkan');
     }
 
@@ -58,7 +58,7 @@ class MadingController extends Controller
      */
     public function show(Mading $mading)
     {
-        return view('madings.show', compact('mading'));
+        return view('admin.madings.show', compact('mading'));
     }
 
     /**
@@ -69,7 +69,7 @@ class MadingController extends Controller
      */
     public function edit(Mading $mading)
     {
-        return view('madings.edit', compact('mading'));
+        return view('admin.madings.edit', compact('mading'));
     }
 
     /**
@@ -89,7 +89,7 @@ class MadingController extends Controller
 
         $mading->update($request->all());
 
-        return redirect()->route('madings.index')
+        return redirect()->route('admin.madings.index')
             ->with('success', 'Mading Berhasil Diubah');
     }
 
@@ -103,7 +103,7 @@ class MadingController extends Controller
     {
         $mading->delete();
 
-        return redirect()->route('madings.index')
+        return redirect()->route('admin.madings.index')
             ->with('success', 'Mading Berhasil Dihapus');
     }
 }

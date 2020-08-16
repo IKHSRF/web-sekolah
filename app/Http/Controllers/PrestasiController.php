@@ -16,7 +16,7 @@ class PrestasiController extends Controller
     {
         $prestasis = Prestasi::latest()->paginate(5);
 
-        return view('prestasis.index', compact('prestasis'))
+        return view('admin.prestasis.index', compact('prestasis'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -27,7 +27,7 @@ class PrestasiController extends Controller
      */
     public function create()
     {
-        return view('prestasis.create');
+        return view('admin.prestasis.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class PrestasiController extends Controller
 
         Prestasi::create($request->all());
 
-        return redirect()->route('prestasis.index')
+        return redirect()->route('admin.prestasis.index')
             ->with('success', 'Prestasi Berhasil Ditambahkan');
     }
 
@@ -58,7 +58,7 @@ class PrestasiController extends Controller
      */
     public function show(Prestasi $prestasi)
     {
-        return view('prestasis.show', compact('prestasi'));
+        return view('admin.prestasis.show', compact('prestasi'));
 
     }
 
@@ -70,7 +70,7 @@ class PrestasiController extends Controller
      */
     public function edit(Prestasi $prestasi)
     {
-        return view('prestasis.edit', compact('prestasi'));
+        return view('admin.prestasis.edit', compact('prestasi'));
     }
 
     /**
@@ -90,7 +90,7 @@ class PrestasiController extends Controller
 
         $prestasi->update($request->all());
 
-        return redirect()->route('prestasis.index')
+        return redirect()->route('admin.prestasis.index')
             ->with('success', 'Prestasi Berhasil Diubah');
     }
 
@@ -104,7 +104,7 @@ class PrestasiController extends Controller
     {
         $prestasi->delete();
 
-        return redirect()->route('prestasis.index')
+        return redirect()->route('admin.prestasis.index')
             ->with('success', 'Prestasi Berhasil Dihapus');
     }
 }
