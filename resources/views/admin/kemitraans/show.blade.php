@@ -1,4 +1,4 @@
-@extends('kemitraans.layout')
+@extends('admin.kemitraans.layout')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -6,7 +6,7 @@
                 <h2> Lihat Mitra</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('kemitraans.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.kemitraans.index') }}"> Back</a>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-@extends('kontaks.layout')
+@extends('admin.kontaks.layout')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -6,7 +6,7 @@
                 <h2> Lihat Data Kontak</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('kontaks.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.kontaks.index') }}"> Back</a>
             </div>
         </div>
     </div>

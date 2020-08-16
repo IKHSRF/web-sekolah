@@ -1,4 +1,4 @@
-@extends('kontaks.layout')
+@extends('admin.kontaks.layout')
 
 @section('content')
 <div class="row">
@@ -7,7 +7,7 @@
             <h2>Tambah Kontak</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('kontaks.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('admin.kontaks.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
     </div>
 @endif
 
-<form action="{{ route('kontaks.store') }}" method="POST">
+<form action="{{ route('admin.kontaks.store') }}" method="POST">
     @csrf
 
      <div class="row">

@@ -1,4 +1,4 @@
-@extends('banners.layout')
+@extends('admin.banners.layout')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -6,7 +6,7 @@
                 <h2> Lihat Banner</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('banners.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.banners.index') }}"> Back</a>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-@extends('jurusans.layout')
+@extends('admin.jurusans.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Jurusan</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('jurusans.create') }}">Buat Jurusan Baru</a>
+                <a class="btn btn-success" href="{{ route('admin.jurusans.create') }}">Buat Jurusan Baru</a>
             </div>
         </div>
     </div>
@@ -35,11 +35,11 @@
             <td>{{ $jurusan->tahun_jurusan }}</td>
             <td>{{ $jurusan->foto_jurusan }}</td>
             <td>
-                <form action="{{ route('jurusans.destroy',$jurusan->id) }}" method="POST">
+                <form action="{{ route('admin.jurusans.destroy',$jurusan->id) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('jurusans.show',$jurusan->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.jurusans.show',$jurusan->id) }}">Show</a>
 
-                    <a class="btn btn-primary" href="{{ route('jurusans.edit',$jurusan->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.jurusans.edit',$jurusan->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

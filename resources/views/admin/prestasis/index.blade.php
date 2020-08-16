@@ -1,4 +1,4 @@
-@extends('prestasis.layout')
+@extends('admin.prestasis.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Prestasi</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('prestasis.create') }}">Buat Data Prestasi</a>
+                <a class="btn btn-success" href="{{ route('admin.prestasis.create') }}">Buat Data Prestasi</a>
             </div>
         </div>
     </div>
@@ -33,11 +33,11 @@
             <td>{{ $prestasi->detail_prestasi }}</td>
             <td>{{ $prestasi->foto_prestasi }}</td>
             <td>
-                <form action="{{ route('prestasis.destroy',$prestasi->id) }}" method="POST">
+                <form action="{{ route('admin.prestasis.destroy',$prestasi->id) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('prestasis.show',$prestasi->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.prestasis.show',$prestasi->id) }}">Show</a>
 
-                    <a class="btn btn-primary" href="{{ route('prestasis.edit',$prestasi->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.prestasis.edit',$prestasi->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

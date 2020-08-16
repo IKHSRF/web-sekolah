@@ -1,4 +1,4 @@
-@extends('mottos.layout')
+@extends('admin.mottos.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Visi Misi & Motto</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('mottos.create') }}">Tambah Visi Misi & Motto</a>
+                <a class="btn btn-success" href="{{ route('admin.mottos.create') }}">Tambah Visi Misi & Motto</a>
             </div>
         </div>
     </div>
@@ -33,11 +33,11 @@
             <td>{{ $motto->misi }}</td>
             <td>{{ $motto->motto }}</td>
             <td>
-                <form action="{{ route('mottos.destroy',$motto->id) }}" method="POST">
+                <form action="{{ route('admin.mottos.destroy',$motto->id) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('mottos.show',$motto->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.mottos.show',$motto->id) }}">Show</a>
 
-                    <a class="btn btn-primary" href="{{ route('mottos.edit',$motto->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.mottos.edit',$motto->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

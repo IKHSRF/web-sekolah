@@ -1,4 +1,4 @@
-@extends('madings.layout')
+@extends('admin.madings.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Mading</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('madings.create') }}">Buat Mading Baru</a>
+                <a class="btn btn-success" href="{{ route('admin.madings.create') }}">Buat Mading Baru</a>
             </div>
         </div>
     </div>
@@ -33,11 +33,11 @@
             <td>{{ $mading->detail_mading }}</td>
             <td>{{ $mading->foto_mading }}</td>
             <td>
-                <form action="{{ route('madings.destroy',$mading->id) }}" method="POST">
+                <form action="{{ route('admin.madings.destroy',$mading->id) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('madings.show',$mading->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.madings.show',$mading->id) }}">Show</a>
 
-                    <a class="btn btn-primary" href="{{ route('madings.edit',$mading->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.madings.edit',$mading->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

@@ -1,4 +1,4 @@
-@extends('jurusans.layout')
+@extends('admin.jurusans.layout')
 
 @section('content')
 <div class="row">
@@ -7,7 +7,7 @@
             <h2>Tambah Jurusan</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('jurusans.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('admin.jurusans.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
     </div>
 @endif
 
-<form action="{{ route('jurusans.store') }}" method="POST">
+<form action="{{ route('admin.jurusans.store') }}" method="POST">
     @csrf
 
      <div class="row">

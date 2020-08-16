@@ -1,4 +1,4 @@
-@extends('sejarahs.layout')
+@extends('admin.sejarahs.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Edit Sejarah</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('sejarahs.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.sejarahs.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <form action="{{ route('sejarahs.update',$sejarah->id) }}" method="POST">
+    <form action="{{ route('admin.sejarahs.update',$sejarah->id) }}" method="POST">
         @csrf
         @method('PUT')
 
