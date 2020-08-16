@@ -31,7 +31,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Hotline:</strong>
-                    <input type="text" name="hotline" value="{{ $kontak->hotline }}" class="form-control" placeholder="No Hotline">
+                    <input type="number" name="hotline" value="{{ $kontak->hotline }}" class="form-control" placeholder="No Hotline">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
