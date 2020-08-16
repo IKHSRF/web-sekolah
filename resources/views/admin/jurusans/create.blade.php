@@ -36,7 +36,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Tahun Berdiri:</strong>
-                <input type="text" name="tahun_berdiri" class="form-control" placeholder="Tahun Berdiri">
+                <input type="number" name="tahun_berdiri" class="form-control" placeholder="Tahun Berdiri">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

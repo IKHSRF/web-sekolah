@@ -37,7 +37,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Tahun Berdiri:</strong>
-                    <textarea class="form-control" style="height:150px" name="tahun_berdiri" placeholder="Tahun Berdiri">{{ $jurusan->tahun_berdiri }}</textarea>
+                    <input type="number" name="tahun_berdiri" value="{{ $jurusan->tahun_berdiri }}" class="form-control" placeholder="Tahun Bediri">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

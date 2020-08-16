@@ -1,13 +1,13 @@
-@extends('sejarahs.layout')
+@extends('banners.layout')
 
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Tambah Sejarah</h2>
+            <h2>Tambah Banneri</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('sejarahs.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('banners.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -23,20 +23,20 @@
     </div>
 @endif
 
-<form action="{{ route('sejarahs.store') }}" method="POST">
+<form action="{{ route('banners.store') }}" method="POST">
     @csrf
 
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>judul:</strong>
-                <input type="text" name="judul_sejarah" class="form-control" placeholder="Judul Sejarah">
+                <strong>Nama Banner:</strong>
+                <input type="text" name="nama_akademik" class="form-control" placeholder="Nama Akademik">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Detail Sejarah:</strong>
-                <textarea class="form-control" style="height:150px" name="detail_sejarah" placeholder="Detail Sejarah"></textarea>
+                <strong>Upload Foto banner</strong>
+                <input type="file" name="foto_banner">Upload</input>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
