@@ -1,4 +1,4 @@
-@extends('madings.layout')
+@extends('admin.madings.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Edit Mading</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('madings.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.madings.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <form action="{{ route('madings.update',$mading->id) }}" method="POST">
+    <form action="{{ route('admin.madings.update',$mading->id) }}" method="POST">
         @csrf
         @method('PUT')
 

@@ -1,4 +1,4 @@
-@extends('mottos.layout')
+@extends('admin.mottos.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Edit Visi Misi</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('mottos.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.mottos.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <form action="{{ route('mottos.update',$motto->id) }}" method="POST">
+    <form action="{{ route('admin.mottos.update',$motto->id) }}" method="POST">
         @csrf
         @method('PUT')
 

@@ -1,4 +1,4 @@
-@extends('gurus.layout')
+@extends('admin.gurus.layout')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -6,7 +6,7 @@
                 <h2> Lihat Data Guru</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('gurus.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.gurus.index') }}"> Back</a>
             </div>
         </div>
     </div>

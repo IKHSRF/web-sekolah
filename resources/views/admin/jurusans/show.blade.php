@@ -1,4 +1,4 @@
-@extends('jurusans.layout')
+@extends('admin.jurusans.layout')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -6,7 +6,7 @@
                 <h2> Lihat Jurusan</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('jurusans.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.jurusans.index') }}"> Back</a>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-@extends('banners.layout')
+@extends('admin.banners.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Banner</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('banners.create') }}">Buat Banner</a>
+                <a class="btn btn-success" href="{{ route('admin.banners.create') }}">Buat Banner</a>
             </div>
         </div>
     </div>
@@ -31,11 +31,11 @@
             <td>{{ $banner>nama_banner }}</td>
             <td>{{ $banner->foto_banner }}</td>
             <td>
-                <form action="{{ route('banners.destroy',$banner->id) }}" method="POST">
+                <form action="{{ route('admin.banners.destroy',$banner->id) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('banners.show',$banner->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.banners.show',$banner->id) }}">Show</a>
 
-                    <a class="btn btn-primary" href="{{ route('banners.edit',$banner->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.banners.edit',$banner->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

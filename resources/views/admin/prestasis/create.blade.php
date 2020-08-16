@@ -1,4 +1,4 @@
-@extends('prestasis.layout')
+@extends('admin.prestasis.layout')
 
 @section('content')
 <div class="row">
@@ -7,7 +7,7 @@
             <h2>Tambah Prestasi</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('prestasis.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('admin.prestasis.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
     </div>
 @endif
 
-<form action="{{ route('prestasis.store') }}" method="POST">
+<form action="{{ route('admin.prestasis.store') }}" method="POST">
     @csrf
 
      <div class="row">

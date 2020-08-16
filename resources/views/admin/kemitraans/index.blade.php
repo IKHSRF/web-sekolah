@@ -1,4 +1,4 @@
-@extends('kemitraans.layout')
+@extends('admin.kemitraans.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Kemitraan</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('kemitraans.create') }}">Buat Data Mitra Baru</a>
+                <a class="btn btn-success" href="{{ route('admin.kemitraans.create') }}">Buat Data Mitra Baru</a>
             </div>
         </div>
     </div>
@@ -35,11 +35,11 @@
             <td>{{ $kemitraan->tahun_mitra }}</td>
             <td>{{ $kemitraan->foto_mitra }}</td>
             <td>
-                <form action="{{ route('kemitraans.destroy',$kemitraan->id) }}" method="POST">
+                <form action="{{ route('admin.kemitraans.destroy',$kemitraan->id) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('kemitraans.show',$kemitraan->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.kemitraans.show',$kemitraan->id) }}">Show</a>
 
-                    <a class="btn btn-primary" href="{{ route('kemitraans.edit',$kemitraan->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.kemitraans.edit',$kemitraan->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

@@ -1,4 +1,4 @@
-@extends('gurus.layout')
+@extends('admin.gurus.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Guru</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('gurus.create') }}">Tambah Data Guru</a>
+                <a class="btn btn-success" href="{{ route('admin.gurus.create') }}">Tambah Data Guru</a>
             </div>
         </div>
     </div>
@@ -33,11 +33,11 @@
             <td>{{ $guru->jabatan }}</td>
             <td>{{ $guru->foto_guru }}</td>
             <td>
-                <form action="{{ route('gurus.destroy',$guru->id) }}" method="POST">
+                <form action="{{ route('admin.gurus.destroy',$guru->id) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('gurus.show',$guru->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.gurus.show',$guru->id) }}">Show</a>
 
-                    <a class="btn btn-primary" href="{{ route('gurus.edit',$guru->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.gurus.edit',$guru->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

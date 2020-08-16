@@ -1,4 +1,4 @@
-@extends('gurus.layout')
+@extends('admin.gurus.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Edit Guru</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('gurus.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.gurus.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <form action="{{ route('gurus.update',$guru->id) }}" method="POST">
+    <form action="{{ route('admin.gurus.update',$guru->id) }}" method="POST">
         @csrf
         @method('PUT')
 

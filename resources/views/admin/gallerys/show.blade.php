@@ -1,4 +1,4 @@
-@extends('gallerys.layout')
+@extends('admin.gallerys.layout')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -6,7 +6,7 @@
                 <h2> Show Galeri</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('gallerys.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.gallerys.index') }}"> Back</a>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-@extends('banners.layout')
+@extends('admin.banners.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Edit kalender Akademik</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('banners.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('admin.banners.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <form action="{{ route('banners.update',$banner->id) }}" method="POST">
+    <form action="{{ route('admin.banners.update',$banner->id) }}" method="POST">
         @csrf
         @method('PUT')
 

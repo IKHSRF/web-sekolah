@@ -1,4 +1,4 @@
-@extends('akademiks.layout')
+@extends('admin.akademiks.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Kalender Akademik</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('akademiks.create') }}">Buat Kalender Akademik Baru</a>
+                <a class="btn btn-success" href="{{ route('admin.akademiks.create') }}">Buat Kalender Akademik Baru</a>
             </div>
         </div>
     </div>
@@ -31,11 +31,11 @@
             <td>{{ $akademik->nama_akademik }}</td>
             <td>{{ $akademik->tahun_akademik }}</td>
             <td>
-                <form action="{{ route('akademiks.destroy',$akademik->id) }}" method="POST">
+                <form action="{{ route('admin.akademiks.destroy',$akademik->id) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('akademiks.show',$akademik->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.akademiks.show',$akademik->id) }}">Show</a>
 
-                    <a class="btn btn-primary" href="{{ route('akademiks.edit',$akademik->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.akademiks.edit',$akademik->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')

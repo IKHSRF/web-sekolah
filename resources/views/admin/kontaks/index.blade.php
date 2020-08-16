@@ -1,4 +1,4 @@
-@extends('kontaks.layout')
+@extends('admin.kontaks.layout')
 
 @section('content')
     <div class="row">
@@ -7,7 +7,7 @@
                 <h2>Kontak</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('kontaks.create') }}">Tambah Data Kontak</a>
+                <a class="btn btn-success" href="{{ route('admin.kontaks.create') }}">Tambah Data Kontak</a>
             </div>
         </div>
     </div>
@@ -35,11 +35,11 @@
             <td>{{ $kontak->alamat }}</td>
             <td>{{ $kontak->sosial_media }}</td>
             <td>
-                <form action="{{ route('kontaks.destroy',$kontak->id) }}" method="POST">
+                <form action="{{ route('admin.kontaks.destroy',$kontak->id) }}" method="POST">
 
-                    <a class="btn btn-info" href="{{ route('kontaks.show',$kontak->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('admin.kontaks.show',$kontak->id) }}">Show</a>
 
-                    <a class="btn btn-primary" href="{{ route('kontaks.edit',$kontak->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('admin.kontaks.edit',$kontak->id) }}">Edit</a>
 
                     @csrf
                     @method('DELETE')
