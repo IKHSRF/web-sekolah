@@ -38,9 +38,9 @@ class PrestasiController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_prestasi' => 'required',
-            'detail_prestasi' => 'required',
+        $this->validate($request, [
+            'nama_prestasi' => 'required|string',
+            'detail_prestasi' => 'required|string',
             'foto_prestasi' => 'required',
         ]);
 
@@ -68,9 +68,10 @@ class PrestasiController extends Controller
      * @param  \App\Prestasi  $prestasi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Prestasi $prestasi)
+    public function edit(Prestasi $prestasi, $id)
     {
-        return view('admin.prestasis.edit', compact('prestasi'));
+        $prestasis = $prestasi::find($id);
+        return view('admin.prestasis.edit', compact('prestasis'));
     }
 
     /**
@@ -80,15 +81,14 @@ class PrestasiController extends Controller
      * @param  \App\Prestasi  $prestasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Prestasi $prestasi)
+    public function update(Request $request, Prestasi $prestasi, $id)
     {
-        $request->validate([
-            'nama_prestasi' => 'required',
-            'detail_prestasi' => 'required',
-            'foto_prestasi' => 'required',
-        ]);
-
-        $prestasi->update($request->all());
+        $prestasi::where('id', $id)
+            ->update([
+                'nama_prestasi' => $request->nama_prestasi,
+                'detail_prestasi' => $request->detail_prestasi,
+                'foto_prestasi' => $request->foto_prestasi,
+            ]);
 
         return redirect()->route('admin.prestasis.index')
             ->with('success', 'Prestasi Berhasil Diubah');
@@ -100,9 +100,9 @@ class PrestasiController extends Controller
      * @param  \App\Prestasi  $prestasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Prestasi $prestasi)
+    public function destroy(Prestasi $prestasi, $id)
     {
-        $prestasi->delete();
+        $prestasi->destroy($id);
 
         return redirect()->route('admin.prestasis.index')
             ->with('success', 'Prestasi Berhasil Dihapus');

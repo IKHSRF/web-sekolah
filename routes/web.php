@@ -28,12 +28,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('/prestasis/{id}', 'PrestasiController@destroy')->name('admin.prestasis.destroy');
 
     //crud jurusans
-    Route::get('/jurusans', 'JurusansController@index')->name('admin.jurusans.index');
-    Route::get('/jurusans/create', 'JurusansController@create')->name('admin.jurusans.create');
-    Route::post('/jurusans', 'JurusansController@store')->name('admin.jurusans.store');
-    Route::get('/jurusans/{id}', 'JurusansController@edit')->name('admin.jurusans.edit');
-    Route::patch('/jurusans/{id}', 'JurusansController@update')->name('admin.jurusans.update');
-    Route::delete('/jurusans/{id}', 'JurusansController@destroy')->name('admin.jurusans.destroy');
+    Route::get('/jurusans', 'JurusanController@index')->name('admin.jurusans.index');
+    Route::get('/jurusans/create', 'JurusanController@create')->name('admin.jurusans.create');
+    Route::post('/jurusans', 'JurusanController@store')->name('admin.jurusans.store');
+    Route::get('/jurusans/{id}', 'JurusanController@edit')->name('admin.jurusans.edit');
+    Route::patch('/jurusans/{id}', 'JurusanController@update')->name('admin.jurusans.update');
+    Route::delete('/jurusans/{id}', 'JurusanController@destroy')->name('admin.jurusans.destroy');
 
     //crud gallerys
     Route::get('/gallerys', 'GalleryController@index')->name('admin.gallerys.index');
@@ -69,6 +69,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     //crud sejarah
     Route::get('/sejarahs', 'SejarahController@index')->name('admin.sejarahs.index');
+    Route::get('/madings/create', 'MadingController@create')->name('admin.madings.create');
     Route::post('/sejarahs', 'SejarahController@store')->name('admin.sejarahs.store');
     Route::get('/sejarahs/{id}', 'SejarahController@edit')->name('admin.sejarahs.edit');
     Route::patch('/sejarahs/{id}', 'SejarahController@update')->name('admin.sejarahs.update');
@@ -76,6 +77,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     //crud sarana pra sarana
     Route::get('/saranas', 'SaranaController@index')->name('admin.saranas.index');
+    Route::get('/saranas/create', 'SaranaController@create')->name('admin.saranas.create');
     Route::post('/saranas', 'SaranaController@store')->name('admin.saranas.store');
     Route::get('/saranas/{id}', 'SaranaController@edit')->name('admin.saranas.edit');
     Route::patch('/saranas/{id}', 'SaranaController@update')->name('admin.saranas.update');
@@ -83,6 +85,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     //crud kalender akademik
     Route::get('/akademiks', 'AkademikController@index')->name('admin.akademiks.index');
+    Route::get('/akademiks/create', 'AkademikController@create')->name('admin.akademiks.create');
     Route::post('/akademiks', 'AkademikController@store')->name('admin.akademiks.store');
     Route::get('/akademiks/{id}', 'AkademikController@edit')->name('admin.akademiks.edit');
     Route::patch('/akademiks/{id}', 'AkademikController@update')->name('admin.akademiks.update');
@@ -90,6 +93,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     //crud visi misi
     Route::get('/mottos', 'MottoController@index')->name('admin.mottos.index');
+    Route::get('/mottos/create', 'MottoController@create')->name('admin.mottos.create');
     Route::post('/mottos', 'MottoController@store')->name('admin.mottos.store');
     Route::get('/mottos/{id}', 'MottoController@edit')->name('admin.mottos.edit');
     Route::patch('/mottos/{id}', 'MottoController@update')->name('admin.mottos.update');
@@ -97,6 +101,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     //crud kontak
     Route::get('/kontaks', 'KontakController@index')->name('admin.kontaks.index');
+    Route::get('/kontaks/create', 'KontakController@create')->name('admin.kontaks.create');
     Route::post('/kontaks', 'KontakController@store')->name('admin.kontaks.store');
     Route::get('/kontaks/{id}', 'KontakController@edit')->name('admin.kontaks.edit');
     Route::patch('/kontaks/{id}', 'KontakController@update')->name('admin.kontaks.update');
@@ -104,6 +109,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     //crud banner
     Route::get('/banners', 'BannerController@index')->name('admin.banners.index');
+    Route::get('/banners/create', 'BannerController@create')->name('admin.banners.create');
     Route::post('/banners', 'BannerController@store')->name('admin.banners.store');
     Route::get('/banners/{id}', 'BannerController@edit')->name('admin.banners.edit');
     Route::patch('/banners/{id}', 'BannerController@update')->name('admin.banners.update');

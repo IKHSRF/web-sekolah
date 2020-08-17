@@ -38,9 +38,9 @@ class SaranaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_sarana' => 'required',
-            'detail_sarana' => 'required',
+        $this->validate($request, [
+            'nama_sarana' => 'required|string',
+            'detail_sarana' => 'required|string',
             'foto_sarana' => 'required',
         ]);
 
@@ -67,9 +67,10 @@ class SaranaController extends Controller
      * @param  \App\Sarana  $sarana
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sarana $sarana)
+    public function edit(Sarana $sarana, $id)
     {
-        return view('admin.saranas.edit', compact('sarana'));
+        $saranas = $sarana::find($id);
+        return view('admin.saranas.edit', compact('saranas'));
     }
 
     /**
@@ -79,15 +80,14 @@ class SaranaController extends Controller
      * @param  \App\Sarana  $sarana
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sarana $sarana)
+    public function update(Request $request, Sarana $sarana, $id)
     {
-        $request->validate([
-            'nama_sarana' => 'required',
-            'detail_sarana' => 'required',
-            'foto_sarana' => 'required',
-        ]);
-
-        $sarana->update($request->all());
+        $sarana::where('id', $id)
+            ->update([
+                'nama_sarana' => $request->nama_sarana,
+                'detail_sarana' => $request->detail_sarana,
+                'foto_sarana' => $request->foto_sarana,
+            ]);
 
         return redirect()->route('admin.saranas.index')
             ->with('success', 'Sarana Berhasil Diupdate');
@@ -99,9 +99,9 @@ class SaranaController extends Controller
      * @param  \App\Sarana  $sarana
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sarana $sarana)
+    public function destroy(Sarana $sarana, $id)
     {
-        $sarana->delete();
+        $sarana->destroy($id);
 
         return redirect()->route('admin.saranas.index')
             ->with('success', 'Sarana Berhasil Dihapus');
