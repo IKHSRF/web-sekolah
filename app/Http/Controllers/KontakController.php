@@ -38,11 +38,13 @@ class KontakController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'hotline' => 'required',
-            'email' => 'required',
-            'alamat' => 'required',
-            'sosial_media' => 'required',
+        $this->validate($request, [
+            'hotline' => 'required|string',
+            'email' => 'required|string',
+            'alamat' => 'required|string',
+            'youtube' => 'required|string',
+            'facebook' => 'required|string',
+            'instagram' => 'required|string',
         ]);
 
         Kontak::create($request->all());
@@ -68,9 +70,10 @@ class KontakController extends Controller
      * @param  \App\Kontak  $kontak
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kontak $kontak)
+    public function edit(Kontak $kontak, $id)
     {
-        return view('admin.kontaks.edit', compact('kontak'));
+        $kontaks = $kontak::find($id);
+        return view('admin.kontaks.edit', compact('kontaks'));
     }
 
     /**
@@ -80,16 +83,17 @@ class KontakController extends Controller
      * @param  \App\Kontak  $kontak
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kontak $kontak)
+    public function update(Request $request, Kontak $kontak, $id)
     {
-        $request->validate([
-            'hotline' => 'required',
-            'email' => 'required',
-            'alamat' => 'required',
-            'sosial_media' => 'required',
-        ]);
-
-        $kontak->update($request->all());
+        $kontak::where('id', $id)
+            ->update([
+                'hotline' => $request->hotline,
+                'email' => $request->email,
+                'alamat' => $request->alamat,
+                'youtube' => $request->youtube,
+                'facebook' => $request->facebook,
+                'instagram' => $request->instagram,
+            ]);
 
         return redirect()->route('admin.kontaks.index')
             ->with('success', 'Kontak Berhasil Diupdate');
@@ -101,9 +105,9 @@ class KontakController extends Controller
      * @param  \App\Kontak  $kontak
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kontak $kontak)
+    public function destroy(Kontak $kontak, $id)
     {
-        $kontak->delete();
+        $kontak->destroy($id);
 
         return redirect()->route('admin.kontaks.index')
             ->with('success', 'Kontak Berhasil Dihapus');

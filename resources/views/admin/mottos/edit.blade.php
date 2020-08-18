@@ -1,56 +1,67 @@
-@extends('admin.mottos.layout')
+@extends('layouts.admin.main')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit Visi Misi</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.mottos.index') }}"> Back</a>
-            </div>
-        </div>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content-header -->
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Ubah Data</h3>
 
-    <form action="{{ route('admin.mottos.update',$motto->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Visi:</strong>
-                    <input type="text" name="visi" value="{{ $motto->visi }}" class="form-control" placeholder="Visi Sekolah">
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Misi:</strong>
-                    <input type="text" name="misi" value="{{ $motto->misi }}" class="form-control" placeholder="Misi Sekolah">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.mottos.update', $mottos->id)}}">
+                        @method('patch')
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Visi</label>
+                                    <input type="text" name="visi" id="visi" class="form-control"
+                                        required="true" value="{{$mottos->visi}}">
+                                    <label>Misi</label>
+                                    <input type="text" name="misi" id="misi" class="form-control"
+                                        required="true" value="{{$mottos->misi}}">
+                                    <label>Motto</label>
+                                    <input type="text" name="motto" id="motto" class="form-control"
+                                        required="true" value="{{$mottos->motto}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="simpan" id="simpan" class="btn btn-primary">
+                                <i class="fa fa-save"></i> Update
+                            </button>
+                        </div>
+                    </form>
+                    <hr>
                 </div>
+                <!-- /.row -->
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Motto:</strong>
-                    <input type="text" name="motto" value="{{ $motto->motto }}" class="form-control" placeholder="Motto sekolah">
-                </div>
-            </div>
-        </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
+            <!-- /.card-body -->
 
-    </form>
+        </div>
+</div>
+</section>
+<!-- /.content -->
+</div>
+
 @endsection

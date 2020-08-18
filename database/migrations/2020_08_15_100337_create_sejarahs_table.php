@@ -17,7 +17,6 @@ class CreateSejarahsTable extends Migration
             $table->id();
             $table->string('judul_sejarah');
             $table->string('detail_sejarah');
-            $table->string('foto_sejarah');
             $table->timestamps();
         });
     }

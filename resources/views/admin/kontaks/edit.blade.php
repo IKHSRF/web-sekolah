@@ -1,62 +1,76 @@
-@extends('admin.kontaks.layout')
+@extends('layouts.admin.main')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit Kontak</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.kontaks.index') }}"> Back</a>
-            </div>
-        </div>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content-header -->
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Ubah Data</h3>
+
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.kontaks.update', $kontaks->id)}}">
+                        @method('patch')
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Hotline</label>
+                                    <input type="number" name="hotline" id="hotline" class="form-control"
+                                        required="true" value="{{$kontaks->hotline}}">
+                                    <label>Email</label>
+                                    <input type="email" name="email" id="email" class="form-control"
+                                        required="true" value="{{$kontaks->email}}">
+                                    <label>Alamat Sekolah</label>
+                                    <input type="text" name="alamat" id="alamat" class="form-control"
+                                        required="true" value="{{$kontaks->alamat}}">
+                                        <label>Youtube</label>
+                                    <input type="text" name="youtube" id="youtube" class="form-control"
+                                        required="true" value="{{$kontaks->youtube}}">
+                                        <label>Facebook</label>
+                                    <input type="text" name="facebook" id="facebook" class="form-control"
+                                        required="true" value="{{$kontaks->facebook}}">
+                                        <label>Instagram</label>
+                                    <input type="text" name="instagram" id="instagram" class="form-control"
+                                        required="true" value="{{$kontaks->instagram}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="simpan" id="simpan" class="btn btn-primary">
+                                <i class="fa fa-save"></i> Update
+                            </button>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.card-body -->
+
         </div>
-    @endif
+</div>
+</section>
+<!-- /.content -->
+</div>
 
-    <form action="{{ route('admin.kontaks.update',$kontak->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Hotline:</strong>
-                    <input type="number" name="hotline" value="{{ $kontak->hotline }}" class="form-control" placeholder="No Hotline">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Email:</strong>
-                    <input type="email" name="email" value="{{ $kontak->email }}" class="form-control" placeholder="Alamat Email">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Alamat Sekolah:</strong>
-                    <input type="text" name="alamat" value="{{ $kontak->alamat }}" class="form-control" placeholder="Alamat Sekolah">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Sosial Media:</strong>
-                    <input type="text" name="sosial_media" value="{{ $kontak->sosial_media }}" class="form-control" placeholder="Sosial Media">
-                </div>
-            </div>
-        </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
-
-    </form>
 @endsection

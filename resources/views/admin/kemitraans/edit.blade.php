@@ -1,61 +1,70 @@
-@extends('admin.kemitraans.layout')
+@extends('layouts.admin.main')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit Kemitraan</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.kemitraans.index') }}"> Back</a>
-            </div>
-        </div>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content-header -->
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Ubah Data</h3>
 
-    <form action="{{ route('admin.kemitraans.update',$kemitraan->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Nama Mitra:</strong>
-                    <input type="text" name="nama_mitra" value="{{ $kemitraan->nama_mitra }}" class="form-control" placeholder="Nama Mitra">
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Tahun Bermitra:</strong>
-                    <textarea class="form-control" style="height:150px" name="tahun_mitra" placeholder="Tahun Bermitra">{{ $kemitraan->tahun_mitra }}</textarea>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.kemitraans.update', $kemitraans->id)}}">
+                        @method('patch')
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Nama Mitra</label>
+                                    <input type="text" name="nama_mitra" id="nama_mitra" class="form-control"
+                                        required="true" value="{{$kemitraans->nama_mitra}}">
+                                    <label>Detail Mitra</label>
+                                    <input type="text" name="detail_mitra" id="detail_mitra" class="form-control"
+                                        required="true" value="{{$kemitraans->detail_mitra}}">
+                                        <label>Tahun Bermitra</label>
+                                    <input type="text" name="tahun_mitra" id="tahun_mitra" class="form-control"
+                                        required="true" value="{{$kemitraans->tahun_mitra}}">
+                                    <label>Foto Mitra</label>
+                                    <input type="file" name="foto_mitra" id="foto_mitra" class="form-control"
+                                        required="true" value="{{$kemitraans->foto_mitra}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="simpan" id="simpan" class="btn btn-primary">
+                                <i class="fa fa-save"></i> Update
+                            </button>
+                        </div>
+                    </form>
+                    <hr>
                 </div>
+                <!-- /.row -->
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Detail Mitra:</strong>
-                    <textarea class="form-control" style="height:150px" name="detail_mitra" placeholder="Detail Mitra">{{ $kemitraan->detail_mitra }}</textarea>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Upload Foto</strong>
-                <input type="file" name="foto_mitra">Upload</input>
-            </div>
-        </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
+            <!-- /.card-body -->
 
-    </form>
+        </div>
+</div>
+</section>
+<!-- /.content -->
+</div>
+
 @endsection

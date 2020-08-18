@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMottosTable extends Migration
+class CreateKontaksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateMottosTable extends Migration
      */
     public function up()
     {
-        Schema::create('mottos', function (Blueprint $table) {
+        Schema::create('kontaks', function (Blueprint $table) {
             $table->id();
-            $table->string('visi');
-            $table->string('misi');
-            $table->string('motto');
+            $table->string('hotline');
+            $table->string('email');
+            $table->string('alamat');
+            $table->string('youtube');
+            $table->string('facebook');
+            $table->string('instagram');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateMottosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mottos');
+        Schema::dropIfExists('kontaks');
     }
 }

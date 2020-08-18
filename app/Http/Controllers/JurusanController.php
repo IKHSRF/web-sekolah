@@ -38,11 +38,11 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_jurusan' => 'required',
+        $this->validate($request, [
+            'nama_jurusan' => 'required|string',
             'tahun_berdiri' => 'required',
-            'detail_berdiri' => 'required',
-            'foto_berdiri' => 'required',
+            'detail_jurusan' => 'required|string',
+            'foto_jurusan' => 'required',
         ]);
 
         Jurusan::create($request->all());
@@ -68,9 +68,10 @@ class JurusanController extends Controller
      * @param  \App\Jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Jurusan $jurusan)
+    public function edit(Jurusan $jurusan, $id)
     {
-        return view('admin.jurusans.edit', compact('jurusan'));
+        $jurusans = $jurusan::find($id);
+        return view('admin.jurusans.edit', compact('jurusans'));
 
     }
 
@@ -81,16 +82,15 @@ class JurusanController extends Controller
      * @param  \App\Jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jurusan $jurusan)
+    public function update(Request $request, Jurusan $jurusan, $id)
     {
-        $request->validate([
-            'nama_jurusan' => 'required',
-            'detail_jurusan' => 'required',
-            'tahun_berdiri' => 'required',
-            'foto_jurusan' => 'required',
-        ]);
-
-        $jurusan->update($request->all());
+        $jurusan::where('id', $id)
+            ->update([
+                'nama_jurusan' => $request->nama_jurusan,
+                'detail_jurusan' => $request->detail_jurusan,
+                'tahun_berdiri' => $request->tahun_berdiri,
+                'foto_jurusan' => $request->foto_jurusan,
+            ]);
 
         return redirect()->route('admin.jurusans.index')
             ->with('success', 'Jurusan Berhasil Diupdate');
@@ -102,9 +102,9 @@ class JurusanController extends Controller
      * @param  \App\Jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jurusan $jurusan)
+    public function destroy(Jurusan $jurusan, $id)
     {
-        $jurusan->delete();
+        $jurusan->destroy($id);
 
         return redirect()->route('admin.jurusans.index')
             ->with('success', 'Jurusan Berhasil Dihapus');

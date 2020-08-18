@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKontaksTable extends Migration
+class CreateGalleriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateKontaksTable extends Migration
      */
     public function up()
     {
-        Schema::create('kontaks', function (Blueprint $table) {
+        Schema::create('galleries', function (Blueprint $table) {
             $table->id();
-            $table->string('hotline');
-            $table->string('email');
-            $table->string('alamat');
-            $table->string('sosial_media');
+            $table->string('nama_galeri');
+            $table->string('detail_galeri');
+            $table->string('foto_galeri');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateKontaksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kontaks');
+        Schema::dropIfExists('galleries');
     }
 }

@@ -38,14 +38,14 @@ class AkademikController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'nama_akademik' => 'required',
-            'tahun_ajaran' => 'required',
+            'tahun_akademik' => 'required',
         ]);
 
         Akademik::create($request->all());
 
-        return redirect()->route('akademiks.index')
+        return redirect()->route('admin.akademiks.index')
             ->with('success', 'Kalender Akademik Berhasil Ditambahkan');
     }
 
@@ -66,9 +66,10 @@ class AkademikController extends Controller
      * @param  \App\Akademik  $akademik
      * @return \Illuminate\Http\Response
      */
-    public function edit(Akademik $akademik)
+    public function edit(Akademik $akademik, $id)
     {
-        return view('admin.akademiks.edit', compact('akademik'));
+        $akademiks = $akademik::find($id);
+        return view('admin.akademiks.edit', compact('akademiks'));
     }
 
     /**
@@ -78,14 +79,13 @@ class AkademikController extends Controller
      * @param  \App\Akademik  $akademik
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Akademik $akademik)
+    public function update(Request $request, Akademik $akademik, $id)
     {
-        $request->validate([
-            'nama_akademik' => 'required',
-            'tahun_akademik' => 'required',
-        ]);
-
-        $akademik->update($request->all());
+        $akademik::where('id', $id)
+            ->update([
+                'nama_akademik' => $request->nama_akademik,
+                'tahun_akademik' => $request->tahun_akademik,
+            ]);
 
         return redirect()->route('admin.akademiks.index')
             ->with('success', 'Kalender Akademik Berhasil Diubah');
@@ -97,9 +97,9 @@ class AkademikController extends Controller
      * @param  \App\Akademik  $akademik
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Akademik $akademik)
+    public function destroy(Akademik $akademik, $id)
     {
-        $akademik->delete();
+        $akademik->destroy($id);
 
         return redirect()->route('admin.akademiks.index')
             ->with('success', 'Kalender Akademik Berhasil Dihapus');
