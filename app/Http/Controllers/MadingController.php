@@ -38,9 +38,9 @@ class MadingController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_mading' => 'required',
-            'detail_mading' => 'required',
+        $this->validate($request, [
+            'nama_mading' => 'required|string',
+            'detail_mading' => 'required|string',
             'foto_mading' => 'required',
         ]);
 
@@ -67,9 +67,10 @@ class MadingController extends Controller
      * @param  \App\Mading  $mading
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mading $mading)
+    public function edit(Mading $mading, $id)
     {
-        return view('admin.madings.edit', compact('mading'));
+        $madings = $mading::find($id);
+        return view('admin.madings.edit', compact('madings'));
     }
 
     /**
@@ -79,15 +80,14 @@ class MadingController extends Controller
      * @param  \App\Mading  $mading
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mading $mading)
+    public function update(Request $request, Mading $mading, $id)
     {
-        $request->validate([
-            'nama_mading' => 'required',
-            'detail_mading' => 'required',
-            'foto_mading' => 'required',
-        ]);
-
-        $mading->update($request->all());
+        $mading::where('id', $id)
+            ->update([
+                'nama_mading' => $request->nama_mading,
+                'detail_mading' => $request->detail_mading,
+                'foto_mading' => $request->foto_mading,
+            ]);
 
         return redirect()->route('admin.madings.index')
             ->with('success', 'Mading Berhasil Diubah');
@@ -99,9 +99,9 @@ class MadingController extends Controller
      * @param  \App\Mading  $mading
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mading $mading)
+    public function destroy(Mading $mading, $id)
     {
-        $mading->delete();
+        $mading->destroy($id);
 
         return redirect()->route('admin.madings.index')
             ->with('success', 'Mading Berhasil Dihapus');

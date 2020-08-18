@@ -18,7 +18,9 @@ class CreateKontaksTable extends Migration
             $table->string('hotline');
             $table->string('email');
             $table->string('alamat');
-            $table->string('sosial_media');
+            $table->string('youtube');
+            $table->string('facebook');
+            $table->string('instagram');
             $table->timestamps();
         });
     }

@@ -48,6 +48,48 @@
                             Motto
                         </p>
                     </a>
+                    <a href="/admin/madings" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Mading
+                        </p>
+                    </a>
+                    <a href="/admin/kontaks" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Kontak
+                        </p>
+                    </a>
+                    <a href="/admin/kemitraans" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Kemitraan
+                        </p>
+                    </a>
+                    <a href="/admin/gurus" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Guru
+                        </p>
+                    </a>
+                    <a href="/admin/gallerys" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Galeri
+                        </p>
+                    </a>
+                    <a href="/admin/banners" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Banner
+                        </p>
+                    </a>
+                    <a href="/admin/akademiks" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Akademik
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>
