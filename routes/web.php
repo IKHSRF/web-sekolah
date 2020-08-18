@@ -49,7 +49,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/gurus', 'GuruController@store')->name('admin.gurus.store');
     Route::get('/gurus/{id}', 'GuruController@edit')->name('admin.gurus.edit');
     Route::patch('/gurus/{id}', 'GuruController@update')->name('admin.gurus.update');
-    Route::delete('/gurus/{id}', 'GuruController@destroy')->name('admin.gallerys.destroy');
+    Route::delete('/gurus/{id}', 'GuruController@destroy')->name('admin.gurus.destroy');
 
     //crud kemitraans
     Route::get('/kemitraans', 'KemitraanController@index')->name('admin.kemitraans.index');

@@ -28,7 +28,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.jurusans.update', $jurusan->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.jurusans.update', $jurusans->id)}}">
                         @method('patch')
                         @csrf
                         <div class="row">
@@ -36,13 +36,16 @@
                                 <div class="form-group">
                                     <label>Nama Jurusan</label>
                                     <input type="text" name="nama_jurusan" id="nama_jurusan" class="form-control"
-                                        required="true" value="{{$madings->nama_jurusan}}">
+                                        required="true" value="{{$jurusans->nama_jurusan}}">
                                     <label>Detail Jurusan</label>
                                     <input type="text" name="detail_jurusan" id="detail_jurusan" class="form-control"
-                                        required="true" value="{{$madings->detail_jurusan}}">
+                                        required="true" value="{{$jurusans->detail_jurusan}}">
+                                        <label>Tahun Berdiri</label>
+                                    <input type="text" name="tahun_berdiri" id="tahun_berdiri" class="form-control"
+                                        required="true" value="{{$jurusans->tahun_berdiri}}">
                                     <label>Foto Jurusan</label>
                                     <input type="file" name="foto_jurusan" id="foto_jurusan" class="form-control"
-                                        required="true" value="{{$madings->foto_jurusan}}">
+                                        required="true" value="{{$jurusans->foto_jurusan}}">
                                 </div>
                             </div>
                         </div>

@@ -40,12 +40,12 @@ class AkademikController extends Controller
     {
         $this->validate($request, [
             'nama_akademik' => 'required',
-            'tahun_ajaran' => 'required',
+            'tahun_akademik' => 'required',
         ]);
 
         Akademik::create($request->all());
 
-        return redirect()->route('akademiks.index')
+        return redirect()->route('admin.akademiks.index')
             ->with('success', 'Kalender Akademik Berhasil Ditambahkan');
     }
 
@@ -79,12 +79,12 @@ class AkademikController extends Controller
      * @param  \App\Akademik  $akademik
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Akademik $akademik)
+    public function update(Request $request, Akademik $akademik, $id)
     {
         $akademik::where('id', $id)
             ->update([
                 'nama_akademik' => $request->nama_akademik,
-                'tahun_ajaran' => $request->tahun_ajaran,
+                'tahun_akademik' => $request->tahun_akademik,
             ]);
 
         return redirect()->route('admin.akademiks.index')

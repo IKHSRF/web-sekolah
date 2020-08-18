@@ -68,7 +68,7 @@ class JurusanController extends Controller
      * @param  \App\Jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Jurusan $jurusan, $if)
+    public function edit(Jurusan $jurusan, $id)
     {
         $jurusans = $jurusan::find($id);
         return view('admin.jurusans.edit', compact('jurusans'));

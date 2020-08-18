@@ -100,8 +100,8 @@
                                 <input type="text" name="nama_akademik" id="nama_akademik" class="form-control" >
                                 <p class="text-danger">{{ $errors->first('nama_akademik') }}</p>
                                 <label>Tahun Ajaran</label>
-                                <input type="text" name="tahun_ajaran" id="tahun_ajaran" class="form-control" >
-                                <p class="text-danger">{{ $errors->first('tahun_ajaran') }}</p>
+                                <input type="text" name="tahun_akademik" id="tahun_akademik" class="form-control" >
+                                <p class="text-danger">{{ $errors->first('tahun_akademik') }}</p>
                             </div>
                         </div>
                     </div>

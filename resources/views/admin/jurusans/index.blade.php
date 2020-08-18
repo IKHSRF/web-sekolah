@@ -39,6 +39,7 @@
                             <th>No</th>
                             <th>Nama Jurusan</th>
                             <th>Detail Jurusan</th>
+                            <th>Tahun Berdiri</th>
                             <th>Foto Jurusan</th>
                             <th>Action</th>
                         </tr>
@@ -49,6 +50,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $jurusan->nama_jurusan }}</td>
                             <td>{{ $jurusan->detail_jurusan}}</td>
+                            <td>{{ $jurusan->tahun_berdiri}}</td>
                             <td>{{ $jurusan->foto_jurusan }}</td>
                             <td>
                                 <div class="row">
@@ -92,7 +94,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" class="form-data" id="form-data" action="{{route('admin.jurusan.store')}}">
+            <form method="post" class="form-data" id="form-data" action="{{route('admin.jurusans.store')}}">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
@@ -104,6 +106,9 @@
                                 <label>Detail Jurusan</label>
                                 <input type="text" name="detail_jurusan" id="detail_jurusan" class="form-control" >
                                 <p class="text-danger">{{ $errors->first('detail_jurusan') }}</p>
+                                <label>Tahun Berdiri</label>
+                                <input type="text" name="tahun_berdiri" id="tahun_berdiri" class="form-control" >
+                                <p class="text-danger">{{ $errors->first('tahun_berdiri') }}</p>
                                 <label>Foto Jurusan</label>
                                 <input type="file" name="foto_jurusan" id="foto_jurusan" class="form-control" >
                                 <p class="text-danger">{{ $errors->first('foto_jurusan') }}</p>

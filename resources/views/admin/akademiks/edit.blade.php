@@ -38,8 +38,8 @@
                                     <input type="text" name="nama_akademik" id="nama_akademik" class="form-control"
                                         required="true" value="{{$akademiks->nama_akademik}}">
                                     <label>Tahun Ajaran</label>
-                                    <input type="text" name="tahun_ajaran" id="tahun_ajaran" class="form-control"
-                                        required="true" value="{{$akademiks->tahun_ajaran}}">
+                                    <input type="text" name="tahun_akademik" id="tahun_akademik" class="form-control"
+                                        required="true" value="{{$akademiks->tahun_akademik}}">
                                 </div>
                             </div>
                         </div>

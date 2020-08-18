@@ -28,21 +28,18 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.madings.update', $madings->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.banners.update', $banners->id)}}">
                         @method('patch')
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Nama Mading</label>
-                                    <input type="text" name="nama_mading" id="nama_mading" class="form-control"
-                                        required="true" value="{{$madings->nama_mading}}">
-                                    <label>Detail Mading</label>
-                                    <input type="text" name="detail_mading" id="detail_mading" class="form-control"
-                                        required="true" value="{{$madings->detail_mading}}">
-                                    <label>Foto Mading</label>
-                                    <input type="text" name="foto_mading" id="foto_mading" class="form-control"
-                                        required="true" value="{{$madings->foto_mading}}">
+                                    <label>Nama Banner</label>
+                                    <input type="text" name="nama_banner" id="nama_banner" class="form-control"
+                                        required="true" value="{{$banners->nama_banner}}">
+                                    <label>Foto Banner</label>
+                                    <input type="text" name="foto_banner" id="foto_banner" class="form-control"
+                                        required="true" value="{{$banners->foto_banner}}">
                                 </div>
                             </div>
                         </div>
