@@ -38,7 +38,7 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'nama_galeri' => 'required',
             'detail_galeri' => 'required',
             'foto_galeri' => 'required',
@@ -67,9 +67,10 @@ class GalleryController extends Controller
      * @param  \App\Gallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gallery $gallery)
+    public function edit(Gallery $gallery, $id)
     {
-        return view('admin.gallerys.edit', compact('gallery'));
+        $gallerys = $gallery::find($id);
+        return view('admin.gallerys.edit', compact('gallerys'));
     }
 
     /**
@@ -79,15 +80,14 @@ class GalleryController extends Controller
      * @param  \App\Gallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gallery $gallery)
+    public function update(Request $request, Gallery $gallery, $id)
     {
-        $request->validate([
-            'nama_galeri' => 'required',
-            'detail_galeri' => 'required',
-            'foto_galeri' => 'required',
-        ]);
-
-        $gallery->update($request->all());
+        $gallery::where('id', $id)
+            ->update([
+                'nama_galeri' => $request->nama_galeri,
+                'detail_galeri' => $request->detail_galeri,
+                'foto_galeri' => $request->foto_galeri,
+            ]);
 
         return redirect()->route('admin.gallerys.index')
             ->with('success', 'Galeri Berhasil Diubah');
@@ -99,9 +99,9 @@ class GalleryController extends Controller
      * @param  \App\Gallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gallery $gallery)
+    public function destroy(Gallery $gallery, $id)
     {
-        $gallery->delete();
+        $gallery->destroy($id);
 
         return redirect()->route('admin.gallerys.index')
             ->with('success', 'Galeri Berhasil Dihapus');

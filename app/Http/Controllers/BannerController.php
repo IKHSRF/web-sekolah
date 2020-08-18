@@ -38,7 +38,7 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'nama_banner' => 'required',
             'foto_banner' => 'required',
         ]);
@@ -66,9 +66,10 @@ class BannerController extends Controller
      * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function edit(Banner $banner)
+    public function edit(Banner $banner, $id)
     {
-        return view('admin.banners.edit', compact('banner'));
+        $banners = $banner::find($id);
+        return view('admin.banners.edit', compact('banners'));
     }
 
     /**
@@ -78,14 +79,13 @@ class BannerController extends Controller
      * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Banner $banner)
+    public function update(Request $request, Banner $banner, $id)
     {
-        $request->validate([
-            'nama_banner' => 'required',
-            'foto_banner' => 'required',
-        ]);
-
-        $banner->update($request->all());
+        $banner::where('id', $id)
+            ->update([
+                'nama_banner' => $request->nama_banner,
+                'foto_banner' => $request->foto_banner,
+            ]);
 
         return redirect()->route('admin.banners.index')
             ->with('success', 'Banner Berhasil Diupdate');
@@ -97,9 +97,9 @@ class BannerController extends Controller
      * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Banner $banner)
+    public function destroy(Banner $banner, $id)
     {
-        $banner->delete();
+        $banner->destroy($id);
 
         return redirect()->route('admin.banners.index')
             ->with('success', 'Banner Berhasil Dihapus');

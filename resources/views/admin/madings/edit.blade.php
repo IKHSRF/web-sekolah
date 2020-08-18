@@ -41,7 +41,7 @@
                                     <input type="text" name="detail_mading" id="detail_mading" class="form-control"
                                         required="true" value="{{$madings->detail_mading}}">
                                     <label>Foto Mading</label>
-                                    <input type="text" name="foto_mading" id="foto_mading" class="form-control"
+                                    <input type="file" name="foto_mading" id="foto_mading" class="form-control"
                                         required="true" value="{{$madings->foto_mading}}">
                                 </div>
                             </div>

@@ -38,9 +38,9 @@ class KemitraanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_mitra' => 'required',
-            'detail_mitra' => 'required',
+        $this->validate($request, [
+            'nama_mitra' => 'required|string',
+            'detail_mitra' => 'required|string',
             'tahun_mitra' => 'required',
             'foto_mitra' => 'required',
         ]);
@@ -68,9 +68,10 @@ class KemitraanController extends Controller
      * @param  \App\Kemitraan  $kemitraan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kemitraan $kemitraan)
+    public function edit(Kemitraan $kemitraan, $id)
     {
-        return view('admin.kemitraans.edit', compact('kemitraan'));
+        $kemitraans = $kemitraan::find($id);
+        return view('admin.kemitraans.edit', compact('kemitraans'));
     }
 
     /**
@@ -80,16 +81,15 @@ class KemitraanController extends Controller
      * @param  \App\Kemitraan  $kemitraan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kemitraan $kemitraan)
+    public function update(Request $request, Kemitraan $kemitraan, $id)
     {
-        $request->validate([
-            'nama_mitra' => 'required',
-            'detail_mitra' => 'required',
-            'tahun_mitra' => 'required',
-            'foto_mitra' => 'required',
-        ]);
-
-        $kemitraan->update($request->all());
+        $kemitraan::where('id', $id)
+            ->update([
+                'nama_mitra' => $request->nama_mitra,
+                'detail_mitra' => $request->detail_mitra,
+                'tahun_mitra' => $request->tahun_mitra,
+                'foto_mitra' => $request->foto_mitra,
+            ]);
 
         return redirect()->route('admin.kemitraans.index')
             ->with('success', 'Mitra Berhasil Diubah');
@@ -101,9 +101,9 @@ class KemitraanController extends Controller
      * @param  \App\Kemitraan  $kemitraan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kemitraan $kemitraan)
+    public function destroy(Kemitraan $kemitraan, $id)
     {
-        $kemitraan->delete();
+        $kemitraan->destroy($id);
 
         return redirect()->route('admin.kemitraans.index')
             ->with('success', 'Mitra Berhasil Dihapus');

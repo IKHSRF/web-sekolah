@@ -38,7 +38,7 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'nama_guru' => 'required',
             'jabatan' => 'required',
             'foto_guru' => 'required',
@@ -67,9 +67,10 @@ class GuruController extends Controller
      * @param  \App\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function edit(Guru $guru)
+    public function edit(Guru $guru, $id)
     {
-        return view('admin.gurus.edit', compact('guru'));
+        $gurus = $guru::find($id);
+        return view('admin.gurus.edit', compact('gurus'));
     }
 
     /**
@@ -79,15 +80,14 @@ class GuruController extends Controller
      * @param  \App\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Guru $guru)
+    public function update(Request $request, Guru $guru, $id)
     {
-        $request->validate([
-            'nama_guru' => 'required',
-            'jabatan' => 'required',
-            'foto_guru' => 'required',
-        ]);
-
-        $guru->update($request->all());
+        $guru::where('id', $id)
+            ->update([
+                'nama_guru' => $request->nama_guru,
+                'jabatan' => $request->jabatan,
+                'foto_guru' => $request->foto_guru,
+            ]);
 
         return redirect()->route('admin.gurus.index')
             ->with('success', 'Guru Berhasil Diubah');
@@ -99,9 +99,9 @@ class GuruController extends Controller
      * @param  \App\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Guru $guru)
+    public function destroy(Guru $guru, $id)
     {
-        $guru->delete();
+        $guru->destroy($id);
 
         return redirect()->route('admin.gurus.index')
             ->with('success', 'Guru Berhasil Dihapus');

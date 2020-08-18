@@ -1,50 +1,64 @@
-@extends('admin.akademiks.layout')
+@extends('layouts.admin.main')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit kalender Akademik</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.akademiks.index') }}"> Back</a>
-            </div>
-        </div>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content-header -->
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Ubah Data</h3>
 
-    <form action="{{ route('admin.akademiks.update',$akademik->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Nama Kegiatan:</strong>
-                    <input type="text" name="nama_akademik" value="{{ $akademik->nama_akademik }}" class="form-control" placeholder="Nama Kegiatan">
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Tahun Ajaran:</strong>
-                    <textarea class="form-control" style="height:150px" name="tahun_akademik" placeholder="Tahun Ajaran">{{ $akademik->tahun_akademik }}</textarea>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.akademiks.update', $akademiks->id)}}">
+                        @method('patch')
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Nama Kegiatan</label>
+                                    <input type="text" name="nama_akademik" id="nama_akademik" class="form-control"
+                                        required="true" value="{{$akademiks->nama_akademik}}">
+                                    <label>Tahun Ajaran</label>
+                                    <input type="text" name="tahun_ajaran" id="tahun_ajaran" class="form-control"
+                                        required="true" value="{{$akademiks->tahun_ajaran}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="simpan" id="simpan" class="btn btn-primary">
+                                <i class="fa fa-save"></i> Update
+                            </button>
+                        </div>
+                    </form>
+                    <hr>
                 </div>
+                <!-- /.row -->
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
+            <!-- /.card-body -->
 
-    </form>
+        </div>
+</div>
+</section>
+<!-- /.content -->
+</div>
+
 @endsection
