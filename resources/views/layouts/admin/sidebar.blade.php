@@ -36,6 +36,18 @@
                             Jurusan
                         </p>
                     </a>
+                    <a href="/admin/sejarahs" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Sejarah
+                        </p>
+                    </a>
+                    <a href="/admin/mottos" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Motto
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

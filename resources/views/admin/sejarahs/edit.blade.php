@@ -1,50 +1,64 @@
 @extends('layouts.admin.main')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit Sejarah</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('admin.sejarahs.index') }}"> Back</a>
-            </div>
-        </div>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content-header -->
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Ubah Data</h3>
 
-    <form action="{{ route('admin.sejarahs.update',$sejarah->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Judul Sejarah:</strong>
-                    <input type="text" name="judul_sejarah" value="{{ $sejarah->judul_sejarahs }}" class="form-control" placeholder="Judul Sejarah">
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Detail Sejarah:</strong>
-                    <textarea class="form-control" style="height:150px" name="detail_sejarah" placeholder="Detail Sejarah">{{ $sejarah->detail_sejarah }}</textarea>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.sejarahs.update', $sejarahs->id)}}">
+                        @method('patch')
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Judul Sejarah</label>
+                                    <input type="text" name="judul_sejarah" id="judul_sejarah" class="form-control"
+                                        required="true" value="{{$sejarahs->judul_sejarah}}">
+                                    <label>Detail Sejarah</label>
+                                    <input type="text" name="detail_sejarah" id="detail_sejarah" class="form-control"
+                                        required="true" value="{{$sejarahs->detail_sejarah}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="simpan" id="simpan" class="btn btn-primary">
+                                <i class="fa fa-save"></i> Update
+                            </button>
+                        </div>
+                    </form>
+                    <hr>
                 </div>
+                <!-- /.row -->
             </div>
-        </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
+            <!-- /.card-body -->
 
-    </form>
+        </div>
+</div>
+</section>
+<!-- /.content -->
+</div>
+
 @endsection

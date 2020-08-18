@@ -16,7 +16,7 @@ class SejarahController extends Controller
     {
         $sejarahs = Sejarah::latest()->paginate(5);
 
-        return view('sejarahs.index', compact('sejarahs'))
+        return view('admin.sejarahs.index', compact('sejarahs'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -39,9 +39,9 @@ class SejarahController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'judul_sejarah' => 'required',
-            'detail_sejarah' => 'required',
+        $this->validate($request, [
+            'judul_sejarah' => 'required|string',
+            'detail_sejarah' => 'required|string',
         ]);
 
         Sejarah::create($request->all());
@@ -67,9 +67,10 @@ class SejarahController extends Controller
      * @param  \App\Sejarah  $sejarah
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sejarah $sejarah)
+    public function edit(Sejarah $sejarah, $id)
     {
-        return view('admin.sejarahs.edit', compact('sejarah'));
+        $sejarahs = $sejarah::find($id);
+        return view('admin.sejarahs.edit', compact('sejarahs'));
     }
 
     /**
@@ -79,14 +80,13 @@ class SejarahController extends Controller
      * @param  \App\Sejarah  $sejarah
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sejarah $sejarah)
+    public function update(Request $request, Sejarah $sejarah, $id)
     {
-        $request->validate([
-            'judul_sejarah' => 'required',
-            'detail_sejarah' => 'required',
-        ]);
-
-        $sejarah->update($request->all());
+        $sejarah::where('id', $id)
+            ->update([
+                'judul_sejarah' => $request->judul_sejarah,
+                'detail_sejarah' => $request->detail_sejarah,
+            ]);
 
         return redirect()->route('admin.sejarahs.index')
             ->with('success', 'Sejarah Berhasil Diupdate');
@@ -98,11 +98,11 @@ class SejarahController extends Controller
      * @param  \App\Sejarah  $sejarah
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sejarah $sejarah)
+    public function destroy(Sejarah $sejarah, $id)
     {
-        $sejarah->delete();
+        $sejarah->destroy($id);
 
-        return redirect()->route('admin.sejarah.index')
+        return redirect()->route('admin.sejarahs.index')
             ->with('success', 'Sejarah Berhasil Dihapus');
     }
 }

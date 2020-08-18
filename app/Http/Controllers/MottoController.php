@@ -38,7 +38,7 @@ class MottoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'visi' => 'required',
             'misi' => 'required',
             'motto' => 'required',
@@ -67,9 +67,10 @@ class MottoController extends Controller
      * @param  \App\Motto  $motto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Motto $motto)
+    public function edit(Motto $motto, $id)
     {
-        return view('admin.mottos.edit', compact('motto'));
+        $mottos = $motto::find($id);
+        return view('admin.mottos.edit', compact('mottos'));
     }
 
     /**
@@ -79,15 +80,14 @@ class MottoController extends Controller
      * @param  \App\Motto  $motto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Motto $motto)
+    public function update(Request $request, Motto $motto, $id)
     {
-        $request->validate([
-            'visi' => 'required',
-            'misi' => 'required',
-            'motto' => 'required',
-        ]);
-
-        $motto->update($request->all());
+        $motto::where('id', $id)
+            ->update([
+                'visi' => $request->visi,
+                'misi' => $request->misi,
+                'motto' => $request->motto,
+            ]);
 
         return redirect()->route('admin.mottos.index')
             ->with('success', 'Visi Misi Berhasil Diupdate');
@@ -99,9 +99,9 @@ class MottoController extends Controller
      * @param  \App\Motto  $motto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Motto $motto)
+    public function destroy(Motto $motto, $id)
     {
-        $motto->delete();
+        $motto->destroy($id);
 
         return redirect()->route('admin.mottos.index')
             ->with('success', 'Visi Misi Berhasil Dihapus');
