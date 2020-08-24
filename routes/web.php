@@ -12,11 +12,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
-
+//User
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.home');
 });
 
+Route::get('/sejarah', function () {
+    return view('user.sejarah');
+})->name('sejarah');
+
+//admin
 Route::group(['prefix' => 'admin'], function() {
      //crud prestasis
      Route::get('/prestasis', 'PrestasiController@index')->name('admin.prestasis.index');
@@ -71,6 +76,8 @@ Route::group(['prefix' => 'admin'], function() {
         return view('admin.index');
      })->name('admin.index');
 });
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

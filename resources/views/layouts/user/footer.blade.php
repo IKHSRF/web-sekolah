@@ -1,5 +1,5 @@
 <footer class="footer">
-    <div class="footer_background" style="background-image:url(images/footer_background.png)"></div>
+    <div class="footer_background" style="background-image:url({{asset('assets/images/footer_background.png')}})"></div>
     <div class="container">
         <div class="row footer_row">
             <div class="col">
@@ -12,7 +12,7 @@
                             <div class="footer_section footer_about">
                                 <div class="footer_logo_container">
                                     <a href="#">
-                                        <div class="footer_logo_text">Unic<span>at</span></div>
+                                        <div class="footer_logo_text">Wikrama<span></span></div>
                                     </a>
                                 </div>
                                 <div class="footer_about_text">
@@ -99,8 +99,7 @@
                         Copyright &copy;<script>
                             document.write(new Date().getFullYear());
 
-                        </script> All rights reserved | This template is made with <i class="fa fa-heart-o"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </script>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </div>
                     <div class="ml-lg-auto cr_links">
