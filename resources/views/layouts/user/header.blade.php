@@ -46,13 +46,13 @@
                                         Profil
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{route('sejarah')}}">Sejarah</a>
-                                        <a class="dropdown-item" href="#">Visi, Misi dan moto</a>
-										<a class="dropdown-item" href="#">Kemitraan</a>
-										<a class="dropdown-item" href="#">Prestasi</a>
-										<a class="dropdown-item" href="#">Guru</a>
-										<a class="dropdown-item" href="#">Stuktur Organisasi</a>
-										<a class="dropdown-item" href="#">Statistik Sekolah</a>
+                                        <a class="dropdown-item" href="{{route('user.profile.sejarah')}}">Sejarah</a>
+                                        <a class="dropdown-item" href="{{route('user.profile.visimisi')}}">Visi, Misi dan moto</a>
+										<a class="dropdown-item" href="{{route('user.profile.kemitraan')}}">Kemitraan</a>
+										<a class="dropdown-item" href="{{route('user.profile.prestasi')}}">Prestasi</a>
+										<a class="dropdown-item" href="{{route('user.profile.guru')}}">Guru</a>
+										<a class="dropdown-item" href="{{route('user.profile.stuktur')}}">Stuktur Organisasi</a>
+										<a class="dropdown-item" href="{{route('user.profile.statistik')}}">Statistik Sekolah</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -61,7 +61,7 @@
                                         Jurusan
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Rekayasa Perangkat Lunak</a>
+                                        <a class="dropdown-item" href="{{route('user.jurusan.rpl')}}">Rekayasa Perangkat Lunak</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -70,7 +70,7 @@
                                         Kurikulum
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Stuktur Kurikulum</a>
+                                        <a class="dropdown-item" href="{{route('user.kurikulum.stuktur')}}">Stuktur Kurikulum</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -79,11 +79,11 @@
                                         Kesiswaan
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Mading Siswa</a>
+                                        <a class="dropdown-item" href="{{route('user.kesiswaan.mading')}}">Mading Siswa</a>
                                     </div>
                                 </li>
-                                <li><a href="#">Sarana dan Prasarana</a></li>
-                                <li><a href="#">Galery</a></li>
+                                <li><a href="{{route('user.sarana')}}">Sarana dan Prasarana</a></li>
+                                <li><a href="{{route('user.gallery')}}">Galery</a></li>
                             </ul>
                         </nav>
 

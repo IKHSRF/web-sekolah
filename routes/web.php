@@ -16,10 +16,56 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('user.home');
 });
-
+//menu profile
 Route::get('/sejarah', function () {
-    return view('user.sejarah');
-})->name('sejarah');
+    return view('user.profile.sejarah');
+})->name('user.profile.sejarah');
+
+Route::get('/guru', function () {
+    return view('user.profile.guru');
+})->name('user.profile.guru');
+
+Route::get('/kemitraan', function () {
+    return view('user.profile.kemitraan');
+})->name('user.profile.kemitraan');
+
+Route::get('/prestasi', function () {
+    return view('user.profile.prestasi');
+})->name('user.profile.prestasi');
+
+Route::get('/statistik', function () {
+    return view('user.profile.statistik');
+})->name('user.profile.statistik');
+
+Route::get('/stuktur', function () {
+    return view('user.profile.stuktur');
+})->name('user.profile.stuktur');
+
+Route::get('/visimisi', function () {
+    return view('user.profile.visimisi');
+})->name('user.profile.visimisi');
+
+//menu jurusan
+Route::get('/jurusan/rekayasa-perangkat-lunak', function(){
+    return view('user.jurusan.rpl');
+})->name('user.jurusan.rpl');
+
+//menu kesiswaan
+Route::get('/kesiswaan/mading', function(){
+    return view('user.kesiswaan.mading');
+})->name('user.kesiswaan.mading');
+
+//menu kurikulum
+Route::get('/kurikulum/stuktur', function(){
+    return view('user.kurikulum.stuktur');
+})->name('user.kurikulum.stuktur');
+
+Route::get('/sarana-dan-prasarana', function(){
+    return view('user.sarana');
+})->name('user.sarana');
+Route::get('/gallery', function(){
+    return view('user.gallery');
+})->name('user.gallery');
 
 //admin
 Route::group(['prefix' => 'admin'], function() {
