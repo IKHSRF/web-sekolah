@@ -28,21 +28,18 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.gallerys.update', $gallerys->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.sejarahs.update', $sejarahs->id)}}">
                         @method('patch')
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Nama Galeri</label>
-                                    <input type="text" name="nama_galeri" id="nama_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->nama_galeri}}">
-                                    <label>Detail Galeri</label>
-                                    <input type="text" name="detail_galeri" id="detail_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->detail_galeri}}">
-                                    <label>Foto Galeri</label>
-                                    <input type="text" name="foto_galeri" id="foto_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->foto_galeri}}">
+                                    <label>Judul Sejarah</label>
+                                    <input type="text" name="judul_sejarah" id="judul_sejarah" class="form-control"
+                                        required="true" value="{{$sejarahs->judul_sejarah}}">
+                                    <label>Detail Sejarah</label>
+                                    <input type="text" name="detail_sejarah" id="detail_sejarah" class="form-control"
+                                        required="true" value="{{$sejarahs->detail_sejarah}}">
                                 </div>
                             </div>
                         </div>

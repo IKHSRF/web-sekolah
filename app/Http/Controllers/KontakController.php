@@ -14,7 +14,10 @@ class KontakController extends Controller
      */
     public function index()
     {
-        //
+        $kontaks = Kontak::latest()->paginate(5);
+
+        return view('admin.kontaks.index', compact('kontaks'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class KontakController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.kontaks.create');
     }
 
     /**
@@ -35,7 +38,19 @@ class KontakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'hotline' => 'required|string',
+            'email' => 'required|string',
+            'alamat' => 'required|string',
+            'youtube' => 'required|string',
+            'facebook' => 'required|string',
+            'instagram' => 'required|string',
+        ]);
+
+        Kontak::create($request->all());
+
+        return redirect()->route('admin.kontaks.index')
+            ->with('success', 'Kontak Berhasil Dibuat');
     }
 
     /**
@@ -46,7 +61,7 @@ class KontakController extends Controller
      */
     public function show(Kontak $kontak)
     {
-        //
+        return view('admin.kontaks.show', compact('kontak'));
     }
 
     /**
@@ -55,9 +70,10 @@ class KontakController extends Controller
      * @param  \App\Kontak  $kontak
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kontak $kontak)
+    public function edit(Kontak $kontak, $id)
     {
-        //
+        $kontaks = $kontak::find($id);
+        return view('admin.kontaks.edit', compact('kontaks'));
     }
 
     /**
@@ -67,9 +83,20 @@ class KontakController extends Controller
      * @param  \App\Kontak  $kontak
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kontak $kontak)
+    public function update(Request $request, Kontak $kontak, $id)
     {
-        //
+        $kontak::where('id', $id)
+            ->update([
+                'hotline' => $request->hotline,
+                'email' => $request->email,
+                'alamat' => $request->alamat,
+                'youtube' => $request->youtube,
+                'facebook' => $request->facebook,
+                'instagram' => $request->instagram,
+            ]);
+
+        return redirect()->route('admin.kontaks.index')
+            ->with('success', 'Kontak Berhasil Diupdate');
     }
 
     /**
@@ -78,8 +105,11 @@ class KontakController extends Controller
      * @param  \App\Kontak  $kontak
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kontak $kontak)
+    public function destroy(Kontak $kontak, $id)
     {
-        //
+        $kontak->destroy($id);
+
+        return redirect()->route('admin.kontaks.index')
+            ->with('success', 'Kontak Berhasil Dihapus');
     }
 }

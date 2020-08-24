@@ -16,7 +16,7 @@ class KemitraanController extends Controller
     {
         $kemitraans = Kemitraan::latest()->paginate(5);
 
-        return view('kemitraans.index', compact('kemitraans'))
+        return view('admin.kemitraans.index', compact('kemitraans'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -27,7 +27,7 @@ class KemitraanController extends Controller
      */
     public function create()
     {
-        return view('kemitraans.create');
+        return view('admin.kemitraans.create');
     }
 
     /**
@@ -38,16 +38,16 @@ class KemitraanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_mitra' => 'required',
-            'detail_mitra' => 'required',
+        $this->validate($request, [
+            'nama_mitra' => 'required|string',
+            'detail_mitra' => 'required|string',
             'tahun_mitra' => 'required',
             'foto_mitra' => 'required',
         ]);
 
         Kemitraan::create($request->all());
 
-        return redirect()->route('kemitraans.index')
+        return redirect()->route('admin.kemitraans.index')
             ->with('success', 'Mitra Berhasil Ditambahkan');
     }
 
@@ -59,7 +59,7 @@ class KemitraanController extends Controller
      */
     public function show(Kemitraan $kemitraan)
     {
-        return view('kemitraans.show', compact('kemitraan'));
+        return view('admin.kemitraans.show', compact('kemitraan'));
     }
 
     /**
@@ -68,9 +68,10 @@ class KemitraanController extends Controller
      * @param  \App\Kemitraan  $kemitraan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kemitraan $kemitraan)
+    public function edit(Kemitraan $kemitraan, $id)
     {
-        return view('kemitraans.edit', compact('kemitraan'));
+        $kemitraans = $kemitraan::find($id);
+        return view('admin.kemitraans.edit', compact('kemitraans'));
     }
 
     /**
@@ -80,18 +81,17 @@ class KemitraanController extends Controller
      * @param  \App\Kemitraan  $kemitraan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kemitraan $kemitraan)
+    public function update(Request $request, Kemitraan $kemitraan, $id)
     {
-        $request->validate([
-            'nama_mitra' => 'required',
-            'detail_mitra' => 'required',
-            'tahun_mitra' => 'required',
-            'foto_mitra' => 'required',
-        ]);
+        $kemitraan::where('id', $id)
+            ->update([
+                'nama_mitra' => $request->nama_mitra,
+                'detail_mitra' => $request->detail_mitra,
+                'tahun_mitra' => $request->tahun_mitra,
+                'foto_mitra' => $request->foto_mitra,
+            ]);
 
-        $kemitraan->update($request->all());
-
-        return redirect()->route('kemitraans.index')
+        return redirect()->route('admin.kemitraans.index')
             ->with('success', 'Mitra Berhasil Diubah');
     }
 
@@ -101,11 +101,11 @@ class KemitraanController extends Controller
      * @param  \App\Kemitraan  $kemitraan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kemitraan $kemitraan)
+    public function destroy(Kemitraan $kemitraan, $id)
     {
-        $kemitraan->delete();
+        $kemitraan->destroy($id);
 
-        return redirect()->route('kemitraans.index')
+        return redirect()->route('admin.kemitraans.index')
             ->with('success', 'Mitra Berhasil Dihapus');
     }
 }

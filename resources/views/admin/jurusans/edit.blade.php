@@ -1,61 +1,70 @@
-@extends('jurusans.layout')
+@extends('layouts.admin.main')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit Jurusan</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('jurusans.index') }}"> Back</a>
-            </div>
-        </div>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content-header -->
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Ubah Data</h3>
 
-    <form action="{{ route('jurusans.update',$jurusan->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-
-         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Nama Jurusan:</strong>
-                    <input type="text" name="nama_jurusan" value="{{ $jurusan->nama_jurusan }}" class="form-control" placeholder="Nama Jurusan">
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Tahun Berdiri:</strong>
-                    <textarea class="form-control" style="height:150px" name="tahun_berdiri" placeholder="Tahun Berdiri">{{ $jurusan->tahun_berdiri }}</textarea>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.jurusans.update', $jurusans->id)}}">
+                        @method('patch')
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Nama Jurusan</label>
+                                    <input type="text" name="nama_jurusan" id="nama_jurusan" class="form-control"
+                                        required="true" value="{{$jurusans->nama_jurusan}}">
+                                    <label>Detail Jurusan</label>
+                                    <input type="text" name="detail_jurusan" id="detail_jurusan" class="form-control"
+                                        required="true" value="{{$jurusans->detail_jurusan}}">
+                                        <label>Tahun Berdiri</label>
+                                    <input type="text" name="tahun_berdiri" id="tahun_berdiri" class="form-control"
+                                        required="true" value="{{$jurusans->tahun_berdiri}}">
+                                    <label>Foto Jurusan</label>
+                                    <input type="file" name="foto_jurusan" id="foto_jurusan" class="form-control"
+                                        required="true" value="{{$jurusans->foto_jurusan}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="simpan" id="simpan" class="btn btn-primary">
+                                <i class="fa fa-save"></i> Update
+                            </button>
+                        </div>
+                    </form>
+                    <hr>
                 </div>
+                <!-- /.row -->
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Detail Jurusan:</strong>
-                    <textarea class="form-control" style="height:150px" name="detail_jurusan" placeholder="Detail Jurusan">{{ $jurusan->detail_jurusan }}</textarea>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Upload Foto</strong>
-                <input type="file" name="foto_jurusan">Upload</input>
-            </div>
-        </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
+            <!-- /.card-body -->
 
-    </form>
+        </div>
+</div>
+</section>
+<!-- /.content -->
+</div>
+
 @endsection

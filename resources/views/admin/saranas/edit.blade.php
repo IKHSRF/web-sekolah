@@ -28,21 +28,21 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.gallerys.update', $gallerys->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.saranas.update', $saranas->id)}}">
                         @method('patch')
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Nama Galeri</label>
-                                    <input type="text" name="nama_galeri" id="nama_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->nama_galeri}}">
-                                    <label>Detail Galeri</label>
-                                    <input type="text" name="detail_galeri" id="detail_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->detail_galeri}}">
-                                    <label>Foto Galeri</label>
-                                    <input type="text" name="foto_galeri" id="foto_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->foto_galeri}}">
+                                    <label>Nama Sarana</label>
+                                    <input type="text" name="nama_sarana" id="nama_sarana" class="form-control"
+                                        required="true" value="{{$saranas->nama_sarana}}">
+                                        <label>Detail Saranan</label>
+                                    <input type="text" name="detail_sarana" id="detail_sarana" class="form-control"
+                                        required="true" value="{{$saranas->detail_sarana}}">
+                                        <label>Foto Sarana</label>
+                                    <input type="file" name="foto_sarana" id="foto_sarana" class="form-control"
+                                        required="true" value="{{$saranas->foto_sarana}}">
                                 </div>
                             </div>
                         </div>

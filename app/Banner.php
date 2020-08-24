@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Kontak extends Model
+class Banner extends Model
 {
     protected $fillable = [
-        'hotline', 'email', 'alamat', 'youtube', 'facebook', 'instagram',
+        'nama_banner', 'foto_banner',
     ];
 }

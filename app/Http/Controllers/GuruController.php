@@ -16,7 +16,7 @@ class GuruController extends Controller
     {
         $gurus = Guru::latest()->paginate(5);
 
-        return view('gurus.index', compact('gurus'))
+        return view('admin.gurus.index', compact('gurus'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -27,7 +27,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        return view('gurus.create');
+        return view('admin.gurus.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'nama_guru' => 'required',
             'jabatan' => 'required',
             'foto_guru' => 'required',
@@ -46,7 +46,7 @@ class GuruController extends Controller
 
         Guru::create($request->all());
 
-        return redirect()->route('gurus.index')
+        return redirect()->route('admin.gurus.index')
             ->with('success', 'Guru Berhasil Ditambahkan');
     }
 
@@ -58,7 +58,7 @@ class GuruController extends Controller
      */
     public function show(Guru $guru)
     {
-        return view('gurus.show', compact('guru'));
+        return view('admin.gurus.show', compact('guru'));
     }
 
     /**
@@ -67,9 +67,10 @@ class GuruController extends Controller
      * @param  \App\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function edit(Guru $guru)
+    public function edit(Guru $guru, $id)
     {
-        return view('gurus.edit', compact('guru'));
+        $gurus = $guru::find($id);
+        return view('admin.gurus.edit', compact('gurus'));
     }
 
     /**
@@ -79,17 +80,16 @@ class GuruController extends Controller
      * @param  \App\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Guru $guru)
+    public function update(Request $request, Guru $guru, $id)
     {
-        $request->validate([
-            'nama_guru' => 'required',
-            'jabatan' => 'required',
-            'foto_guru' => 'required',
-        ]);
+        $guru::where('id', $id)
+            ->update([
+                'nama_guru' => $request->nama_guru,
+                'jabatan' => $request->jabatan,
+                'foto_guru' => $request->foto_guru,
+            ]);
 
-        $guru->update($request->all());
-
-        return redirect()->route('gurus.index')
+        return redirect()->route('admin.gurus.index')
             ->with('success', 'Guru Berhasil Diubah');
     }
 
@@ -99,11 +99,11 @@ class GuruController extends Controller
      * @param  \App\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Guru $guru)
+    public function destroy(Guru $guru, $id)
     {
-        $guru->delete();
+        $guru->destroy($id);
 
-        return redirect()->route('gurus.index')
+        return redirect()->route('admin.gurus.index')
             ->with('success', 'Guru Berhasil Dihapus');
     }
 }

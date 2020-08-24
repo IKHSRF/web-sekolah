@@ -28,21 +28,30 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.gallerys.update', $gallerys->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.kontaks.update', $kontaks->id)}}">
                         @method('patch')
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Nama Galeri</label>
-                                    <input type="text" name="nama_galeri" id="nama_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->nama_galeri}}">
-                                    <label>Detail Galeri</label>
-                                    <input type="text" name="detail_galeri" id="detail_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->detail_galeri}}">
-                                    <label>Foto Galeri</label>
-                                    <input type="text" name="foto_galeri" id="foto_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->foto_galeri}}">
+                                    <label>Hotline</label>
+                                    <input type="number" name="hotline" id="hotline" class="form-control"
+                                        required="true" value="{{$kontaks->hotline}}">
+                                    <label>Email</label>
+                                    <input type="email" name="email" id="email" class="form-control"
+                                        required="true" value="{{$kontaks->email}}">
+                                    <label>Alamat Sekolah</label>
+                                    <input type="text" name="alamat" id="alamat" class="form-control"
+                                        required="true" value="{{$kontaks->alamat}}">
+                                        <label>Youtube</label>
+                                    <input type="text" name="youtube" id="youtube" class="form-control"
+                                        required="true" value="{{$kontaks->youtube}}">
+                                        <label>Facebook</label>
+                                    <input type="text" name="facebook" id="facebook" class="form-control"
+                                        required="true" value="{{$kontaks->facebook}}">
+                                        <label>Instagram</label>
+                                    <input type="text" name="instagram" id="instagram" class="form-control"
+                                        required="true" value="{{$kontaks->instagram}}">
                                 </div>
                             </div>
                         </div>

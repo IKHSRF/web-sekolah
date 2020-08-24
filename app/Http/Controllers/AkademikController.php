@@ -14,7 +14,10 @@ class AkademikController extends Controller
      */
     public function index()
     {
-        //
+        $akademiks = Akademik::latest()->paginate(5);
+
+        return view('admin.akademiks.index', compact('akademiks'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class AkademikController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.akademiks.create');
     }
 
     /**
@@ -35,7 +38,15 @@ class AkademikController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama_akademik' => 'required',
+            'tahun_akademik' => 'required',
+        ]);
+
+        Akademik::create($request->all());
+
+        return redirect()->route('admin.akademiks.index')
+            ->with('success', 'Kalender Akademik Berhasil Ditambahkan');
     }
 
     /**
@@ -46,7 +57,7 @@ class AkademikController extends Controller
      */
     public function show(Akademik $akademik)
     {
-        //
+        return view('admin.akademiks.show', compact('akademik'));
     }
 
     /**
@@ -55,9 +66,10 @@ class AkademikController extends Controller
      * @param  \App\Akademik  $akademik
      * @return \Illuminate\Http\Response
      */
-    public function edit(Akademik $akademik)
+    public function edit(Akademik $akademik, $id)
     {
-        //
+        $akademiks = $akademik::find($id);
+        return view('admin.akademiks.edit', compact('akademiks'));
     }
 
     /**
@@ -67,9 +79,16 @@ class AkademikController extends Controller
      * @param  \App\Akademik  $akademik
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Akademik $akademik)
+    public function update(Request $request, Akademik $akademik, $id)
     {
-        //
+        $akademik::where('id', $id)
+            ->update([
+                'nama_akademik' => $request->nama_akademik,
+                'tahun_akademik' => $request->tahun_akademik,
+            ]);
+
+        return redirect()->route('admin.akademiks.index')
+            ->with('success', 'Kalender Akademik Berhasil Diubah');
     }
 
     /**
@@ -78,8 +97,11 @@ class AkademikController extends Controller
      * @param  \App\Akademik  $akademik
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Akademik $akademik)
+    public function destroy(Akademik $akademik, $id)
     {
-        //
+        $akademik->destroy($id);
+
+        return redirect()->route('admin.akademiks.index')
+            ->with('success', 'Kalender Akademik Berhasil Dihapus');
     }
 }

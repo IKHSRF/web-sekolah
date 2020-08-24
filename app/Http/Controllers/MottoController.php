@@ -14,7 +14,10 @@ class MottoController extends Controller
      */
     public function index()
     {
-        //
+        $mottos = Motto::latest()->paginate(5);
+
+        return view('admin.mottos.index', compact('mottos'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class MottoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.mottos.create');
     }
 
     /**
@@ -35,7 +38,16 @@ class MottoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'visi' => 'required',
+            'misi' => 'required',
+            'motto' => 'required',
+        ]);
+
+        Motto::create($request->all());
+
+        return redirect()->route('admin.mottos.index')
+            ->with('success', 'Visi Misi Berhasil Dibuat');
     }
 
     /**
@@ -46,7 +58,7 @@ class MottoController extends Controller
      */
     public function show(Motto $motto)
     {
-        //
+        return view('admin.mottos.show', compact('motto'));
     }
 
     /**
@@ -55,9 +67,10 @@ class MottoController extends Controller
      * @param  \App\Motto  $motto
      * @return \Illuminate\Http\Response
      */
-    public function edit(Motto $motto)
+    public function edit(Motto $motto, $id)
     {
-        //
+        $mottos = $motto::find($id);
+        return view('admin.mottos.edit', compact('mottos'));
     }
 
     /**
@@ -67,9 +80,17 @@ class MottoController extends Controller
      * @param  \App\Motto  $motto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Motto $motto)
+    public function update(Request $request, Motto $motto, $id)
     {
-        //
+        $motto::where('id', $id)
+            ->update([
+                'visi' => $request->visi,
+                'misi' => $request->misi,
+                'motto' => $request->motto,
+            ]);
+
+        return redirect()->route('admin.mottos.index')
+            ->with('success', 'Visi Misi Berhasil Diupdate');
     }
 
     /**
@@ -78,8 +99,11 @@ class MottoController extends Controller
      * @param  \App\Motto  $motto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Motto $motto)
+    public function destroy(Motto $motto, $id)
     {
-        //
+        $motto->destroy($id);
+
+        return redirect()->route('admin.mottos.index')
+            ->with('success', 'Visi Misi Berhasil Dihapus');
     }
 }

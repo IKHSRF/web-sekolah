@@ -14,7 +14,10 @@ class SaranaController extends Controller
      */
     public function index()
     {
-        //
+        $saranas = Sarana::latest()->paginate(5);
+
+        return view('admin.saranas.index', compact('saranas'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +27,7 @@ class SaranaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.saranas.create');
     }
 
     /**
@@ -35,7 +38,16 @@ class SaranaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama_sarana' => 'required|string',
+            'detail_sarana' => 'required|string',
+            'foto_sarana' => 'required',
+        ]);
+
+        Sarana::create($request->all());
+
+        return redirect()->route('admin.saranas.index')
+            ->with('success', 'Sarana Berhasil Ditambahkan');
     }
 
     /**
@@ -46,7 +58,7 @@ class SaranaController extends Controller
      */
     public function show(Sarana $sarana)
     {
-        //
+        return view('admin.saranas.show', compact('sarana'));
     }
 
     /**
@@ -55,9 +67,10 @@ class SaranaController extends Controller
      * @param  \App\Sarana  $sarana
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sarana $sarana)
+    public function edit(Sarana $sarana, $id)
     {
-        //
+        $saranas = $sarana::find($id);
+        return view('admin.saranas.edit', compact('saranas'));
     }
 
     /**
@@ -67,9 +80,17 @@ class SaranaController extends Controller
      * @param  \App\Sarana  $sarana
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sarana $sarana)
+    public function update(Request $request, Sarana $sarana, $id)
     {
-        //
+        $sarana::where('id', $id)
+            ->update([
+                'nama_sarana' => $request->nama_sarana,
+                'detail_sarana' => $request->detail_sarana,
+                'foto_sarana' => $request->foto_sarana,
+            ]);
+
+        return redirect()->route('admin.saranas.index')
+            ->with('success', 'Sarana Berhasil Diupdate');
     }
 
     /**
@@ -78,8 +99,11 @@ class SaranaController extends Controller
      * @param  \App\Sarana  $sarana
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sarana $sarana)
+    public function destroy(Sarana $sarana, $id)
     {
-        //
+        $sarana->destroy($id);
+
+        return redirect()->route('admin.saranas.index')
+            ->with('success', 'Sarana Berhasil Dihapus');
     }
 }

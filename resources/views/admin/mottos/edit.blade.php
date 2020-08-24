@@ -28,21 +28,21 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.gallerys.update', $gallerys->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.mottos.update', $mottos->id)}}">
                         @method('patch')
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Nama Galeri</label>
-                                    <input type="text" name="nama_galeri" id="nama_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->nama_galeri}}">
-                                    <label>Detail Galeri</label>
-                                    <input type="text" name="detail_galeri" id="detail_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->detail_galeri}}">
-                                    <label>Foto Galeri</label>
-                                    <input type="text" name="foto_galeri" id="foto_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->foto_galeri}}">
+                                    <label>Visi</label>
+                                    <input type="text" name="visi" id="visi" class="form-control"
+                                        required="true" value="{{$mottos->visi}}">
+                                    <label>Misi</label>
+                                    <input type="text" name="misi" id="misi" class="form-control"
+                                        required="true" value="{{$mottos->misi}}">
+                                    <label>Motto</label>
+                                    <input type="text" name="motto" id="motto" class="form-control"
+                                        required="true" value="{{$mottos->motto}}">
                                 </div>
                             </div>
                         </div>

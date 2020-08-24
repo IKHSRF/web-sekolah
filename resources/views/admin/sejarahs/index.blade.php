@@ -22,7 +22,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-lg-6">
-                        <h3 class="card-title">Data Jurusan</h3>
+                        <h3 class="card-title">Data Sejarah</h3>
                     </div>
                     <div class="col-lg-6">
                         <button type="button" class="btn btn-primary float-lg-right" data-toggle="modal" data-target="#exampleModal">
@@ -37,28 +37,24 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama Jurusan</th>
-                            <th>Detail Jurusan</th>
-                            <th>Tahun Berdiri</th>
-                            <th>Foto Jurusan</th>
+                            <th>Judul</th>
+                            <th>Detail Sejarah</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach( $jurusans as $jurusan )
+                        @foreach( $sejarahs as $sejarah )
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $jurusan->nama_jurusan }}</td>
-                            <td>{{ $jurusan->detail_jurusan}}</td>
-                            <td>{{ $jurusan->tahun_berdiri}}</td>
-                            <td>{{ $jurusan->foto_jurusan }}</td>
+                            <td>{{ $sejarah->judul_sejarah }}</td>
+                            <td>{{ $sejarah->detail_sejarah }}</td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <a href="{{route('admin.jurusans.edit', $jurusan->id)}}" class="btn btn-success btn-sm edit_data"> <i class="fa fa-edit"></i>Edit</a>
+                                        <a href="{{route('admin.sejarahs.edit', $sejarah->id)}}" class="btn btn-success btn-sm edit_data"> <i class="fa fa-edit"></i>Edit</a>
                                     </div>
                                     <div class="col-lg-4">
-                                        <form action="{{route('admin.jurusans.destroy', $jurusan->id)}}" method="post">
+                                        <form action="{{route('admin.sejarahs.destroy', $sejarah->id)}}" method="post">
                                             @method('delete')
                                             @csrf
                                             <button  class="btn btn-danger btn-sm hapus_data"> <i class="fa fa-trash"></i>Hapus</button>
@@ -94,24 +90,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" class="form-data" id="form-data" action="{{route('admin.jurusans.store')}}">
+            <form method="post" class="form-data" id="form-data" action="{{route('admin.sejarahs.store')}}">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label>Nama Jurusan</label>
-                                <input type="text" name="nama_jurusan" id="nama_jurusan" class="form-control" >
-                                <p class="text-danger">{{ $errors->first('nama_jurusan') }}</p>
-                                <label>Detail Jurusan</label>
-                                <input type="text" name="detail_jurusan" id="detail_jurusan" class="form-control" >
-                                <p class="text-danger">{{ $errors->first('detail_jurusan') }}</p>
-                                <label>Tahun Berdiri</label>
-                                <input type="text" name="tahun_berdiri" id="tahun_berdiri" class="form-control" >
-                                <p class="text-danger">{{ $errors->first('tahun_berdiri') }}</p>
-                                <label>Foto Jurusan</label>
-                                <input type="file" name="foto_jurusan" id="foto_jurusan" class="form-control" >
-                                <p class="text-danger">{{ $errors->first('foto_jurusan') }}</p>
+                                <label>Judul Sejarah</label>
+                                <input type="text" name="judul_sejarah" id="judul_sejarah" class="form-control" >
+                                <p class="text-danger">{{ $errors->first('judul_sarana') }}</p>
+                                <label>Detail Sejarah</label>
+                                <input type="text" name="detail_sejarah" id="detail_sejarah" class="form-control" >
+                                <p class="text-danger">{{ $errors->first('detail_sejarah') }}</p>
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAkademiksTable extends Migration
+class CreateBannersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateAkademiksTable extends Migration
      */
     public function up()
     {
-        Schema::create('akademiks', function (Blueprint $table) {
+        Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_kalender');
-            $table->string('detail_kalender');
-            $table->string('foto_kalender');
+            $table->string('nama_banner');
+            $table->string('foto_banner');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateAkademiksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('akademiks');
+        Schema::dropIfExists('banners');
     }
 }
