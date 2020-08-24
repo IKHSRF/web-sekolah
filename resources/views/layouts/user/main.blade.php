@@ -13,8 +13,6 @@
         @include('layouts.user.header')
         <!-- /.navbar -->
 
-        <!-- Main Sidebar Container -->
-        @include('layouts.user.sidebar')
 
         <!-- Content Wrapper. Contains page content -->
         @yield('content')
