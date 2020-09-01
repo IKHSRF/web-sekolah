@@ -38,8 +38,8 @@
                                     <input type="text" name="judul_sejarah" id="judul_sejarah" class="form-control"
                                         required="true" value="{{$sejarahs->judul_sejarah}}">
                                     <label>Detail Sejarah</label>
-                                    <input type="text" name="detail_sejarah" id="detail_sejarah" class="form-control"
-                                        required="true" value="{{$sejarahs->detail_sejarah}}">
+                                    <textarea name="detail_sejarah" id="detail_sejarah" class="form-control"
+                                        required="true" value="{{$sejarahs->detail_sejarah}}" style="height:150px;"></textarea>
                                 </div>
                             </div>
                         </div>

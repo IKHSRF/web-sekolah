@@ -102,7 +102,7 @@
                                 <input type="text" name="nama_galeri" id="nama_galeri" class="form-control" >
                                 <p class="text-danger">{{ $errors->first('nama_mading') }}</p>
                                 <label>Detail Galeri</label>
-                                <input type="text" name="detail_galeri" id="detail_galeri" class="form-control" >
+                                <textarea type="text" name="detail_galeri" id="detail_galeri" class="form-control" style="height:150px;"></textarea>
                                 <p class="text-danger">{{ $errors->first('detail_galeri') }}</p>
                                 <label>Foto Galeri</label>
                                 <input type="file" name="foto_galeri" id="foto_galeri" class="form-control" >

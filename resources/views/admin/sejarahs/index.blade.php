@@ -100,7 +100,7 @@
                                 <input type="text" name="judul_sejarah" id="judul_sejarah" class="form-control" >
                                 <p class="text-danger">{{ $errors->first('judul_sarana') }}</p>
                                 <label>Detail Sejarah</label>
-                                <input type="text" name="detail_sejarah" id="detail_sejarah" class="form-control" >
+                                <textarea name="detail_sejarah" id="detail_sejarah" class="form-control" style="height:150px;"></textarea>
                                 <p class="text-danger">{{ $errors->first('detail_sejarah') }}</p>
                             </div>
                         </div>

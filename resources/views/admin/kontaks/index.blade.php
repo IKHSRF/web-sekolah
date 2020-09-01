@@ -40,9 +40,6 @@
                             <th>Hotline</th>
                             <th>Email</th>
                             <th>Alamat Sekolah</th>
-                            <th>Youtube</th>
-                            <th>Facebook</th>
-                            <th>Instagram</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -53,9 +50,6 @@
                             <td>{{ $kontak->hotline }}</td>
                             <td>{{ $kontak->email}}</td>
                             <td>{{ $kontak->alamat }}</td>
-                            <td>{{ $kontak->youtube }}</td>
-                            <td>{{ $kontak->facebook }}</td>
-                            <td>{{ $kontak->instagram }}</td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -111,17 +105,8 @@
                                 <input type="email" name="email" id="email" class="form-control" >
                                 <p class="text-danger">{{ $errors->first('email') }}</p>
                                 <label>Alamat Sekolah</label>
-                                <input type="text" name="alamat" id="alamat" class="form-control" >
+                                <textarea name="alamat" id="alamat" class="form-control" style="height:150px;"> </textarea>
                                 <p class="text-danger">{{ $errors->first('alamat') }}</p>
-                                <label>Youtube</label>
-                                <input type="text" name="youtube" id="youtube" class="form-control" >
-                                <p class="text-danger">{{ $errors->first('youtube') }}</p>
-                                <label>Facebook</label>
-                                <input type="text" name="facebook" id="facebook" class="form-control" >
-                                <p class="text-danger">{{ $errors->first('facebook') }}</p>
-                                <label>Instagram</label>
-                                <input type="text" name="instagram" id="instagram" class="form-control" >
-                                <p class="text-danger">{{ $errors->first('instagram') }}</p>
                             </div>
                         </div>
                     </div>

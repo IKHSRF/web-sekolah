@@ -104,10 +104,10 @@
                                 <input type="text" name="nama_jurusan" id="nama_jurusan" class="form-control" >
                                 <p class="text-danger">{{ $errors->first('nama_jurusan') }}</p>
                                 <label>Detail Jurusan</label>
-                                <input type="text" name="detail_jurusan" id="detail_jurusan" class="form-control" >
+                                <textarea name="detail_jurusan" id="detail_jurusan" class="form-control" style="height:150px;"></textarea>
                                 <p class="text-danger">{{ $errors->first('detail_jurusan') }}</p>
                                 <label>Tahun Berdiri</label>
-                                <input type="text" name="tahun_berdiri" id="tahun_berdiri" class="form-control" >
+                                <input type="number" name="tahun_berdiri" id="tahun_berdiri" class="form-control" >
                                 <p class="text-danger">{{ $errors->first('tahun_berdiri') }}</p>
                                 <label>Foto Jurusan</label>
                                 <input type="file" name="foto_jurusan" id="foto_jurusan" class="form-control" >
