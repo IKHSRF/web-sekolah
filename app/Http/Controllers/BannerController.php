@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class BannerController extends Controller
 {
@@ -39,14 +41,26 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_banner' => 'required',
-            'foto_banner' => 'required',
+            'nama_banner' => 'required|string',
+            'foto_banner' => 'required|image',
         ]);
 
-        Banner::create($request->all());
+        if($request->hasFile('foto_banner')){
+            $foto = request('foto_banner');
+            $nama_foto = time() .'-'. Str::slug($request->nama_banner).'.'.$foto->getClientOriginalExtension();
 
-        return redirect()->route('admin.banners.index')
-            ->with('success', 'Banner Berhasil Dibuat');
+            $banner = Banner::create([
+                'nama_banner' => $request->nama_banner,
+                'foto_banner' => $nama_foto,
+            ]);
+            // dd($banner);
+            $foto->move(public_path('gambar/banner'), $nama_foto);
+        
+            return redirect()->route('admin.banners.index')
+                    ->with('success', 'Banner Berhasil Dibuat');
+        }else{
+            return redirect()->back()->with('error', 'Banner Gagal Dibuat');
+        }
     }
 
     /**
@@ -79,13 +93,27 @@ class BannerController extends Controller
      * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Banner $banner, $id)
+    public function update(Request $request, Banner $id)
     {
-        $banner::where('id', $id)
-            ->update([
-                'nama_banner' => $request->nama_banner,
-                'foto_banner' => $request->foto_banner,
-            ]);
+        $banner = $id;
+        $this->validate($request, [
+            'nama_banner' => 'required|string',
+            'foto_banner' => 'image',
+        ]);
+        
+        if($request->hasFile('foto_banner')){
+            $foto = request('foto_banner');
+            $nama_foto = time() .'-'. Str::slug($request->nama_banner).'.'.$foto->getClientOriginalExtension();
+            $foto->move(public_path('gambar/banner/'), $nama_foto);
+            File::delete(public_path('gambar/banner/'. $banner->foto_banner));
+        }else{
+            $nama_foto = $banner->foto_banner;
+        }
+
+        $banner->update([
+            'nama_banner' => $request->nama_banner,
+            'foto_banner' => $nama_foto,
+        ]);
 
         return redirect()->route('admin.banners.index')
             ->with('success', 'Banner Berhasil Diupdate');
@@ -97,9 +125,15 @@ class BannerController extends Controller
      * @param  \App\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Banner $banner, $id)
+    public function destroy(Banner $id)
     {
-        $banner->destroy($id);
+        $banner = $id;
+        if(!empty(public_path('gambar/banner/'.$banner->foto_banner))){
+            File::delete(public_path('gambar/banner/'.$banner->foto_banner));
+            $banner->delete();
+        }else{
+            $banner->delete();
+        }
 
         return redirect()->route('admin.banners.index')
             ->with('success', 'Banner Berhasil Dihapus');

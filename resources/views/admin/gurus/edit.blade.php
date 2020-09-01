@@ -28,7 +28,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.gurus.update', $gurus->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.gurus.update', $gurus->id)}}" enctype="multipart/form-data">
                         @method('patch')
                         @csrf
                         <div class="row">
@@ -41,8 +41,11 @@
                                     <input type="text" name="jabatan" id="jabatan" class="form-control"
                                         required="true" value="{{$gurus->jabatan}}">
                                     <label>Foto Guru</label>
-                                    <input type="text" name="foto_guru" id="foto_guru" class="form-control"
-                                        required="true" value="{{$gurus->foto_guru}}">
+                                    <img id="imagePreview" src="{{ asset('gambar/guru/'.$gurus->foto_guru) }}"
+                                        style="object-fit: cover; width: 60%; padding: 10px;">
+                                    <input type="file" name="foto_guru" id="foto_guru" class="form-control"
+                                        value="{{$gurus->foto_guru}}">
+                                    <b><i class="text-danger">kosongkan jika tidak ingin mengubah foto</i></b>
                                 </div>
                             </div>
                         </div>
@@ -64,4 +67,21 @@
 <!-- /.content -->
 </div>
 
+@endsection
+@section('js')
+    <script>
+    function imagePreview(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#foto_guru').change(function () {
+        imagePreview(this);
+    });
+    </script>
 @endsection

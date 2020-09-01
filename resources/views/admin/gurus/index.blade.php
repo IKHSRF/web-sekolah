@@ -49,7 +49,10 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $guru->nama_guru }}</td>
                             <td>{{ $guru->jabatan}}</td>
-                            <td>{{ $guru->foto_guru }}</td>
+                            <td style="width: 170px; text-align: center">
+                                <img src="{{ asset('gambar/guru/'.$guru->foto_guru) }}"
+                                    style="width: 70%">
+                            </td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -92,20 +95,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" class="form-data" id="form-data" action="{{route('admin.gurus.store')}}">
+            <form method="post" class="form-data" id="form-data" action="{{route('admin.gurus.store')}}" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Nama Guru</label>
-                                <input type="text" name="nama_guru" id="nama_guru" class="form-control" >
+                                <input type="text" name="nama_guru" id="nama_guru" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('nama_guru') }}</p>
                                 <label>Jabatan</label>
-                                <input type="text" name="jabatan" id="jabatan" class="form-control" >
+                                <input type="text" name="jabatan" id="jabatan" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('jabatan') }}</p>
                                 <label>Foto Guru</label>
-                                <input type="file" name="foto_guru" id="foto_guru" class="form-control" >
+                                <input type="file" name="foto_guru" id="foto_guru" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('foto_guru') }}</p>
                             </div>
                         </div>

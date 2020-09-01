@@ -48,8 +48,17 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $gallery->nama_galeri }}</td>
-                            <td>{{ $gallery->detail_galeri}}</td>
-                            <td>{{ $gallery->foto_galeri }}</td>
+                            <td>
+                                @if(strlen($gallery->detail_galeri)>39)
+                                    {{ substr($gallery->detail_galeri,0,40).' ....' }}
+                                @elseif(strlen($gallery->detail_galeri)<40)
+                                    {{ $gallery->detail_galeri }}
+                                @endif
+                            </td>
+                            <td style="width: 170px; text-align: center">
+                                <img src="{{ asset('gambar/galeri/'.$gallery->foto_galeri) }}"
+                                    style="width: 70%">
+                            </td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -92,20 +101,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" class="form-data" id="form-data" action="{{route('admin.gallerys.store')}}">
+            <form method="post" class="form-data" id="form-data" action="{{route('admin.gallerys.store')}}" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Nama Galeri</label>
-                                <input type="text" name="nama_galeri" id="nama_galeri" class="form-control" >
+                                <input type="text" name="nama_galeri" id="nama_galeri" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('nama_mading') }}</p>
                                 <label>Detail Galeri</label>
-                                <textarea type="text" name="detail_galeri" id="detail_galeri" class="form-control" style="height:150px;"></textarea>
+                                <textarea type="text" name="detail_galeri" id="detail_galeri" class="form-control" style="height:150px;" required></textarea>
                                 <p class="text-danger">{{ $errors->first('detail_galeri') }}</p>
                                 <label>Foto Galeri</label>
-                                <input type="file" name="foto_galeri" id="foto_galeri" class="form-control" >
+                                <input type="file" name="foto_galeri" id="foto_galeri" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('foto_galeri') }}</p>
                             </div>
                         </div>

@@ -49,9 +49,18 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $jurusan->nama_jurusan }}</td>
-                            <td>{{ $jurusan->detail_jurusan}}</td>
+                            <td>
+                                @if(strlen($jurusan->detail_jurusan)>39)
+                                    {{ substr($jurusan->detail_jurusan,0,40).' ....' }}
+                                @elseif(strlen($jurusan->detail_jurusan)<40)
+                                    {{ $jurusan->detail_jurusan }}
+                                @endif
+                            </td>
                             <td>{{ $jurusan->tahun_berdiri}}</td>
-                            <td>{{ $jurusan->foto_jurusan }}</td>
+                            <td style="width: 170px; text-align: center">
+                                <img src="{{ asset('gambar/jurusan/'.$jurusan->foto_jurusan) }}"
+                                    style="width: 70%">
+                            </td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -94,23 +103,23 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" class="form-data" id="form-data" action="{{route('admin.jurusans.store')}}">
+            <form method="post" class="form-data" id="form-data" action="{{route('admin.jurusans.store')}}" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Nama Jurusan</label>
-                                <input type="text" name="nama_jurusan" id="nama_jurusan" class="form-control" >
+                                <input type="text" name="nama_jurusan" id="nama_jurusan" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('nama_jurusan') }}</p>
                                 <label>Detail Jurusan</label>
-                                <textarea name="detail_jurusan" id="detail_jurusan" class="form-control" style="height:150px;"></textarea>
+                                <textarea name="detail_jurusan" id="detail_jurusan" class="form-control" style="height:150px;" required></textarea>
                                 <p class="text-danger">{{ $errors->first('detail_jurusan') }}</p>
                                 <label>Tahun Berdiri</label>
-                                <input type="number" name="tahun_berdiri" id="tahun_berdiri" class="form-control" >
+                                <input type="number" name="tahun_berdiri" id="tahun_berdiri" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('tahun_berdiri') }}</p>
                                 <label>Foto Jurusan</label>
-                                <input type="file" name="foto_jurusan" id="foto_jurusan" class="form-control" >
+                                <input type="file" name="foto_jurusan" id="foto_jurusan" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('foto_jurusan') }}</p>
                             </div>
                         </div>

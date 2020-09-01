@@ -48,8 +48,17 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $sarana->nama_sarana }}</td>
-                            <td>{{ $sarana->detail_sarana }}</td>
-                            <td>{{ $sarana->foto_sarana }}</td>
+                            <td>
+                                @if(strlen($sarana->detail_sarana)>39)
+                                    {{ substr($sarana->detail_sarana,0,40).' ....' }}
+                                @elseif(strlen($sarana->detail_sarana)<40)
+                                    {{ $sarana->detail_sarana }}
+                                @endif
+                            </td>
+                            <td style="width: 170px; text-align: center">
+                                <img src="{{ asset('gambar/sarana/'.$sarana->foto_sarana) }}"
+                                    style="width: 70%">
+                            </td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -92,7 +101,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" class="form-data" id="form-data" action="{{route('admin.saranas.store')}}">
+            <form method="post" class="form-data" id="form-data" action="{{route('admin.saranas.store')}}" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="row">

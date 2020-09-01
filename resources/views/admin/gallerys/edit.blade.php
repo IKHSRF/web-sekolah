@@ -28,7 +28,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.gallerys.update', $gallerys->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.gallerys.update', $gallerys->id)}}" enctype="multipart/form-data">
                         @method('patch')
                         @csrf
                         <div class="row">
@@ -39,10 +39,13 @@
                                         required="true" value="{{$gallerys->nama_galeri}}">
                                     <label>Detail Galeri</label>
                                     <textarea name="detail_galeri" id="detail_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->detail_galeri}}" style="height:150px;"></textarea>
+                                        required="true" style="height:150px;">{{$gallerys->detail_galeri}}</textarea>
                                     <label>Foto Galeri</label>
-                                    <input type="text" name="foto_galeri" id="foto_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->foto_galeri}}">
+                                    <img id="imagePreview" src="{{ asset('gambar/galeri/'.$gallerys->foto_galeri) }}"
+                                        style="object-fit: cover; width: 60%; padding: 10px;">
+                                    <input type="file" name="foto_galeri" id="foto_galeri" class="form-control"
+                                        value="{{$gallerys->foto_galeri}}">
+                                    <b><i class="text-danger">kosongkan jika tidak ingin mengubah foto</i></b>
                                 </div>
                             </div>
                         </div>
@@ -64,4 +67,21 @@
 <!-- /.content -->
 </div>
 
+@endsection
+@section('js')
+    <script>
+    function imagePreview(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#foto_galeri').change(function () {
+        imagePreview(this);
+    });
+    </script>
 @endsection

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Prestasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class PrestasiController extends Controller
 {
@@ -41,13 +43,26 @@ class PrestasiController extends Controller
         $this->validate($request, [
             'nama_prestasi' => 'required|string',
             'detail_prestasi' => 'required|string',
-            'foto_prestasi' => 'required',
+            'foto_prestasi' => 'required|image',
         ]);
 
-        Prestasi::create($request->all());
+        if($request->hasFile('foto_prestasi')){
+            $foto = request('foto_prestasi');
+            $nama_foto = time() .'-'. Str::slug($request->nama_prestasi).'.'.$foto->getClientOriginalExtension();
 
-        return redirect()->route('admin.prestasis.index')
-            ->with('success', 'Prestasi Berhasil Ditambahkan');
+            $prestasi = Prestasi::create([
+                'nama_prestasi' => $request->nama_prestasi,
+                'detail_prestasi' => $request->detail_prestasi,
+                'foto_prestasi' => $nama_foto,
+            ]);
+
+            $foto->move(public_path('gambar/prestasi'), $nama_foto);
+        
+            return redirect()->route('admin.prestasis.index')
+                    ->with('success', 'Prestasi Berhasil Ditambahkan');
+        }else{
+            return redirect()->back()->with('error', 'Prestasi Gagal Ditambahkan');
+        }
     }
 
     /**
@@ -81,14 +96,29 @@ class PrestasiController extends Controller
      * @param  \App\Prestasi  $prestasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Prestasi $prestasi, $id)
+    public function update(Request $request, Prestasi $id)
     {
-        $prestasi::where('id', $id)
-            ->update([
-                'nama_prestasi' => $request->nama_prestasi,
-                'detail_prestasi' => $request->detail_prestasi,
-                'foto_prestasi' => $request->foto_prestasi,
-            ]);
+        $prestasi = $id;
+        $this->validate($request, [
+            'nama_prestasi' => 'required|string',
+            'detail_prestasi' => 'required|string',
+            'foto_prestasi' => 'image',
+        ]);
+        
+        if($request->hasFile('foto_prestasi')){
+            $foto = request('foto_prestasi');
+            $nama_foto = time() .'-'. Str::slug($request->nama_prestasi).'.'.$foto->getClientOriginalExtension();
+            $foto->move(public_path('gambar/prestasi/'), $nama_foto);
+            File::delete(public_path('gambar/prestasi/'. $prestasi->foto_prestasi));
+        }else{
+            $nama_foto = $prestasi->foto_prestasi;
+        }
+
+        $prestasi->update([
+            'nama_prestasi' => $request->nama_prestasi,
+            'detail_prestasi' => $request->detail_prestasi,
+            'foto_prestasi' => $nama_foto,
+        ]);
 
         return redirect()->route('admin.prestasis.index')
             ->with('success', 'Prestasi Berhasil Diubah');
@@ -100,9 +130,15 @@ class PrestasiController extends Controller
      * @param  \App\Prestasi  $prestasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Prestasi $prestasi, $id)
+    public function destroy(Prestasi $id)
     {
-        $prestasi->destroy($id);
+        $prestasi = $id;
+        if(!empty(public_path('gambar/prestasi/'.$prestasi->foto_prestasi))){
+            File::delete(public_path('gambar/prestasi/'.$prestasi->foto_prestasi));
+            $prestasi->delete();
+        }else{
+            $prestasi->delete();
+        }
 
         return redirect()->route('admin.prestasis.index')
             ->with('success', 'Prestasi Berhasil Dihapus');

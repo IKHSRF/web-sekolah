@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Jurusan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class JurusanController extends Controller
 {
@@ -42,13 +44,27 @@ class JurusanController extends Controller
             'nama_jurusan' => 'required|string',
             'tahun_berdiri' => 'required',
             'detail_jurusan' => 'required|string',
-            'foto_jurusan' => 'required',
+            'foto_jurusan' => 'required|image',
         ]);
 
-        Jurusan::create($request->all());
+        if($request->hasFile('foto_jurusan')){
+            $foto = request('foto_jurusan');
+            $nama_foto = time() .'-'. Str::slug($request->nama_jurusan).'.'.$foto->getClientOriginalExtension();
 
-        return redirect()->route('admin.jurusans.index')
-            ->with('success', 'Jurusan Berhasil Dibuat');
+            $jurusan = Jurusan::create([
+                'nama_jurusan' => $request->nama_jurusan,
+                'tahun_berdiri' => $request->tahun_berdiri,
+                'detail_jurusan' => $request->detail_jurusan,
+                'foto_jurusan' => $nama_foto,
+            ]);
+
+            $foto->move(public_path('gambar/jurusan'), $nama_foto);
+        
+            return redirect()->route('admin.jurusans.index')
+                    ->with('success', 'Jurusan Berhasil Dibuat');
+        }else{
+            return redirect()->back()->with('error', 'Jurusan Gagal Dibuat');
+        }
     }
 
     /**
@@ -82,15 +98,31 @@ class JurusanController extends Controller
      * @param  \App\Jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jurusan $jurusan, $id)
+    public function update(Request $request, Jurusan $id)
     {
-        $jurusan::where('id', $id)
-            ->update([
-                'nama_jurusan' => $request->nama_jurusan,
-                'detail_jurusan' => $request->detail_jurusan,
-                'tahun_berdiri' => $request->tahun_berdiri,
-                'foto_jurusan' => $request->foto_jurusan,
-            ]);
+        $jurusan = $id;
+        $this->validate($request, [
+            'nama_jurusan' => 'required|string',
+            'tahun_berdiri' => 'required|numeric',
+            'detail_jurusan' => 'required|string',
+            'foto_jurusan' => 'image',
+        ]);
+        
+        if($request->hasFile('foto_jurusan')){
+            $foto = request('foto_jurusan');
+            $nama_foto = time() .'-'. Str::slug($request->nama_jurusan).'.'.$foto->getClientOriginalExtension();
+            $foto->move(public_path('gambar/jurusan/'), $nama_foto);
+            File::delete(public_path('gambar/jurusan/'. $jurusan->foto_jurusan));
+        }else{
+            $nama_foto = $jurusan->foto_jurusan;
+        }
+
+        $jurusan->update([
+            'nama_jurusan' => $request->nama_jurusan,
+            'tahun_berdiri' => $request->tahun_berdiri,
+            'detail_jurusan' => $request->detail_jurusan,
+            'foto_jurusan' => $nama_foto,
+        ]);
 
         return redirect()->route('admin.jurusans.index')
             ->with('success', 'Jurusan Berhasil Diupdate');
@@ -102,9 +134,15 @@ class JurusanController extends Controller
      * @param  \App\Jurusan  $jurusan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jurusan $jurusan, $id)
+    public function destroy(Jurusan $id)
     {
-        $jurusan->destroy($id);
+        $jurusan = $id;
+        if(!empty(public_path('gambar/jurusan/'.$jurusan->foto_jurusan))){
+            File::delete(public_path('gambar/jurusan/'.$jurusan->foto_jurusan));
+            $jurusan->delete();
+        }else{
+            $jurusan->delete();
+        }
 
         return redirect()->route('admin.jurusans.index')
             ->with('success', 'Jurusan Berhasil Dihapus');

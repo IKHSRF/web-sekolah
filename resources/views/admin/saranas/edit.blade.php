@@ -28,7 +28,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.saranas.update', $saranas->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.saranas.update', $saranas->id)}}" enctype="multipart/form-data">
                         @method('patch')
                         @csrf
                         <div class="row">
@@ -39,15 +39,18 @@
                                         required="true" value="{{$saranas->nama_sarana}}">
                                         <label>Detail Saranan</label>
                                     <textarea name="detail_sarana" id="detail_sarana" class="form-control"
-                                        required="true" value="{{$saranas->detail_sarana}}" style="height:150px;"></textarea>
+                                        required="true" style="height:150px;">{{$saranas->detail_sarana}}</textarea>
                                         <label>Foto Sarana</label>
+                                    <img id="imagePreview" src="{{ asset('gambar/sarana/'.$saranas->foto_sarana) }}"
+                                    style="object-fit: cover; width: 60%; padding: 10px;">
                                     <input type="file" name="foto_sarana" id="foto_sarana" class="form-control"
-                                        required="true" value="{{$saranas->foto_sarana}}">
+                                        value="{{$saranas->foto_sarana}}">
+                                    <b><i class="text-danger">kosongkan jika tidak ingin mengubah foto</i></b>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" name="simpan" id="simpan" class="btn btn-primary">
+                            <button type="submit" name="simpan" id="simpan" class="btn btn-primary mt-3">
                                 <i class="fa fa-save"></i> Update
                             </button>
                         </div>
@@ -64,4 +67,21 @@
 <!-- /.content -->
 </div>
 
+@endsection
+@section('js')
+    <script>
+    function imagePreview(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#foto_sarana').change(function () {
+        imagePreview(this);
+    });
+    </script>
 @endsection

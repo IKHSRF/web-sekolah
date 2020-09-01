@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Kemitraan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class KemitraanController extends Controller
 {
@@ -41,14 +43,28 @@ class KemitraanController extends Controller
         $this->validate($request, [
             'nama_mitra' => 'required|string',
             'detail_mitra' => 'required|string',
-            'tahun_mitra' => 'required',
-            'foto_mitra' => 'required',
+            'tahun_mitra' => 'required|numeric',
+            'foto_mitra' => 'required|image',
         ]);
 
-        Kemitraan::create($request->all());
+        if($request->hasFile('foto_mitra')){
+            $foto = request('foto_mitra');
+            $nama_foto = time() .'-'. Str::slug($request->nama_mitra).'.'.$foto->getClientOriginalExtension();
 
-        return redirect()->route('admin.kemitraans.index')
-            ->with('success', 'Mitra Berhasil Ditambahkan');
+            $mitra = Kemitraan::create([
+                'nama_mitra' => $request->nama_mitra,
+                'detail_mitra' => $request->detail_mitra,
+                'tahun_mitra' => $request->tahun_mitra,
+                'foto_mitra' => $nama_foto,
+            ]);
+            // dd($mitra);
+            $foto->move(public_path('gambar/mitra'), $nama_foto);
+        
+            return redirect()->route('admin.kemitraans.index')
+                    ->with('success', 'Mitra Berhasil Ditambahkan');
+        }else{
+            return redirect()->back()->with('error', 'Mitra Gagal Ditambahkan');
+        }
     }
 
     /**
@@ -81,15 +97,31 @@ class KemitraanController extends Controller
      * @param  \App\Kemitraan  $kemitraan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kemitraan $kemitraan, $id)
+    public function update(Request $request, Kemitraan $id)
     {
-        $kemitraan::where('id', $id)
-            ->update([
-                'nama_mitra' => $request->nama_mitra,
-                'detail_mitra' => $request->detail_mitra,
-                'tahun_mitra' => $request->tahun_mitra,
-                'foto_mitra' => $request->foto_mitra,
-            ]);
+        $mitra = $id;
+        $this->validate($request, [
+            'nama_mitra' => 'required|string',
+            'detail_mitra' => 'required|string',
+            'tahun_mitra' => 'required|numeric',
+            'foto_mitra' => 'image',
+        ]);
+        
+        if($request->hasFile('foto_mitra')){
+            $foto = request('foto_mitra');
+            $nama_foto = time() .'-'. Str::slug($request->nama_mitra).'.'.$foto->getClientOriginalExtension();
+            $foto->move(public_path('gambar/mitra/'), $nama_foto);
+            File::delete(public_path('gambar/mitra/'. $mitra->foto_mitra));
+        }else{
+            $nama_foto = $mitra->foto_mitra;
+        }
+
+        $mitra->update([
+            'nama_mitra' => $request->nama_mitra,
+            'detail_mitra' => $request->detail_mitra,
+            'tahun_mitra' => $request->tahun_mitra,
+            'foto_mitra' => $nama_foto,
+        ]);
 
         return redirect()->route('admin.kemitraans.index')
             ->with('success', 'Mitra Berhasil Diubah');
@@ -101,9 +133,15 @@ class KemitraanController extends Controller
      * @param  \App\Kemitraan  $kemitraan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kemitraan $kemitraan, $id)
+    public function destroy(Kemitraan $id)
     {
-        $kemitraan->destroy($id);
+        $mitra = $id;
+        if(!empty(public_path('gambar/mitra/'.$mitra->foto_mitra))){
+            File::delete(public_path('gambar/mitra/'.$mitra->foto_mitra));
+            $mitra->delete();
+        }else{
+            $mitra->delete();
+        }
 
         return redirect()->route('admin.kemitraans.index')
             ->with('success', 'Mitra Berhasil Dihapus');

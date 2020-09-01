@@ -28,7 +28,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.kemitraans.update', $kemitraans->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.kemitraans.update', $kemitraans->id)}}" enctype="multipart/form-data">
                         @method('patch')
                         @csrf
                         <div class="row">
@@ -39,13 +39,16 @@
                                         required="true" value="{{$kemitraans->nama_mitra}}">
                                     <label>Detail Mitra</label>
                                     <textarea name="detail_mitra" id="detail_mitra" class="form-control"
-                                        required="true" value="{{$kemitraans->detail_mitra}}" style="height:150px;"> </textarea>
+                                        required="true" style="height:150px;">{{$kemitraans->detail_mitra}}</textarea>
                                         <label>Tahun Bermitra</label>
                                     <input type="text" name="tahun_mitra" id="tahun_mitra" class="form-control"
                                         required="true" value="{{$kemitraans->tahun_mitra}}">
                                     <label>Foto Mitra</label>
+                                    <img id="imagePreview" src="{{ asset('gambar/mitra/'.$kemitraans->foto_mitra) }}"
+                                        style="object-fit: cover; width: 60%; padding: 10px;">
                                     <input type="file" name="foto_mitra" id="foto_mitra" class="form-control"
-                                        required="true" value="{{$kemitraans->foto_mitra}}">
+                                        value="{{$kemitraans->foto_mitra}}">
+                                    <b><i class="text-danger">kosongkan jika tidak ingin mengubah foto</i></b>
                                 </div>
                             </div>
                         </div>
@@ -67,4 +70,21 @@
 <!-- /.content -->
 </div>
 
+@endsection
+@section('js')
+    <script>
+    function imagePreview(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#foto_mitra').change(function () {
+        imagePreview(this);
+    });
+    </script>
 @endsection

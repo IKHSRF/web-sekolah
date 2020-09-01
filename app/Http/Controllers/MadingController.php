@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mading;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class MadingController extends Controller
 {
@@ -41,13 +43,26 @@ class MadingController extends Controller
         $this->validate($request, [
             'nama_mading' => 'required|string',
             'detail_mading' => 'required|string',
-            'foto_mading' => 'required',
+            'foto_mading' => 'required|image',
         ]);
 
-        Mading::create($request->all());
+        if($request->hasFile('foto_mading')){
+            $foto = request('foto_mading');
+            $nama_foto = time() .'-'. Str::slug($request->nama_mading).'.'.$foto->getClientOriginalExtension();
 
-        return redirect()->route('admin.madings.index')
-            ->with('success', 'Mading Berhasil Ditambahkan');
+            $mading = Mading::create([
+                'nama_mading' => $request->nama_mading,
+                'detail_mading' => $request->detail_mading,
+                'foto_mading' => $nama_foto,
+            ]);
+            // dd($mading);
+            $foto->move(public_path('gambar/mading'), $nama_foto);
+        
+            return redirect()->route('admin.madings.index')
+                    ->with('success', 'Mading Berhasil Dibuat');
+        }else{
+            return redirect()->back()->with('error', 'Mading Gagal Dibuat');
+        }
     }
 
     /**
@@ -80,14 +95,29 @@ class MadingController extends Controller
      * @param  \App\Mading  $mading
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mading $mading, $id)
+    public function update(Request $request, Mading $id)
     {
-        $mading::where('id', $id)
-            ->update([
-                'nama_mading' => $request->nama_mading,
-                'detail_mading' => $request->detail_mading,
-                'foto_mading' => $request->foto_mading,
-            ]);
+        $mading = $id;
+        $this->validate($request, [
+            'nama_mading' => 'required|string',
+            'detail_mading' => 'required|string',
+            'foto_mading' => 'image',
+        ]);
+        
+        if($request->hasFile('foto_mading')){
+            $foto = request('foto_mading');
+            $nama_foto = time() .'-'. Str::slug($request->nama_mading).'.'.$foto->getClientOriginalExtension();
+            $foto->move(public_path('gambar/mading/'), $nama_foto);
+            File::delete(public_path('gambar/mading/'. $mading->foto_mading));
+        }else{
+            $nama_foto = $mading->foto_mading;
+        }
+
+        $mading->update([
+            'nama_mading' => $request->nama_mading,
+            'detail_mading' => $request->detail_mading,
+            'foto_mading' => $nama_foto,
+        ]);
 
         return redirect()->route('admin.madings.index')
             ->with('success', 'Mading Berhasil Diubah');
@@ -99,9 +129,15 @@ class MadingController extends Controller
      * @param  \App\Mading  $mading
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mading $mading, $id)
+    public function destroy(Mading $id)
     {
-        $mading->destroy($id);
+        $mading = $id;
+        if(!empty(public_path('gambar/mading/'.$mading->foto_mading))){
+            File::delete(public_path('gambar/mading/'.$mading->foto_mading));
+            $mading->delete();
+        }else{
+            $mading->delete();
+        }
 
         return redirect()->route('admin.madings.index')
             ->with('success', 'Mading Berhasil Dihapus');

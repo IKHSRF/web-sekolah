@@ -48,8 +48,17 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $prestasi->nama_prestasi }}</td>
-                            <td>{{ $prestasi->detail_prestasi }}</td>
-                            <td>{{ $prestasi->foto_prestasi }}</td>
+                            <td>
+                                @if(strlen($prestasi->detail_prestasi)>39)
+                                    {{ substr($prestasi->detail_prestasi,0,40).' ....' }}
+                                @elseif(strlen($prestasi->detail_prestasi)<40)
+                                    {{ $prestasi->detail_prestasi }}
+                                @endif
+                            </td>
+                            <td style="width: 170px; text-align: center">
+                                <img src="{{ asset('gambar/prestasi/'.$prestasi->foto_prestasi) }}"
+                                    style="width: 70%">
+                            </td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -92,7 +101,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" class="form-data" id="form-data" action="{{route('admin.prestasis.store')}}">
+            <form method="post" class="form-data" id="form-data" action="{{route('admin.prestasis.store')}}" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
