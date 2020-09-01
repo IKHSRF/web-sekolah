@@ -61,7 +61,9 @@
                                         Jurusan
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{route('user.jurusan.rpl')}}">Rekayasa Perangkat Lunak</a>
+                                        @foreach($jurusan as $jurusa)
+                                        <a class="dropdown-item" href="{{route('user.jurusan, $jurusa->nama_jurusan')}}">{{$jurusa->nama_jurusan}}</a>
+                                        @endforeach
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
