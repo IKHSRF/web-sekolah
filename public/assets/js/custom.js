@@ -43,6 +43,8 @@ $(document).ready(function () {
     initHeaderSearch();
     initHomeSlider();
     initMilestones();
+    initAccordions();
+    initVideo();
 
     function initAccordions() {
         if ($('.accordion').length) {
@@ -90,6 +92,15 @@ $(document).ready(function () {
                 });
             });
         }
+    }
+
+    function initVideo() {
+        $(".vimeo").colorbox({
+            iframe: true,
+            innerWidth: 640,
+            innerHeight: 409,
+            maxWidth: '90%'
+        });
     }
     /* 
 
