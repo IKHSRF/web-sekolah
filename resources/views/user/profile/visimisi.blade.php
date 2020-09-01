@@ -30,230 +30,37 @@
 
     <!-- Home Slider Nav -->
 </div>
-<!-- Features -->
-
-<div class="features">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="section_title_container text-center">
-                    <h2 class="section_title">SMK WIKRAMA 1 BANJARMASIN</h2>
-                    <div class="section_subtitle">
-                        <p>SMK Wikrama 1 Banjarmasin adalah salah satu sekolah menengah kejuruan di Kabupaten Jepara di bidang Teknologi Informatika.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row features_row">
-
-            <!-- Features Item -->
-            <div class="col-lg-4 feature_col">
-                <div class="feature text-center trans_400">
-                    <div class="feature_icon"><img src="{{asset('assets/images/icon_1.png')}}" alt=""></div>
-                    <h3 class="feature_title">Ilmu yang Amaliah</h3>
-                    <div class="feature_text">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Features Item -->
-            <div class="col-lg-4 feature_col">
-                <div class="feature text-center trans_400">
-                    <div class="feature_icon"><img src="{{asset('assets/images/icon_2.png')}}" alt=""></div>
-                    <h3 class="feature_title">Amal yang Ilmiah</h3>
-                    <div class="feature_text">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Features Item -->
-            <div class="col-lg-4 feature_col">
-                <div class="feature text-center trans_400">
-                    <div class="feature_icon"><img src="{{asset('assets/images/icon_3.png')}}" alt=""></div>
-                    <h3 class="feature_title">Akhlakul Karimah</h3>
-                    <div class="feature_text">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<!-- Popular Courses -->
-
-<div class="courses">
-    <div class="section_background parallax-window" data-parallax="scroll"
-        data-image-src="images/courses_background.jpg" data-speed="0.8"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="section_title_container text-center">
-                    <h2 class="section_title">Sarana & Prasarana</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row courses_row">
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset('assets/images/course_1.jpg')}}" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">Laboratorium</a></h3>
-                        <div class="course_text">
-                            <p>There are many new variations of pasages of available text.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset('assets/images/course_2.jpg')}}" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">WiFi</a></h3>
-                        <div class="course_text">
-                            <p>There are many new variations of pasages of available text.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset('assets/images/course_3.jpg')}}" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">Tempat Parkir</a></h3>
-                        <div class="course_text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="row courses_row">
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset('assets/images/course_1.jpg')}}" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">Laboratorium</a></h3>
-                        <div class="course_text">
-                            <p>There are many new variations of pasages of available text.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset('assets/images/course_2.jpg')}}" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">WiFi</a></h3>
-                        <div class="course_text">
-                            <p>There are many new variations of pasages of available text.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset('assets/images/course_3.jpg')}}" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">Tempat Parkir</a></h3>
-                        <div class="course_text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<!-- Counter -->
 
 <div class="counter">
-    <div class="counter_background" style="background-image:url(images/counter_background.jpg)"></div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="counter_content">
-                    <h2 class="counter_title">Register Now</h2>
+                    <h2 class="counter_title">Visi</h2>
                     <div class="counter_text">
-                        <p>Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                            industry’s standard dumy text ever since the 1500s, when an unknown printer took a
-                            galley of type and scrambled it to make a type specimen book.</p>
-                    </div>
-
-                    <!-- Milestones -->
-
-                    <div class="milestones d-flex flex-md-row flex-column align-items-center justify-content-between">
-
-                        <!-- Milestone -->
-                        <div class="milestone">
-                            <div class="milestone_counter" data-end-value="15">0</div>
-                            <div class="milestone_text">years</div>
-                        </div>
-
-                        <!-- Milestone -->
-                        <div class="milestone">
-                            <div class="milestone_counter" data-end-value="120" data-sign-after="k">0</div>
-                            <div class="milestone_text">years</div>
-                        </div>
-
-                        <!-- Milestone -->
-                        <div class="milestone">
-                            <div class="milestone_counter" data-end-value="670" data-sign-after="+">0</div>
-                            <div class="milestone_text">years</div>
-                        </div>
-
-                        <!-- Milestone -->
-                        <div class="milestone">
-                            <div class="milestone_counter" data-end-value="320">0</div>
-                            <div class="milestone_text">years</div>
-                        </div>
-
+                        @foreach ($motto as $mott)
+                        <p>{{$loop->iteration}}. {{$mott->visi}}</p>
+                        @endforeach
                     </div>
                 </div>
-
-            </div>
-        </div>
-
-        <div class="counter_form">
-            <div class="row fill_height">
-                <div class="col fill_height">
-                    <form class="counter_form_content d-flex flex-column align-items-center justify-content-center"
-                        action="#">
-                        <div class="counter_form_title">courses now</div>
-                        <input type="text" class="counter_input" placeholder="Your Name:" required="required">
-                        <input type="tel" class="counter_input" placeholder="Phone:" required="required">
-                        <select name="counter_select" id="counter_select" class="counter_input counter_options">
-                            <option>Choose Subject</option>
-                            <option>Subject</option>
-                            <option>Subject</option>
-                            <option>Subject</option>
-                        </select>
-                        <textarea class="counter_input counter_text_input" placeholder="Message:"
-                            required="required"></textarea>
-                        <button type="submit" class="counter_form_button">submit now</button>
-                    </form>
+                <div class="counter_content">
+                    <h2 class="counter_title">Misi</h2>
+                    <div class="counter_text">
+                        @foreach ($motto as $mott)
+                        <p>{{$loop->iteration}}. {{$mott->misi}}</p>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="counter_content">
+                    <h2 class="counter_title">Moto</h2>
+                    <div class="counter_text">
+                        @foreach ($motto as $mott)
+                        <p>{{$mott->motto}}</p>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 

@@ -29,21 +29,16 @@ Route::get('/jurusan/{nama_jurusan}', function(){
 })->name('user.jurusan');
 
 //menu kesiswaan
-Route::get('/kesiswaan/mading', function(){
-    return view('user.kesiswaan.mading');
-})->name('user.kesiswaan.mading');
+Route::get('/kesiswaan/mading','LandingController@getMading')->name('user.kesiswaan.mading');
 
 //menu kurikulum
 Route::get('/kurikulum/stuktur', function(){
     return view('user.kurikulum.stuktur');
 })->name('user.kurikulum.stuktur');
+Route::get('/sarana-dan-prasarana','LandingController@getSarana')->name('user.sarana');
 
-Route::get('/sarana-dan-prasarana', function(){
-    return view('user.sarana');
-})->name('user.sarana');
-Route::get('/gallery', function(){
-    return view('user.gallery');
-})->name('user.gallery');
+
+Route::get('/gallery', 'LandingController@getGallery')->name('user.gallery');
 //dashbord
 Route::group(['prefix' => 'admin'], function () {
     //crud prestasis
