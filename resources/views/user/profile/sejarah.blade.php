@@ -33,7 +33,7 @@
 <!-- Features -->
 
 <div class="feature">
-		<div class="feature_background" style="background-image:url(images/courses_background.jpg)"></div>
+		<div class="feature_background" style="background-image:url({{asset('assets/images/courses_background.jpg')}}"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col">
@@ -52,35 +52,14 @@
 						<div class="accordions">
 							
 							<div class="elements_accordions">
-
+								@foreach($sejarah as $sejara)
 								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>Award for Best School 2017</div></div>
+									<div class="accordion d-flex flex-row align-items-center"><div>{{$sejara->judul_sejarah}}</div></div>
 									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+										<p>{{$sejara->detail_sejarah}}</p>
 									</div>
 								</div>
-
-								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center active"><div>You’re learning from the best.</div></div>
-									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
-								</div>
-
-								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>Our degrees are recognized worldwide.</div></div>
-									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
-								</div>
-
-								<div class="accordion_container">
-									<div class="accordion d-flex flex-row align-items-center"><div>We encourage our students to go global.</div></div>
-									<div class="accordion_panel">
-										<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-									</div>
-								</div>
-
+								@endforeach
 							</div>
 
 						</div>
@@ -91,9 +70,9 @@
 				<!-- Feature Video -->
 				<div class="col-lg-6 feature_col">
 					<div class="feature_video d-flex flex-column align-items-center justify-content-center">
-						<div class="feature_video_background" style="background-image:url(images/video.jpg)"></div>
+<div class="feature_video_background" style="background-image:url({{asset('assets/images/video.jpg')}}"></div>
 						<a class="vimeo feature_video_button" href="https://player.vimeo.com/video/99340873?title=0" title="OH, PORTUGAL - IN 4K - Basti Hansen - Stock Footage">
-							<img src="images/play.png" alt="">
+							<img src="{{asset('assets/images/play.png')}}" alt="">
 						</a>
 					</div>
 				</div>
