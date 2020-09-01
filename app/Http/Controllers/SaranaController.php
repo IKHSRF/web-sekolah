@@ -44,7 +44,11 @@ class SaranaController extends Controller
             'foto_sarana' => 'required',
         ]);
 
-        Sarana::create($request->all());
+        Sarana::create([
+            'nama_sarana' => $request->'nama_sarana',
+            'detail_sarana' => 'required|string',
+            'foto_sarana' => 'required'
+        ]);
 
         return redirect()->route('admin.saranas.index')
             ->with('success', 'Sarana Berhasil Ditambahkan');

@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 //User
-Route::get('/', function () {
-    return view('user.home');
-});
+Route::get('/', 'LandingController@getHome')->name('user.home');
 //menu profile
 Route::get('/sejarah', function () {
     return view('user.profile.sejarah');

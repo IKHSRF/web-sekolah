@@ -175,7 +175,7 @@
             </div>
         </div>
         <div class="row courses_row">
-
+        foreach ($sarana as $saran)
             <!-- Course -->
             <div class="col-lg-4 course_col">
                 <div class="course">
@@ -188,75 +188,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset('assets/images/course_2.jpg')}}" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">WiFi</a></h3>
-                        <div class="course_text">
-                            <p>There are many new variations of pasages of available text.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset('assets/images/course_3.jpg')}}" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">Tempat Parkir</a></h3>
-                        <div class="course_text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="row courses_row">
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset('assets/images/course_1.jpg')}}" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">Laboratorium</a></h3>
-                        <div class="course_text">
-                            <p>There are many new variations of pasages of available text.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset('assets/images/course_2.jpg')}}" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">WiFi</a></h3>
-                        <div class="course_text">
-                            <p>There are many new variations of pasages of available text.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Course -->
-            <div class="col-lg-4 course_col">
-                <div class="course">
-                    <div class="course_image"><img src="{{asset('assets/images/course_3.jpg')}}" alt=""></div>
-                    <div class="course_body">
-                        <h3 class="course_title"><a href="course.html">Tempat Parkir</a></h3>
-                        <div class="course_text">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi elitsed do eiusmod tempor</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        @endforeach
         </div>
     </div>
 </div>
