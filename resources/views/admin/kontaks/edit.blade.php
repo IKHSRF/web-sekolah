@@ -41,17 +41,8 @@
                                     <input type="email" name="email" id="email" class="form-control"
                                         required="true" value="{{$kontaks->email}}">
                                     <label>Alamat Sekolah</label>
-                                    <input type="text" name="alamat" id="alamat" class="form-control"
-                                        required="true" value="{{$kontaks->alamat}}">
-                                        <label>Youtube</label>
-                                    <input type="text" name="youtube" id="youtube" class="form-control"
-                                        required="true" value="{{$kontaks->youtube}}">
-                                        <label>Facebook</label>
-                                    <input type="text" name="facebook" id="facebook" class="form-control"
-                                        required="true" value="{{$kontaks->facebook}}">
-                                        <label>Instagram</label>
-                                    <input type="text" name="instagram" id="instagram" class="form-control"
-                                        required="true" value="{{$kontaks->instagram}}">
+                                    <textarea name="alamat" id="alamat" class="form-control"
+                                        required="true" value="{{$kontaks->alamat}}" style="height:150px;"> </textarea>
                                 </div>
                             </div>
                         </div>

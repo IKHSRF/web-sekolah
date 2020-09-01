@@ -38,8 +38,8 @@
                                     <input type="text" name="nama_mitra" id="nama_mitra" class="form-control"
                                         required="true" value="{{$kemitraans->nama_mitra}}">
                                     <label>Detail Mitra</label>
-                                    <input type="text" name="detail_mitra" id="detail_mitra" class="form-control"
-                                        required="true" value="{{$kemitraans->detail_mitra}}">
+                                    <textarea name="detail_mitra" id="detail_mitra" class="form-control"
+                                        required="true" value="{{$kemitraans->detail_mitra}}" style="height:150px;"> </textarea>
                                         <label>Tahun Bermitra</label>
                                     <input type="text" name="tahun_mitra" id="tahun_mitra" class="form-control"
                                         required="true" value="{{$kemitraans->tahun_mitra}}">

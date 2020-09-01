@@ -38,8 +38,8 @@
                                     <input type="text" name="nama_prestasi" id="nama_prestasi" class="form-control"
                                         required="true" value="{{$prestasis->nama_prestasi}}">
                                         <label>Detail Prestasi</label>
-                                    <input type="text" name="detail_prestasi" id="detail_prestasi" class="form-control"
-                                        required="true" value="{{$prestasis->detail_prestasi}}">
+                                    <textarea name="detail_prestasi" id="detail_prestasi" class="form-control"
+                                        required="true" value="{{$prestasis->detail_prestasi}}" style="height:150px;"></textarea>
                                         <label>Foto Prestasi</label>
                                     <input type="file" name="foto_prestasi" id="foto_prestasi" class="form-control"
                                         required="true" value="{{$prestasis->foto_prestasi}}">

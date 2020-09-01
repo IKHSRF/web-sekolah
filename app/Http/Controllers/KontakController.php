@@ -42,9 +42,6 @@ class KontakController extends Controller
             'hotline' => 'required|string',
             'email' => 'required|string',
             'alamat' => 'required|string',
-            'youtube' => 'required|string',
-            'facebook' => 'required|string',
-            'instagram' => 'required|string',
         ]);
 
         Kontak::create($request->all());
@@ -90,9 +87,6 @@ class KontakController extends Controller
                 'hotline' => $request->hotline,
                 'email' => $request->email,
                 'alamat' => $request->alamat,
-                'youtube' => $request->youtube,
-                'facebook' => $request->facebook,
-                'instagram' => $request->instagram,
             ]);
 
         return redirect()->route('admin.kontaks.index')

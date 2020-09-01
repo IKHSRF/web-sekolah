@@ -38,8 +38,8 @@
                                     <input type="text" name="nama_galeri" id="nama_galeri" class="form-control"
                                         required="true" value="{{$gallerys->nama_galeri}}">
                                     <label>Detail Galeri</label>
-                                    <input type="text" name="detail_galeri" id="detail_galeri" class="form-control"
-                                        required="true" value="{{$gallerys->detail_galeri}}">
+                                    <textarea name="detail_galeri" id="detail_galeri" class="form-control"
+                                        required="true" value="{{$gallerys->detail_galeri}}" style="height:150px;"></textarea>
                                     <label>Foto Galeri</label>
                                     <input type="text" name="foto_galeri" id="foto_galeri" class="form-control"
                                         required="true" value="{{$gallerys->foto_galeri}}">

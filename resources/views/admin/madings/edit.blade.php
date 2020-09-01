@@ -38,8 +38,8 @@
                                     <input type="text" name="nama_mading" id="nama_mading" class="form-control"
                                         required="true" value="{{$madings->nama_mading}}">
                                     <label>Detail Mading</label>
-                                    <input type="text" name="detail_mading" id="detail_mading" class="form-control"
-                                        required="true" value="{{$madings->detail_mading}}">
+                                    <textarea name="detail_mading" id="detail_mading" class="form-control"
+                                        required="true" value="{{$madings->detail_mading}}" style="height:150px;"></textarea>
                                     <label>Foto Mading</label>
                                     <input type="file" name="foto_mading" id="foto_mading" class="form-control"
                                         required="true" value="{{$madings->foto_mading}}">

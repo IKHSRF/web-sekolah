@@ -104,7 +104,7 @@
                                 <input type="text" name="nama_mitra" id="nama_mitra" class="form-control" >
                                 <p class="text-danger">{{ $errors->first('nama_mitra') }}</p>
                                 <label>Detail Mitra</label>
-                                <input type="text" name="detail_mitra" id="detail_mitra" class="form-control" >
+                                <textarea name="detail_mitra" id="detail_mitra" class="form-control" style="height:150px;"></textarea>
                                 <p class="text-danger">{{ $errors->first('detail_mitra') }}</p>
                                 <label>Tahun Bermitra</label>
                                 <input type="text" name="tahun_mitra" id="tahun_mitra" class="form-control" >
