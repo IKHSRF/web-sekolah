@@ -16,7 +16,7 @@
                                     </a>
                                 </div>
                                 <div class="footer_about_text">
-                                    <p>Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</p>
+                                    <p>Ilmu yang Amaliah, Amal yang Ilmiah, Akhlakul Karimah.</p>
                                 </div>
                             </div>
 

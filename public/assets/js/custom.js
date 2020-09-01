@@ -45,6 +45,17 @@ $(document).ready(function () {
     initMilestones();
     initAccordions();
     initVideo();
+    initColorbox();
+
+    function initColorbox() {
+        if ($('.gallery_item').length) {
+            $('.colorbox').colorbox({
+                rel: 'colorbox',
+                photo: true,
+                maxWidth: '90%'
+            });
+        }
+    }
 
     function initAccordions() {
         if ($('.accordion').length) {

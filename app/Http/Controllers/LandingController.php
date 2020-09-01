@@ -10,6 +10,9 @@ use App\Kemitraan;
 use App\Prestasi;
 use App\Banner;
 use App\Kontak;
+use App\Mading;
+use App\Gallery;
+
 use Illuminate\Http\Request;
 
 class LandingController extends Controller
@@ -23,9 +26,9 @@ class LandingController extends Controller
     public function getHome(){
         $jurusan = $this->jurusan();
         $kontak = $this->kontak();
-        $banner = Banner::orderBy('updated_at','ASC')->limit(3);
-        $sarana = Sarana::orderBy('updated_at', 'ASC')->limit(6);
-        $guru = Guru::orderBy('updated_at', 'ASC')->limit(4);
+        $banner = Banner::orderBy('created_at','ASC')->limit(3);
+        $sarana = Sarana::orderBy('created_at', 'ASC')->limit(6);
+        $guru = Guru::orderBy('created_at', 'ASC')->limit(4);
         return view('user.home', compact('sarana','guru','banner', 'jurusan','kontak'));
     }
 
@@ -73,6 +76,36 @@ class LandingController extends Controller
     public function getStatistik(){
         $jurusan = $this->jurusan();
         $kontak = $this->kontak();
-        return view('user.profile.sejarah',compact('jurusan','kontak'));
+        return view('user.profile.statistik',compact('jurusan','kontak'));
     }
+
+
+
+
+
+
+    //mading 
+    public function getMading(){
+        $mading = Mading::all();
+        $jurusan = $this->jurusan();
+        $kontak = $this->kontak();
+        return view('user.kesiswaan.mading',compact('jurusan','kontak','mading'));
+    }
+
+    //sarana
+    public function getSarana(){
+        $jurusan = $this->jurusan();
+        $kontak = $this->kontak();
+        $sarana = Sarana::all();
+        return view('user.sarana',compact('sarana','jurusan','kontak'));
+    }
+
+    //galery
+    public function getGallery(){
+        $jurusan = $this->jurusan();
+        $kontak = $this->kontak();
+        $gallery = Gallery::orderBy('created_at','ASC')->get();
+        return view('user.gallery',compact('gallery','jurusan','kontak'));
+    }
+    
 }
