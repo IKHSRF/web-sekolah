@@ -109,9 +109,9 @@
                 </li>
                 <li class="nav-item">
                 <a href="/admin/akademiks" class="nav-link">
-                        <i class="nav-icon fas fa-file"></i>
+                        <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>
-                            Akademik
+                            Kalender Akademik
                         </p>
                     </a>
                 </li>
