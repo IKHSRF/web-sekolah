@@ -1,4 +1,4 @@
-<?php
+                <?php
 
 use Illuminate\Support\Facades\Route;
 
@@ -13,42 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
  */
 //User
-Route::get('/', function () {
-    return view('user.home');
-});
+Route::get('/', 'LandingController@getHome')->name('user.home');
 //menu profile
-Route::get('/sejarah', function () {
-    return view('user.profile.sejarah');
-})->name('user.profile.sejarah');
-
-Route::get('/guru', function () {
-    return view('user.profile.guru');
-})->name('user.profile.guru');
-
-Route::get('/kemitraan', function () {
-    return view('user.profile.kemitraan');
-})->name('user.profile.kemitraan');
-
-Route::get('/prestasi', function () {
-    return view('user.profile.prestasi');
-})->name('user.profile.prestasi');
-
-Route::get('/statistik', function () {
-    return view('user.profile.statistik');
-})->name('user.profile.statistik');
-
-Route::get('/stuktur', function () {
-    return view('user.profile.stuktur');
-})->name('user.profile.stuktur');
-
-Route::get('/visimisi', function () {
-    return view('user.profile.visimisi');
-})->name('user.profile.visimisi');
+Route::get('/sejarah', 'LandingController@getSejarah')->name('user.profile.sejarah');
+Route::get('/guru', 'LandingController@getGuru')->name('user.profile.guru');
+Route::get('/kemitraan', 'LandingController@getKemitraan')->name('user.profile.kemitraan');
+Route::get('/prestasi', 'LandingController@getPrestasi')->name('user.profile.prestasi');
+Route::get('/statistik', 'LandingController@getStatistik')->name('user.profile.statistik');
+Route::get('/stuktur', 'LandingController@getStuktur')->name('user.profile.stuktur');
+Route::get('/visimisi', 'LandingController@getVisiMisi')->name('user.profile.visimisi');
 
 //menu jurusan
-Route::get('/jurusan/rekayasa-perangkat-lunak', function(){
-    return view('user.jurusan.rpl');
-})->name('user.jurusan.rpl');
+Route::get('/jurusan/{nama_jurusan}', function(){
+    return view('user.jurusan');
+})->name('user.jurusan');
 
 //menu kesiswaan
 Route::get('/kesiswaan/mading', function(){
