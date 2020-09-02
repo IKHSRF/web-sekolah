@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class GalleryController extends Controller
 {
@@ -39,15 +41,28 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_galeri' => 'required',
-            'detail_galeri' => 'required',
-            'foto_galeri' => 'required',
+            'nama_galeri' => 'required|string',
+            'detail_galeri' => 'required|string',
+            'foto_galeri' => 'required|image',
         ]);
 
-        Gallery::create($request->all());
+        if($request->hasFile('foto_galeri')){
+            $foto = request('foto_galeri');
+            $nama_foto = time() .'-'. Str::slug($request->nama_galeri).'.'.$foto->getClientOriginalExtension();
 
-        return redirect()->route('admin.gallerys.index')
-            ->with('success', 'Galeri Berhasil Ditambahakan');
+            $galeri = Gallery::create([
+                'nama_galeri' => $request->nama_galeri,
+                'detail_galeri' => $request->detail_galeri,
+                'foto_galeri' => $nama_foto,
+            ]);
+            // dd($galeri);
+            $foto->move(public_path('gambar/galeri'), $nama_foto);
+        
+            return redirect()->route('admin.gallerys.index')
+                    ->with('success', 'Galeri Berhasil Ditambahkan');
+        }else{
+            return redirect()->back()->with('error', 'Galeri Gagal Ditambahkan');
+        }
     }
 
     /**
@@ -80,14 +95,29 @@ class GalleryController extends Controller
      * @param  \App\Gallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gallery $gallery, $id)
+    public function update(Request $request, Gallery $id)
     {
-        $gallery::where('id', $id)
-            ->update([
-                'nama_galeri' => $request->nama_galeri,
-                'detail_galeri' => $request->detail_galeri,
-                'foto_galeri' => $request->foto_galeri,
-            ]);
+        $galeri = $id;
+        $this->validate($request, [
+            'nama_galeri' => 'required|string',
+            'detail_galeri' => 'required|string',
+            'foto_galeri' => 'image',
+        ]);
+        
+        if($request->hasFile('foto_galeri')){
+            $foto = request('foto_galeri');
+            $nama_foto = time() .'-'. Str::slug($request->nama_galeri).'.'.$foto->getClientOriginalExtension();
+            $foto->move(public_path('gambar/galeri/'), $nama_foto);
+            File::delete(public_path('gambar/galeri/'. $galeri->foto_galeri));
+        }else{
+            $nama_foto = $galeri->foto_galeri;
+        }
+
+        $galeri->update([
+            'nama_galeri' => $request->nama_galeri,
+            'detail_galeri' => $request->detail_galeri,
+            'foto_galeri' => $nama_foto,
+        ]);
 
         return redirect()->route('admin.gallerys.index')
             ->with('success', 'Galeri Berhasil Diubah');
@@ -99,9 +129,15 @@ class GalleryController extends Controller
      * @param  \App\Gallery  $gallery
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gallery $gallery, $id)
+    public function destroy(Gallery $id)
     {
-        $gallery->destroy($id);
+        $galeri = $id;
+        if(!empty(public_path('gambar/galeri/'.$galeri->foto_galeri))){
+            File::delete(public_path('gambar/galeri/'.$galeri->foto_galeri));
+            $galeri->delete();
+        }else{
+            $galeri->delete();
+        }
 
         return redirect()->route('admin.gallerys.index')
             ->with('success', 'Galeri Berhasil Dihapus');

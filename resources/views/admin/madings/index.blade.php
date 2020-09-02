@@ -48,8 +48,17 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $mading->nama_mading }}</td>
-                            <td>{{ $mading->detail_mading}}</td>
-                            <td>{{ $mading->foto_mading }}</td>
+                            <td>
+                                @if(strlen($mading->detail_mading)>39)
+                                    {{ substr($mading->detail_mading,0,40).' ....' }}
+                                @elseif(strlen($mading->detail_mading)<40)
+                                    {{ $mading->detail_mading }}
+                                @endif
+                            </td>
+                            <td style="width: 170px; text-align: center">
+                                <img src="{{ asset('gambar/mading/'.$mading->foto_mading) }}"
+                                    style="width: 70%">
+                            </td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -92,20 +101,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" class="form-data" id="form-data" action="{{route('admin.madings.store')}}">
+            <form method="post" class="form-data" id="form-data" action="{{route('admin.madings.store')}}" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Nama Mading</label>
-                                <input type="text" name="nama_mading" id="nama_mading" class="form-control" >
+                                <input type="text" name="nama_mading" id="nama_mading" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('nama_mading') }}</p>
                                 <label>Detail Mading</label>
-                                <textarea name="detail_mading" id="detail_mading" class="form-control" style="height:150px;"></textarea>
+                                <textarea name="detail_mading" id="detail_mading" class="form-control" style="height:150px;" required></textarea>
                                 <p class="text-danger">{{ $errors->first('detail_mading') }}</p>
                                 <label>Foto Mading</label>
-                                <input type="file" name="foto_mading" id="foto_mading" class="form-control" >
+                                <input type="file" name="foto_mading" id="foto_mading" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('foto_mading') }}</p>
                             </div>
                         </div>

@@ -49,9 +49,18 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $kemitraan->nama_mitra }}</td>
-                            <td>{{ $kemitraan->detail_mitra}}</td>
+                            <td>
+                                @if(strlen($kemitraan->detail_mitra)>39)
+                                    {{ substr($kemitraan->detail_mitra,0,40).' ....' }}
+                                @elseif(strlen($kemitraan->detail_mitra)<40)
+                                    {{ $kemitraan->detail_mitra }}
+                                @endif
+                            </td>
                             <td>{{ $kemitraan->tahun_mitra }}</td>
-                            <td>{{ $kemitraan->foto_mitra }}</td>
+                            <td style="width: 170px; text-align: center">
+                                <img src="{{ asset('gambar/mitra/'.$kemitraan->foto_mitra) }}"
+                                    style="width: 70%">
+                            </td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -94,23 +103,23 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" class="form-data" id="form-data" action="{{route('admin.kemitraans.store')}}">
+            <form method="post" class="form-data" id="form-data" action="{{route('admin.kemitraans.store')}}" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Nama Mitra</label>
-                                <input type="text" name="nama_mitra" id="nama_mitra" class="form-control" >
+                                <input type="text" name="nama_mitra" id="nama_mitra" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('nama_mitra') }}</p>
                                 <label>Detail Mitra</label>
-                                <textarea name="detail_mitra" id="detail_mitra" class="form-control" style="height:150px;"></textarea>
+                                <textarea name="detail_mitra" id="detail_mitra" class="form-control" style="height:150px;" required></textarea>
                                 <p class="text-danger">{{ $errors->first('detail_mitra') }}</p>
                                 <label>Tahun Bermitra</label>
-                                <input type="text" name="tahun_mitra" id="tahun_mitra" class="form-control" >
+                                <input type="text" name="tahun_mitra" id="tahun_mitra" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('tahun_mitra') }}</p>
                                 <label>Foto Mitra</label>
-                                <input type="file" name="foto_mitra" id="foto_mitra" class="form-control" >
+                                <input type="file" name="foto_mitra" id="foto_mitra" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('foto_mitra') }}</p>
                             </div>
                         </div>

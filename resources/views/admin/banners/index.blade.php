@@ -47,7 +47,10 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $banner->nama_banner }}</td>
-                            <td>{{ $banner->foto_banner }}</td>
+                            <td style="width: 170px; text-align: center">
+                                <img src="{{ asset('gambar/banner/'.$banner->foto_banner) }}"
+                                    style="width: 70%">
+                            </td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -90,17 +93,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" class="form-data" id="form-data" action="{{route('admin.banners.store')}}">
+            <form method="post" class="form-data" id="form-data" action="{{route('admin.banners.store')}}" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Nama Banner</label>
-                                <input type="text" name="nama_banner" id="nama_banner" class="form-control" >
+                                <input type="text" name="nama_banner" id="nama_banner" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('nama_banner') }}</p>
                                 <label>Foto Banner</label>
-                                <input type="file" name="foto_banner" id="foto_banner" class="form-control" >
+                                <input type="file" name="foto_banner" id="foto_banner" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('foto_banner') }}</p>
                             </div>
                         </div>

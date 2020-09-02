@@ -28,7 +28,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.madings.update', $madings->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.madings.update', $madings->id)}}" enctype="multipart/form-data">
                         @method('patch')
                         @csrf
                         <div class="row">
@@ -39,10 +39,13 @@
                                         required="true" value="{{$madings->nama_mading}}">
                                     <label>Detail Mading</label>
                                     <textarea name="detail_mading" id="detail_mading" class="form-control"
-                                        required="true" value="{{$madings->detail_mading}}" style="height:150px;"></textarea>
+                                        required="true" style="height:150px;">{{$madings->detail_mading}}</textarea>
                                     <label>Foto Mading</label>
+                                    <img id="imagePreview" src="{{ asset('gambar/mading/'.$madings->foto_mading) }}"
+                                        style="object-fit: cover; width: 60%; padding: 10px;">
                                     <input type="file" name="foto_mading" id="foto_mading" class="form-control"
-                                        required="true" value="{{$madings->foto_mading}}">
+                                        value="{{$madings->foto_mading}}">
+                                    <b><i class="text-danger">kosongkan jika tidak ingin mengubah foto</i></b>
                                 </div>
                             </div>
                         </div>
@@ -64,4 +67,21 @@
 <!-- /.content -->
 </div>
 
+@endsection
+@section('js')
+    <script>
+    function imagePreview(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#foto_mading').change(function () {
+        imagePreview(this);
+    });
+    </script>
 @endsection

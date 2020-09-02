@@ -28,7 +28,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.banners.update', $banners->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.banners.update', $banners->id)}}" enctype="multipart/form-data">
                         @method('patch')
                         @csrf
                         <div class="row">
@@ -38,8 +38,11 @@
                                     <input type="text" name="nama_banner" id="nama_banner" class="form-control"
                                         required="true" value="{{$banners->nama_banner}}">
                                     <label>Foto Banner</label>
-                                    <input type="text" name="foto_banner" id="foto_banner" class="form-control"
-                                        required="true" value="{{$banners->foto_banner}}">
+                                    <img id="imagePreview" src="{{ asset('gambar/banner/'.$banners->foto_banner) }}"
+                                        style="object-fit: cover; width: 60%; padding: 10px;">
+                                    <input type="file" name="foto_banner" id="foto_banner" class="form-control"
+                                        value="{{$banners->foto_banner}}">
+                                    <b><i class="text-danger">kosongkan jika tidak ingin mengubah foto</i></b>
                                 </div>
                             </div>
                         </div>
@@ -61,4 +64,21 @@
 <!-- /.content -->
 </div>
 
+@endsection
+@section('js')
+    <script>
+    function imagePreview(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#foto_banner').change(function () {
+        imagePreview(this);
+    });
+    </script>
 @endsection

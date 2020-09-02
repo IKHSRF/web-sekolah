@@ -28,7 +28,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.prestasis.update', $prestasis->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.prestasis.update', $prestasis->id)}}" enctype="multipart/form-data">
                         @method('patch')
                         @csrf
                         <div class="row">
@@ -39,10 +39,13 @@
                                         required="true" value="{{$prestasis->nama_prestasi}}">
                                         <label>Detail Prestasi</label>
                                     <textarea name="detail_prestasi" id="detail_prestasi" class="form-control"
-                                        required="true" value="{{$prestasis->detail_prestasi}}" style="height:150px;"></textarea>
+                                        required="true" style="height:150px;">{{$prestasis->detail_prestasi}}</textarea>
                                         <label>Foto Prestasi</label>
+                                    <img id="imagePreview" src="{{ asset('gambar/prestasi/'.$prestasis->foto_prestasi) }}"
+                                        style="object-fit: cover; width: 60%; padding: 10px;">
                                     <input type="file" name="foto_prestasi" id="foto_prestasi" class="form-control"
-                                        required="true" value="{{$prestasis->foto_prestasi}}">
+                                        value="{{$prestasis->foto_prestasi}}">
+                                    <b><i class="text-danger">kosongkan jika tidak ingin mengubah foto</i></b>
                                 </div>
                             </div>
                         </div>
@@ -64,4 +67,21 @@
 <!-- /.content -->
 </div>
 
+@endsection
+@section('js')
+    <script>
+    function imagePreview(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#foto_prestasi').change(function () {
+        imagePreview(this);
+    });
+    </script>
 @endsection

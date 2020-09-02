@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Sarana;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class SaranaController extends Controller
 {
@@ -41,13 +43,27 @@ class SaranaController extends Controller
         $this->validate($request, [
             'nama_sarana' => 'required|string',
             'detail_sarana' => 'required|string',
-            'foto_sarana' => 'required',
+            'foto_sarana' => 'required|image',
         ]);
 
-        Sarana::create($request->all());
+        if($request->hasFile('foto_sarana')){
+            $foto = request('foto_sarana');
+            $nama_foto = time() .'-'. Str::slug($request->nama_sarana).'.'.$foto->getClientOriginalExtension();
 
-        return redirect()->route('admin.saranas.index')
-            ->with('success', 'Sarana Berhasil Ditambahkan');
+            $sarana = Sarana::create([
+                'nama_sarana' => $request->nama_sarana,
+                'detail_sarana' => $request->detail_sarana,
+                'foto_sarana' => $nama_foto,
+            ]);
+
+            $foto->move(public_path('gambar/sarana'), $nama_foto);
+        
+            return redirect()->route('admin.saranas.index')
+                ->with('success', 'Sarana Berhasil Ditambahkan');
+        }else{
+            return redirect()->back()->with('error', 'Sarana Gagal Ditambahkan');
+        }
+
     }
 
     /**
@@ -80,14 +96,29 @@ class SaranaController extends Controller
      * @param  \App\Sarana  $sarana
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sarana $sarana, $id)
+    public function update(Request $request, Sarana $id)
     {
-        $sarana::where('id', $id)
-            ->update([
-                'nama_sarana' => $request->nama_sarana,
-                'detail_sarana' => $request->detail_sarana,
-                'foto_sarana' => $request->foto_sarana,
-            ]);
+        $sarana = $id;
+        $this->validate($request, [
+            'nama_sarana' => 'required|string',
+            'detail_sarana' => 'required|string',
+            'foto_sarana' => 'image',
+        ]);
+        
+        if($request->hasFile('foto_sarana')){
+            $foto = request('foto_sarana');
+            $nama_foto = time() .'-'. Str::slug($request->nama_sarana).'.'.$foto->getClientOriginalExtension();
+            $foto->move(public_path('gambar/sarana/'), $nama_foto);
+            File::delete(public_path('gambar/sarana/'. $sarana->foto_sarana));
+        }else{
+            $nama_foto = $sarana->foto_sarana;
+        }
+
+        $sarana->update([
+            'nama_sarana' => $request->nama_sarana,
+            'detail_sarana' => $request->detail_sarana,
+            'foto_sarana' => $nama_foto,
+        ]);
 
         return redirect()->route('admin.saranas.index')
             ->with('success', 'Sarana Berhasil Diupdate');
@@ -99,10 +130,16 @@ class SaranaController extends Controller
      * @param  \App\Sarana  $sarana
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sarana $sarana, $id)
+    public function destroy(Sarana $id)
     {
-        $sarana->destroy($id);
-
+        $sarana = $id;
+        if(!empty(public_path('gambar/sarana/'.$sarana->foto_sarana))){
+            File::delete(public_path('gambar/sarana/'.$sarana->foto_sarana));
+            $sarana->delete();
+        }else{
+            $sarana->delete();
+        }
+        
         return redirect()->route('admin.saranas.index')
             ->with('success', 'Sarana Berhasil Dihapus');
     }

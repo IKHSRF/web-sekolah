@@ -28,7 +28,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.jurusans.update', $jurusans->id)}}">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.jurusans.update', $jurusans->id)}}" enctype="multipart/form-data">
                         @method('patch')
                         @csrf
                         <div class="row">
@@ -39,13 +39,16 @@
                                         required="true" value="{{$jurusans->nama_jurusan}}">
                                     <label>Detail Jurusan</label>
                                     <textarea name="detail_jurusan" id="detail_jurusan" class="form-control"
-                                        required="true" value="{{$jurusans->detail_jurusan}}" style="height:150px;"></textarea>
+                                        required="true" style="height:150px;">{{$jurusans->detail_jurusan}}</textarea>
                                         <label>Tahun Berdiri</label>
                                     <input type="number" name="tahun_berdiri" id="tahun_berdiri" class="form-control"
                                         required="true" value="{{$jurusans->tahun_berdiri}}">
                                     <label>Foto Jurusan</label>
+                                    <img id="imagePreview" src="{{ asset('gambar/jurusan/'.$jurusans->foto_jurusan) }}"
+                                        style="object-fit: cover; width: 60%; padding: 10px;">
                                     <input type="file" name="foto_jurusan" id="foto_jurusan" class="form-control"
-                                        required="true" value="{{$jurusans->foto_jurusan}}">
+                                        value="{{$jurusans->foto_jurusan}}">
+                                    <b><i class="text-danger">kosongkan jika tidak ingin mengubah foto</i></b>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +67,24 @@
         </div>
 </div>
 </section>
-<!-- /.content -->
+<!-- /.content -->s
 </div>
 
+@endsection
+@section('js')
+    <script>
+    function imagePreview(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#foto_jurusan').change(function () {
+        imagePreview(this);
+    });
+    </script>
 @endsection

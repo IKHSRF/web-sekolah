@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Guru;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class GuruController extends Controller
 {
@@ -39,15 +41,28 @@ class GuruController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_guru' => 'required',
-            'jabatan' => 'required',
-            'foto_guru' => 'required',
+            'nama_guru' => 'required|string',
+            'jabatan' => 'required|string',
+            'foto_guru' => 'required|image',
         ]);
 
-        Guru::create($request->all());
+        if($request->hasFile('foto_guru')){
+            $foto = request('foto_guru');
+            $nama_foto = time() .'-'. Str::slug($request->nama_guru).'.'.$foto->getClientOriginalExtension();
 
-        return redirect()->route('admin.gurus.index')
-            ->with('success', 'Guru Berhasil Ditambahkan');
+            $guru = Guru::create([
+                'nama_guru' => $request->nama_guru,
+                'jabatan' => $request->jabatan,
+                'foto_guru' => $nama_foto,
+            ]);
+            // dd($guru);
+            $foto->move(public_path('gambar/guru'), $nama_foto);
+        
+            return redirect()->route('admin.gurus.index')
+                    ->with('success', 'guru Berhasil Ditambahkan');
+        }else{
+            return redirect()->back()->with('error', 'guru Gagal Ditambahkan');
+        }
     }
 
     /**
@@ -80,14 +95,29 @@ class GuruController extends Controller
      * @param  \App\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Guru $guru, $id)
+    public function update(Request $request, Guru $id)
     {
-        $guru::where('id', $id)
-            ->update([
-                'nama_guru' => $request->nama_guru,
-                'jabatan' => $request->jabatan,
-                'foto_guru' => $request->foto_guru,
-            ]);
+        $guru = $id;
+        $this->validate($request, [
+            'nama_guru' => 'required|string',
+            'jabatan' => 'required|string',
+            'foto_guru' => 'image',
+        ]);
+        
+        if($request->hasFile('foto_guru')){
+            $foto = request('foto_guru');
+            $nama_foto = time() .'-'. Str::slug($request->nama_guru).'.'.$foto->getClientOriginalExtension();
+            $foto->move(public_path('gambar/guru/'), $nama_foto);
+            File::delete(public_path('gambar/guru/'. $guru->foto_guru));
+        }else{
+            $nama_foto = $guru->foto_guru;
+        }
+
+        $guru->update([
+            'nama_guru' => $request->nama_guru,
+            'jabatan' => $request->jabatan,
+            'foto_guru' => $nama_foto,
+        ]);
 
         return redirect()->route('admin.gurus.index')
             ->with('success', 'Guru Berhasil Diubah');
@@ -99,9 +129,15 @@ class GuruController extends Controller
      * @param  \App\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Guru $guru, $id)
+    public function destroy(Guru $id)
     {
-        $guru->destroy($id);
+        $guru = $id;
+        if(!empty(public_path('gambar/guru/'.$guru->foto_guru))){
+            File::delete(public_path('gambar/guru/'.$guru->foto_guru));
+            $guru->delete();
+        }else{
+            $guru->delete();
+        }
 
         return redirect()->route('admin.gurus.index')
             ->with('success', 'Guru Berhasil Dihapus');
