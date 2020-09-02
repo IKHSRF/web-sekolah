@@ -43,6 +43,19 @@ $(document).ready(function () {
     initHeaderSearch();
     initHomeSlider();
     initMilestones();
+    initAccordions();
+    initVideo();
+    initColorbox();
+
+    function initColorbox() {
+        if ($('.gallery_item').length) {
+            $('.colorbox').colorbox({
+                rel: 'colorbox',
+                photo: true,
+                maxWidth: '90%'
+            });
+        }
+    }
 
     function initAccordions() {
         if ($('.accordion').length) {
@@ -90,6 +103,15 @@ $(document).ready(function () {
                 });
             });
         }
+    }
+
+    function initVideo() {
+        $(".vimeo").colorbox({
+            iframe: true,
+            innerWidth: 640,
+            innerHeight: 409,
+            maxWidth: '90%'
+        });
     }
     /* 
 

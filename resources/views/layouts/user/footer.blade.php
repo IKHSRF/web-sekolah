@@ -6,7 +6,7 @@
                 <div class="footer_content">
                     <div class="row">
 
-                        <div class="col-lg-3 footer_col">
+                        <div class="col-lg-4 footer_col">
 
                             <!-- Footer About -->
                             <div class="footer_section footer_about">
@@ -16,41 +16,31 @@
                                     </a>
                                 </div>
                                 <div class="footer_about_text">
-                                    <p>Lorem ipsum dolor sit ametium, consectetur adipiscing elit.</p>
-                                </div>
-                                <div class="footer_social">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                        </li>
-                                    </ul>
+                                    <p>Ilmu yang Amaliah, Amal yang Ilmiah, Akhlakul Karimah.</p>
                                 </div>
                             </div>
 
                         </div>
 
-                        <div class="col-lg-3 footer_col">
+                        <div class="col-lg-4 footer_col">
 
                             <!-- Footer Contact -->
                             <div class="footer_section footer_contact">
                                 <div class="footer_title">Contact Us</div>
+                                @foreach($kontak as $konta)
                                 <div class="footer_contact_info">
                                     <ul>
-                                        <li>Email: Info.deercreative@gmail.com</li>
-                                        <li>Phone: +(88) 111 555 666</li>
-                                        <li>40 Baria Sreet 133/2 New York City, United States</li>
+                                        <li>Email: {{$konta->email}}</li>
+                                        <li>Phone: {{$konta->hotline}}</li>
+                                        <li>{{$konta->alamat}}</li>
                                     </ul>
                                 </div>
+                                @endforeach
                             </div>
 
                         </div>
 
-                        <div class="col-lg-3 footer_col">
+                        <div class="col-lg-4 footer_col">
 
                             <!-- Footer links -->
                             <div class="footer_section footer_links">
@@ -70,22 +60,6 @@
                             </div>
 
                         </div>
-
-                        <div class="col-lg-3 footer_col clearfix">
-
-                            <!-- Footer links -->
-                            <div class="footer_section footer_mobile">
-                                <div class="footer_title">Mobile</div>
-                                <div class="footer_mobile_content">
-                                    <div class="footer_image"><a href="#"><img src="images/mobile_1.png" alt=""></a>
-                                    </div>
-                                    <div class="footer_image"><a href="#"><img src="images/mobile_2.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
                     </div>
                 </div>
             </div>

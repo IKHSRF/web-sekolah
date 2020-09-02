@@ -6,19 +6,21 @@
                 <div class="row">
                     <div class="col">
                         <div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
+                            @foreach($kontak as $konta)
                             <ul class="top_bar_contact_list">
                                 <li>
                                     <div class="question">Have any questions?</div>
                                 </li>
                                 <li>
                                     <i class="fa fa-phone" aria-hidden="true"></i>
-                                    <div>001-1234-88888</div>
+                                    <div>{{$konta->hotline}}</div>
                                 </li>
                                 <li>
                                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                    <div>info.deercreative@gmail.com</div>
+                                    <div>{{$konta->email}}</div>
                                 </li>
                             </ul>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -61,7 +63,9 @@
                                         Jurusan
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{route('user.jurusan.rpl')}}">Rekayasa Perangkat Lunak</a>
+                                        @foreach($jurusan as $jurusa)
+                                        <a class="dropdown-item" href="{{route('user.jurusan, $jurusa->nama_jurusan')}}">{{$jurusa->nama_jurusan}}</a>
+                                        @endforeach
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
