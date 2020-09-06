@@ -22,7 +22,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-lg-6">
-                        <h3 class="card-title">Data Guru</h3>
+                        <h3 class="card-title">Struktur Organisasi</h3>
                     </div>
                     <div class="col-lg-6">
                         <button type="button" class="btn btn-primary float-lg-right" data-toggle="modal" data-target="#exampleModal">
@@ -38,32 +38,28 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Guru</th>
-                            <th>Status</th>
-                            <th>Jenjang</th>
-                            <th>Mata Pelajaran</th>
+                            <th>Jabatan</th>
                             <th>Foto Guru</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach( $gurus as $guru )
+                        @foreach( $strukturs as $struktur )
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $guru->nama_guru }}</td>
-                            <td>{{ $guru->jabatan}}</td>
-                            <td>{{ $guru->jenjang}}</td>
-                            <td>{{ $guru->mata_pelajaran}}</td>
+                            <td>{{ $struktur->nama }}</td>
+                            <td>{{ $struktur->jabatan}}</td>
                             <td style="width: 170px; text-align: center">
-                                <img src="{{ asset('gambar/guru/'.$guru->foto_guru) }}"
+                                <img src="{{ asset('gambar/struktur/'.$struktur->foto) }}"
                                     style="width: 70%">
                             </td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
-                                        <a href="{{route('admin.gurus.edit', $guru->id)}}" class="btn btn-success btn-sm edit_data"> <i class="fa fa-edit"></i>Edit</a>
+                                        <a href="{{route('admin.strukturs.edit', $struktur->id)}}" class="btn btn-success btn-sm edit_data"> <i class="fa fa-edit"></i>Edit</a>
                                     </div>
                                     <div class="col-lg-4">
-                                        <form action="{{route('admin.gurus.destroy', $guru->id)}}" method="post">
+                                        <form action="{{route('admin.strukturs.destroy', $struktur->id)}}" method="post">
                                             @method('delete')
                                             @csrf
                                             <button  class="btn btn-danger btn-sm hapus_data"> <i class="fa fa-trash"></i>Hapus</button>
@@ -99,27 +95,21 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" class="form-data" id="form-data" action="{{route('admin.gurus.store')}}" enctype="multipart/form-data">
+            <form method="post" class="form-data" id="form-data" action="{{route('admin.strukturs.store')}}" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label>Nama Guru</label>
-                                <input type="text" name="nama_guru" id="nama_guru" class="form-control" required>
-                                <p class="text-danger">{{ $errors->first('nama_guru') }}</p>
-                                <label>Status</label>
+                                <label>Nama</label>
+                                <input type="text" name="nama" id="nama" class="form-control" required>
+                                <p class="text-danger">{{ $errors->first('nama') }}</p>
+                                <label>jabatan</label>
                                 <input type="text" name="jabatan" id="jabatan" class="form-control" required>
                                 <p class="text-danger">{{ $errors->first('jabatan') }}</p>
-                                <label>jenjang</label>
-                                <input type="text" name="jenjang" id="jenjang" class="form-control" required>
-                                <p class="text-danger">{{ $errors->first('jenjang') }}</p>
-                                <label>Mata Pelajaran</label>
-                                <input type="text" name="mata_pelajaran" id="mata_pelajaran" class="form-control" required>
-                                <p class="text-danger">{{ $errors->first('mata_pelajaran') }}</p>
-                                <label>Foto Guru</label>
-                                <input type="file" name="foto_guru" id="foto_guru" class="form-control" required>
-                                <p class="text-danger">{{ $errors->first('foto_guru') }}</p>
+                                <label>Foto</label>
+                                <input type="file" name="foto" id="foto" class="form-control" required>
+                                <p class="text-danger">{{ $errors->first('foto') }}</p>
                             </div>
                         </div>
                     </div>

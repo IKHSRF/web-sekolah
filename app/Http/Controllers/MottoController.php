@@ -42,6 +42,10 @@ class MottoController extends Controller
             'visi' => 'required',
             'misi' => 'required',
             'motto' => 'required',
+            'kebijakan_mutu' => 'required',
+            'sasaran_mutu' => 'required',
+            'karakter_utama' => 'required',
+            'afirmasi_siswa' => 'required',
         ]);
 
         Motto::create($request->all());
@@ -87,6 +91,11 @@ class MottoController extends Controller
                 'visi' => $request->visi,
                 'misi' => $request->misi,
                 'motto' => $request->motto,
+                'kebijakan_mutu' => $request->kebijakan_mutu,
+                'sasaran_mutu' => $request->sasaran_mutu,
+                'karakter_utama' => $request->karakter_utama,
+                'afirmasi_siswa' => $request->afirmasi_siswa,
+
             ]);
 
         return redirect()->route('admin.mottos.index')

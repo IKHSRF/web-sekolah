@@ -24,19 +24,18 @@ Route::get('/stuktur', 'LandingController@getStuktur')->name('user.profile.stukt
 Route::get('/visimisi', 'LandingController@getVisiMisi')->name('user.profile.visimisi');
 
 //menu jurusan
-Route::get('/jurusan/{nama_jurusan}', function(){
+Route::get('/jurusan/{nama_jurusan}', function () {
     return view('user.jurusan');
 })->name('user.jurusan');
 
 //menu kesiswaan
-Route::get('/kesiswaan/mading','LandingController@getMading')->name('user.kesiswaan.mading');
+Route::get('/kesiswaan/mading', 'LandingController@getMading')->name('user.kesiswaan.mading');
 
 //menu kurikulum
-Route::get('/kurikulum/stuktur', function(){
+Route::get('/kurikulum/stuktur', function () {
     return view('user.kurikulum.stuktur');
 })->name('user.kurikulum.stuktur');
-Route::get('/sarana-dan-prasarana','LandingController@getSarana')->name('user.sarana');
-
+Route::get('/sarana-dan-prasarana', 'LandingController@getSarana')->name('user.sarana');
 
 Route::get('/gallery', 'LandingController@getGallery')->name('user.gallery');
 //dashbord
@@ -137,12 +136,19 @@ Route::group(['prefix' => 'admin'], function () {
     Route::patch('/banners/{id}', 'BannerController@update')->name('admin.banners.update');
     Route::delete('/banners/{id}', 'BannerController@destroy')->name('admin.banners.destroy');
 
+    //crud struktur
+    Route::get('/strukturs', 'StrukturController@index')->name('admin.strukturs.index');
+    Route::get('/strukturs/create', 'StrukturController@create')->name('admin.strukturs.create');
+    Route::post('/strukturs', 'StrukturController@store')->name('admin.strukturs.store');
+    Route::get('/strukturs/{id}', 'StrukturController@edit')->name('admin.strukturs.edit');
+    Route::patch('/strukturs/{id}', 'StrukturController@update')->name('admin.strukturs.update');
+    Route::delete('/strukturs/{id}', 'StrukturController@destroy')->name('admin.strukturs.destroy');
+
     //dashbord
     Route::get('/', function () {
         return view('admin.index');
     })->name('admin.index');
 });
-
 
 Auth::routes();
 
