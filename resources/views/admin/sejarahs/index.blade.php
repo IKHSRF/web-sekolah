@@ -101,7 +101,7 @@
                                 <p class="text-danger">{{ $errors->first('judul_sarana') }}</p>
                                 <label>Detail Sejarah</label>
                                 <textarea name="detail_sejarah" id="detail_sejarah" class="form-control" style="height:150px;"></textarea>
-                                <p class="text-danger">{{ $errors->first('detail_sejarah') }}</p>
+                                <p class="text-danger">{{ $errors->first('d detail_sejarah') }}</p>
                             </div>
                         </div>
                     </div>

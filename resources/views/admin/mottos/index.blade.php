@@ -40,6 +40,10 @@
                             <th>Visi</th>
                             <th>Misi</th>
                             <th>Motto</th>
+                            <th>Kebijakan Mutu</th>
+                            <th>Sasaran Mutu</th>
+                            <th>Karakter Utama</th>
+                            <th>Afirmasi Siswa</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -50,6 +54,10 @@
                             <td>{{ $motto->visi }}</td>
                             <td>{{ $motto->visi}}</td>
                             <td>{{ $motto->motto }}</td>
+                            <td>{{ $motto->kebijakan_mutu }}</td>
+                            <td>{{ $motto->sasaran_mutu }}</td>
+                            <td>{{ $motto->karakter_utama }}</td>
+                            <td>{{ $motto->afirmasi_siswa }}</td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -107,6 +115,18 @@
                                 <label>Motto</label>
                                 <input type="text" name="motto" id="motto" class="form-control" >
                                 <p class="text-danger">{{ $errors->first('motto') }}</p>
+                                <label>Kebijakan Mutu</label>
+                                <input type="text" name="kebijakan_mutu" id="kebijakan_mutu" class="form-control" >
+                                <p class="text-danger">{{ $errors->first('kebijakan_mmutu') }}</p>
+                                <label>Sasaran Mutu</label>
+                                <input type="text" name="sasaran_mutu" id="sasaran_mutu" class="form-control" >
+                                <p class="text-danger">{{ $errors->first('sasaran_mutu') }}</p>
+                                <label>Karakter Utama</label>
+                                <input type="text" name="karakter_utama" id="karakter_utama" class="form-control" >
+                                <p class="text-danger">{{ $errors->first('karakter_utama') }}</p>
+                                <label>Afirmasi Siswa</label>
+                                <input type="text" name="afirmasi_siswa" id="afirmasi_siswa" class="form-control" >
+                                <p class="text-danger">{{ $errors->first('afirmasi_siswa') }}</p>
                             </div>
                         </div>
                     </div>

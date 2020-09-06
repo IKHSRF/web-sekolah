@@ -43,6 +43,18 @@
                                     <label>Motto</label>
                                     <input type="text" name="motto" id="motto" class="form-control"
                                         required="true" value="{{$mottos->motto}}">
+                                    <label>Kebijakan Mutu</label>
+                                    <input type="text" name="kebijakan_mutu" id="kebijakan_mutu" class="form-control"
+                                        required="true" value="{{$mottos->kebijakan_mutu}}">
+                                    <label>Sasaran Mutu</label>
+                                    <input type="text" name="sasaran_mutu" id="sasaran_mutu" class="form-control"
+                                        required="true" value="{{$mottos->sasaran_mutu}}">
+                                    <label>Karakter Utama</label>
+                                    <input type="text" name="karakter_utama" id="karakter_utama" class="form-control"
+                                        required="true" value="{{$mottos->karakter_utama}}">
+                                    <label>Afirmasi Siswa</label>
+                                    <input type="text" name="afirmasi_siswa" id="afirmasi_siswa" class="form-control"
+                                        required="true" value="{{$mottos->afirmasi_siswa}}">
                                 </div>
                             </div>
                         </div>

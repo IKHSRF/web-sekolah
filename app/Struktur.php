@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Guru extends Model
+class Struktur extends Model
 {
     protected $fillable = [
-        'nama_guru', 'jabatan', 'foto_guru', 'jenjang', 'mata_pelajaran',
+        'jabatan', 'nama', 'foto',
     ];
 }

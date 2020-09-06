@@ -43,24 +43,28 @@ class GuruController extends Controller
         $this->validate($request, [
             'nama_guru' => 'required|string',
             'jabatan' => 'required|string',
+            'jenjang' => 'required|string',
+            'mata_pelajaran' => 'required|string',
             'foto_guru' => 'required|image',
         ]);
 
-        if($request->hasFile('foto_guru')){
+        if ($request->hasFile('foto_guru')) {
             $foto = request('foto_guru');
-            $nama_foto = time() .'-'. Str::slug($request->nama_guru).'.'.$foto->getClientOriginalExtension();
+            $nama_foto = time() . '-' . Str::slug($request->nama_guru) . '.' . $foto->getClientOriginalExtension();
 
             $guru = Guru::create([
                 'nama_guru' => $request->nama_guru,
                 'jabatan' => $request->jabatan,
                 'foto_guru' => $nama_foto,
+                'jenjang' => $request->jenjang,
+                'mata_pelajaran' => $request->mata_pelajaran,
             ]);
             // dd($guru);
             $foto->move(public_path('gambar/guru'), $nama_foto);
-        
+
             return redirect()->route('admin.gurus.index')
-                    ->with('success', 'guru Berhasil Ditambahkan');
-        }else{
+                ->with('success', 'guru Berhasil Ditambahkan');
+        } else {
             return redirect()->back()->with('error', 'guru Gagal Ditambahkan');
         }
     }
@@ -101,21 +105,25 @@ class GuruController extends Controller
         $this->validate($request, [
             'nama_guru' => 'required|string',
             'jabatan' => 'required|string',
+            'jenjang' => 'required|string',
+            'mata_pelajaran' => 'required|string',
             'foto_guru' => 'image',
         ]);
-        
-        if($request->hasFile('foto_guru')){
+
+        if ($request->hasFile('foto_guru')) {
             $foto = request('foto_guru');
-            $nama_foto = time() .'-'. Str::slug($request->nama_guru).'.'.$foto->getClientOriginalExtension();
+            $nama_foto = time() . '-' . Str::slug($request->nama_guru) . '.' . $foto->getClientOriginalExtension();
             $foto->move(public_path('gambar/guru/'), $nama_foto);
-            File::delete(public_path('gambar/guru/'. $guru->foto_guru));
-        }else{
+            File::delete(public_path('gambar/guru/' . $guru->foto_guru));
+        } else {
             $nama_foto = $guru->foto_guru;
         }
 
         $guru->update([
             'nama_guru' => $request->nama_guru,
             'jabatan' => $request->jabatan,
+            'jenjang' => $request->jenjang,
+            'mata_pelajaran' => $request->mata_pelajaran,
             'foto_guru' => $nama_foto,
         ]);
 
@@ -132,10 +140,10 @@ class GuruController extends Controller
     public function destroy(Guru $id)
     {
         $guru = $id;
-        if(!empty(public_path('gambar/guru/'.$guru->foto_guru))){
-            File::delete(public_path('gambar/guru/'.$guru->foto_guru));
+        if (!empty(public_path('gambar/guru/' . $guru->foto_guru))) {
+            File::delete(public_path('gambar/guru/' . $guru->foto_guru));
             $guru->delete();
-        }else{
+        } else {
             $guru->delete();
         }
 
