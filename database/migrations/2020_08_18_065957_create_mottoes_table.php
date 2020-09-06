@@ -18,6 +18,10 @@ class CreateMottoesTable extends Migration
             $table->string('visi');
             $table->string('misi');
             $table->string('motto');
+            $table->string('kebijakan_mutu');
+            $table->string('sasaran_mutu');
+            $table->string('karakter_utama');
+            $table->string('afirmasi_siswa');
             $table->timestamps();
         });
     }

@@ -28,29 +28,23 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form method="post" class="form-data" id="form-data" action="{{route('admin.gurus.update', $gurus->id)}}" enctype="multipart/form-data">
+                    <form method="post" class="form-data" id="form-data" action="{{route('admin.strukturs.update', $strukturs->id)}}" enctype="multipart/form-data">
                         @method('patch')
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Nama Guru</label>
-                                    <input type="text" name="nama_guru" id="nama_guru" class="form-control"
-                                        required="true" value="{{$gurus->nama_guru}}">
-                                    <label>Status</label>
+                                    <label>Nama</label>
+                                    <input type="text" name="nama" id="nama" class="form-control"
+                                        required="true" value="{{$strukturs->nama}}">
+                                    <label>Jabatan</label>
                                     <input type="text" name="jabatan" id="jabatan" class="form-control"
-                                        required="true" value="{{$gurus->jabatan}}">
-                                    <label>Jenjang</label>
-                                    <input type="text" name="jenjang" id="jenjang" class="form-control"
-                                        required="true" value="{{$gurus->jenjang}}">
-                                    <label>Mata Pelajaran</label>
-                                    <input type="text" name="mata_pelajaran" id="mata_pelajaran" class="form-control"
-                                        required="true" value="{{$gurus->mata_pelajaran}}">
-                                    <label>Foto Guru</label>
-                                    <img id="imagePreview" src="{{ asset('gambar/guru/'.$gurus->foto_guru) }}"
+                                        required="true" value="{{$strukturs->jabatan}}">
+                                    <label>Foto</label>
+                                    <img id="imagePreview" src="{{ asset('gambar/struktur/'.$strukturs->foto) }}"
                                         style="object-fit: cover; width: 60%; padding: 10px;">
-                                    <input type="file" name="foto_guru" id="foto_guru" class="form-control"
-                                        value="{{$gurus->foto_guru}}">
+                                    <input type="file" name="foto" id="foto" class="form-control"
+                                        value="{{$strukturs->foto}}">
                                     <b><i class="text-danger">kosongkan jika tidak ingin mengubah foto</i></b>
                                 </div>
                             </div>
@@ -86,7 +80,7 @@
         }
     }
 
-    $('#foto_guru').change(function () {
+    $('#foto').change(function () {
         imagePreview(this);
     });
     </script>
